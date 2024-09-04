@@ -75,3 +75,4 @@ public class Building : MonoBehaviour
     }
 }
 
+//structure prefab is the building obj and ghost prefab is the one you make changes to, I will update the code to have an array of the building we can have and uptdate the ghost to be a copy of that obj with its own params so it doesnt need to be set.
