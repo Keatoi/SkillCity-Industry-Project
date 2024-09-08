@@ -7,9 +7,12 @@ using UnityEngine.UIElements;
 public class DayNightCycle : MonoBehaviour
 {
     // File consist of a rudimentary timer that counts dowm before increasing the day count by one and reseting - Owen Atkinson
-    [SerializeField, Range(0, 24)] private float timeOfDay;
-    [SerializeField, Range(0, 60)] private float timeOfHour;
+    [SerializeField, Range(0, 24)] private int timeOfDay;
+    [SerializeField, Range(0, 60)] private int timeOfHour;
+    [SerializeField, Range(0, 30)] private int currentDay;
+    [SerializeField, Range(0, 4)] private int currentMonth;
     [SerializeField] private float inGameMinute = 1f;
+    [SerializeField] private int winterStartMonth = 3;
     private float minuteResetValue;
     [SerializeField] private Vector3 rotationperMinute = new Vector3(0.25f, 0, 0);
     
@@ -49,11 +52,13 @@ public class DayNightCycle : MonoBehaviour
                 timeOfDay++;
                 if (timeOfDay >= 24)
                 {
-                    //Reset all values
-                    //TODO implement date system that will increase here.
+                    //Increment Day, check month,Reset all values
+                    currentDay++;
+                    if (currentDay >= 30) currentMonth++;
                     timeOfDay = 0;
                     timeOfHour = 0;
                     inGameMinute = minuteResetValue;
+                    CheckDate();
                 }
 
             }
@@ -62,7 +67,7 @@ public class DayNightCycle : MonoBehaviour
     }
     void CheckDate()
     {
-
+        //TODO: Do Something for Winter here (and also check if it is winter obvs). May alternatively be done in a GameMode Script and this just sets a boolean there to be Winter. idk need to design winter first.
     }
 }
 
