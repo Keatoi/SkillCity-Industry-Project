@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField]float minViewRotation = -25f;//Limit how much the player can look down
     [SerializeField] float walkSpeed = 20f;
+    [SerializeField] float JumpSpeed = 5f;
     private float speed;
     //MouseSettings
     public float mouseSensitivity = 100f;
@@ -45,6 +47,18 @@ public class PlayerController : MonoBehaviour
     {
         moveInput = value.Get<Vector2>();
 
+    }
+    private void OnCrouch(InputValue value)
+    {
+
+    }
+    private void OnJump(InputValue value)
+    {
+        if(controller.isGrounded)
+        {
+            Vector3 jumpVelocity.y += Mathf.Sqrt(JumpSpeed * -2f * gravity);
+        }
+        controller.Move(jumpVelocity * Time.deltaTime);
     }
     void Movement()
     {
