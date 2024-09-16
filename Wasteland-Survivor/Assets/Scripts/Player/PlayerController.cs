@@ -16,11 +16,14 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     
     float xRotation = 0;
-    
-    [SerializeField]float minViewRotation = -25f;//Limit how much the player can look down
+    [SerializeField] float startingHealth = 100;
+    [SerializeField]float minViewRotation = -90f;//Limit how much the player can look down
     [SerializeField] float walkSpeed = 20f;
     [SerializeField] float JumpSpeed = 5f;
     private float speed;
+    private float health;
+
+    //END PLAYER VAR
     //MouseSettings
     public float mouseSensitivity = 100f;
     // Start is called before the first frame update
@@ -28,6 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         speed = walkSpeed;
+        health = startingHealth;
     }
     private void OnLook(InputValue value)
     {
@@ -52,6 +56,7 @@ public class PlayerController : MonoBehaviour
     {
 
     }
+    
     private void OnJump(InputValue value)
     {
         if(controller.isGrounded)
@@ -76,12 +81,21 @@ public class PlayerController : MonoBehaviour
             moveVelocity.y += gravity * Time.deltaTime;
         }
         //FWD/Strafing movement
-       // if (moveVelocity != Vector3.zero) { transform.forward = moveVelocity; }
+      
         controller.Move(moveVelocity * speed * Time.deltaTime);
        
        
     }
-   
+   public void ChangeMouseSensitivity(float newMouseSensitivity) { mouseSensitivity = newMouseSensitivity; }
+    
+    public void ChangeHealth(float hp)
+    {
+        //changes the amount of health the player currently has by the parameter value. Positive increases health, negative decreases. (e.g 100 + -25 = 75)
+        health += hp;
+        Debug.Log(health);
+        //check for 0  health then die or something I guess 
+
+    }
 
     // Update is called once per frame
     void FixedUpdate()
