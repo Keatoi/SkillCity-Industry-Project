@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
+using System.Threading;
 using UnityEngine;
 
 public class BulletController : MonoBehaviour
@@ -9,16 +11,17 @@ public class BulletController : MonoBehaviour
     [SerializeField] float baseDamage = 25f;
     [SerializeField] float projectileSpeed = 60f;
     public PlayerController playerController;
+    private Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        BulletMovement();
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -27,5 +30,9 @@ public class BulletController : MonoBehaviour
             UnityEngine.Debug.Log("Hit Player!");
             playerController.ChangeHealth(-baseDamage);
         }
+    }
+    void BulletMovement()
+    {
+        Vector3 projVelo = new Vector3(projectileSpeed * Time.deltaTime, 0f, 0f);
     }
 }
