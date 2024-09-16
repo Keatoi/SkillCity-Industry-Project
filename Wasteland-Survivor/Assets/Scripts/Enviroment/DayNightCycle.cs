@@ -15,7 +15,8 @@ public class DayNightCycle : MonoBehaviour
     [SerializeField] private int winterStartMonth = 3;
     private float minuteResetValue;
     [SerializeField] private Vector3 rotationperMinute = new Vector3(0.25f, 0, 0);
-    
+    public bool bIsWinter { get; private set; }
+   
     void Start()
     {
         minuteResetValue = inGameMinute;
@@ -24,6 +25,8 @@ public class DayNightCycle : MonoBehaviour
         float hourToAdd = (rotationperMinute.x * 60) * timeOfDay;
         Vector3 newSunRotation = new Vector3(transform.rotation.x + (minuteToAdd + hourToAdd), 0, 0);
         transform.Rotate(newSunRotation);
+        //check date to determine if winter should be enabled
+        CheckDate();
 
     }
 
@@ -67,7 +70,26 @@ public class DayNightCycle : MonoBehaviour
     }
     void CheckDate()
     {
-        //TODO: Do Something for Winter here (and also check if it is winter obvs). May alternatively be done in a GameMode Script and this just sets a boolean there to be Winter. idk need to design winter first.
+        if(currentMonth >= winterStartMonth)
+        {
+            bIsWinter = true; 
+        }
+        else
+        {
+            bIsWinter = false;
+        }
+    }
+    void IncreaseHours(int amountToIncrease)
+    {
+        timeOfDay += amountToIncrease;
+    }
+    void IncreaseMinutes(int amountToIncrease)
+    {
+        timeOfDay += amountToIncrease;
+    }
+    void IncreaseDay(int amountToIncrease)
+    {
+        currentDay += amountToIncrease;
     }
 }
 
