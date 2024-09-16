@@ -29,6 +29,7 @@ public class BulletController : MonoBehaviour
         {
             UnityEngine.Debug.Log("Hit Player!");
             playerController.ChangeHealth(-baseDamage);
+            Destroy(gameObject);
         }
     }
     void BulletMovement()

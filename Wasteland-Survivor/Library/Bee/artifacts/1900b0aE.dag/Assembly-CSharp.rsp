@@ -333,6 +333,8 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.46f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Scripts/Entities/BulletController.cs"
 "Assets/Scripts/Enviroment/DayNightCycle.cs"
+"Assets/Scripts/Enviroment/InteractableObjects/Bed.cs"
+"Assets/Scripts/Enviroment/InteractableObjects/InteractableObject.cs"
 "Assets/Scripts/Player/Input/Wasteland-Survivor.cs"
 "Assets/Scripts/Player/PlayerController.cs"
 -langversion:9.0

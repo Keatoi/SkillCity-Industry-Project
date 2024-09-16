@@ -79,15 +79,15 @@ public class DayNightCycle : MonoBehaviour
             bIsWinter = false;
         }
     }
-    void IncreaseHours(int amountToIncrease)
+    public void IncreaseHours(int amountToIncrease)
     {
         timeOfDay += amountToIncrease;
     }
-    void IncreaseMinutes(int amountToIncrease)
+   public void IncreaseMinutes(int amountToIncrease)
     {
-        timeOfDay += amountToIncrease;
+        timeOfHour += amountToIncrease;
     }
-    void IncreaseDay(int amountToIncrease)
+    public void IncreaseDay(int amountToIncrease)
     {
         currentDay += amountToIncrease;
     }
