@@ -574,3 +574,40 @@ AssetImportParameters requested are different than current active one (requested
   custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
   custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
   custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 776.885681 seconds.
+  path: Assets/Prefabs/Enviroment
+  artifactKey: Guid(15fbfcbca097d4849b6f0e09be1fc489) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enviroment using Guid(15fbfcbca097d4849b6f0e09be1fc489) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '910603297484a28434d29add9016ae45') in 0.002966 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 3.615971 seconds.
+  path: Assets/Prefabs/Enviroment/Directional Light.prefab
+  artifactKey: Guid(595949a6e58cb8249b2a3f7b2ec8a4b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enviroment/Directional Light.prefab using Guid(595949a6e58cb8249b2a3f7b2ec8a4b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '63abb69100b551bdf8a10117da95a9fb') in 0.022995 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 4.548876 seconds.
+  path: Assets/Prefabs/Enviroment/Sun.prefab
+  artifactKey: Guid(595949a6e58cb8249b2a3f7b2ec8a4b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enviroment/Sun.prefab using Guid(595949a6e58cb8249b2a3f7b2ec8a4b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: '5be6e06cbbc501b982fad1b8c098c747') in 0.002047 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 463.677027 seconds.
+  path: Assets/Prefabs/Enviroment/Items/Bed.prefab
+  artifactKey: Guid(08c2741e94043f7488816a74e0d91349) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enviroment/Items/Bed.prefab using Guid(08c2741e94043f7488816a74e0d91349) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+ -> (artifact id: 'be38d327aedb58b4d23ff0406b0fbe52') in 0.076047 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 9
