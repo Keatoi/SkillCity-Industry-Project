@@ -11,17 +11,19 @@ public class PlayerController : MonoBehaviour
     public float gravity = -9.81f;
     private bool bisGrounded;
     [SerializeField] private Camera mainCam;
-    [SerializeField]Transform playerBodyPos;
+    [SerializeField] Transform playerBodyPos;
     
     private CharacterController controller;
     
     float xRotation = 0;
-    [SerializeField] float startingHealth = 100;
+    float standingHeight,crouchingHeight;
+    bool bIsCrouching = false;
+    
     [SerializeField]float minViewRotation = -90f;//Limit how much the player can look down
     [SerializeField] float walkSpeed = 20f;
     [SerializeField] float JumpSpeed = 5f;
-    private float speed;
-    private float health;
+    private float speed, crouchSpeed;
+    
 
     //END PLAYER VAR
     //MouseSettings
@@ -31,7 +33,9 @@ public class PlayerController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         speed = walkSpeed;
-        health = startingHealth;
+        controller.height = standingHeight;
+        crouchingHeight = standingHeight / 2;
+        crouchSpeed = speed / 2;
     }
     private void OnLook(InputValue value)
     {
@@ -46,6 +50,15 @@ public class PlayerController : MonoBehaviour
         //Rotate player entity
         transform.Rotate(Vector3.up * lookX);
     }
+    private void OnFire(InputValue value)
+    {
+        if (GetComponent<GunSystem>())
+        {
+            Debug.Log("Calling Fire");
+            GetComponent<GunSystem>().Fire();
+        }
+        
+    }
 
     private void OnMove(InputValue value)
     {
@@ -54,7 +67,8 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCrouch(InputValue value)
     {
-
+        bIsCrouching = !bIsCrouching;
+        Debug.Log("Crouch Pressed");
     }
     
     private void OnJump(InputValue value)
@@ -69,7 +83,20 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 moveVelocity = transform.right * moveInput.x + transform.forward * moveInput.y;
         bisGrounded = controller.isGrounded;
+        //Crouching
+        if(bIsCrouching)
+        {
+            controller.height = crouchingHeight;
+            speed = crouchSpeed;
+            //Debug.Log("crouching");
 
+        }
+        else
+        {
+            controller.height = standingHeight;
+            speed = walkSpeed;
+            //Debug.Log("not crouching");
+        }
         //Gravity Implementation
         moveVelocity.y += gravity * Time.deltaTime;
         if (controller.isGrounded)
@@ -88,14 +115,7 @@ public class PlayerController : MonoBehaviour
     }
    public void ChangeMouseSensitivity(float newMouseSensitivity) { mouseSensitivity = newMouseSensitivity; }
     
-    public void ChangeHealth(float hp)
-    {
-        //changes the amount of health the player currently has by the parameter value. Positive increases health, negative decreases. (e.g 100 + -25 = 75)
-        health += hp;
-        Debug.Log(health);
-        //check for 0  health then die or something I guess 
-
-    }
+   
 
     // Update is called once per frame
     void FixedUpdate()

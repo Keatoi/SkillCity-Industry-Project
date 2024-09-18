@@ -47,7 +47,7 @@ public class DayNightCycle : MonoBehaviour
             transform.Rotate(rotationperMinute);
             timeOfHour++;
          
-            print(timeOfHour);
+          
             if (timeOfHour >= 60)
             {
                 //Reset Hour, Check if 24 hours have passed
