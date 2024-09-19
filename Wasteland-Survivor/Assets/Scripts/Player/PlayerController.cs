@@ -14,14 +14,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform playerBodyPos;
     
     private CharacterController controller;
-    
+    [SerializeField] float camOffset = 0.5f;
+    [SerializeField] float crouchCamOffset = 0.25f;
     float xRotation = 0;
     float standingHeight,crouchingHeight;
     bool bIsCrouching = false;
-    
+    bool bIsJumping = false;
     [SerializeField]float minViewRotation = -90f;//Limit how much the player can look down
     [SerializeField] float walkSpeed = 20f;
-    [SerializeField] float JumpSpeed = 5f;
+    [SerializeField] float JumpSpeed = 2f;
+    private float maxJumps = 1;
     private float speed, crouchSpeed;
     
 
@@ -36,6 +38,8 @@ public class PlayerController : MonoBehaviour
         controller.height = standingHeight;
         crouchingHeight = standingHeight / 2;
         crouchSpeed = speed / 2;
+        Vector3 camPos = new Vector3(0f, camOffset, 0f);
+        mainCam.transform.localPosition = camPos;
     }
     private void OnLook(InputValue value)
     {
@@ -73,11 +77,12 @@ public class PlayerController : MonoBehaviour
     
     private void OnJump(InputValue value)
     {
-        if(controller.isGrounded)
+        if(bisGrounded)
         {
-            //Vector3 jumpVelocity.y += Mathf.Sqrt(JumpSpeed * -2f * gravity);
+            bIsJumping = !bIsJumping;
         }
-       // controller.Move(jumpVelocity * Time.deltaTime);
+       
+       
     }
     void Movement()
     {
@@ -89,26 +94,32 @@ public class PlayerController : MonoBehaviour
             controller.height = crouchingHeight;
             speed = crouchSpeed;
             //Debug.Log("crouching");
-
+            Vector3 camPos = new Vector3(0f, crouchCamOffset, 0f);
+            mainCam.transform.localPosition = camPos;
         }
         else
         {
             controller.height = standingHeight;
             speed = walkSpeed;
-            //Debug.Log("not crouching");
+            Vector3 camPos = new Vector3(0f, camOffset, 0f);
+            mainCam.transform.localPosition = camPos;
         }
         //Gravity Implementation
         moveVelocity.y += gravity * Time.deltaTime;
-        if (controller.isGrounded)
+        if (controller.isGrounded && moveVelocity.y < 0)
         {
             moveVelocity.y = 0;
+            maxJumps = 0;
         }
-        else
+        if(bIsJumping && maxJumps < 1)
         {
-            moveVelocity.y += gravity * Time.deltaTime;
+            moveVelocity.y += Mathf.Sqrt(JumpSpeed * -3.0f * gravity);
+            bIsJumping = false;
+            maxJumps++;
+            
         }
         //FWD/Strafing movement
-      
+        moveVelocity.y += gravity * Time.deltaTime;
         controller.Move(moveVelocity * speed * Time.deltaTime);
        
        

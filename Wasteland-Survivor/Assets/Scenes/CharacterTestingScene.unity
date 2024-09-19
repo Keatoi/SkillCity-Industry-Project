@@ -213,6 +213,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8224855509206211273, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: crouchCamOffset
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214377120670627532, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214377120670627532, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
