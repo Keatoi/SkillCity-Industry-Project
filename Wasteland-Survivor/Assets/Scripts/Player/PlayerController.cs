@@ -12,7 +12,8 @@ public class PlayerController : MonoBehaviour
     private bool bisGrounded;
     [SerializeField] private Camera mainCam;
     [SerializeField] Transform playerBodyPos;
-    
+    [SerializeField] GameObject currentWeapon;
+
     private CharacterController controller;
     [SerializeField] float camOffset = 0.5f;
     [SerializeField] float crouchCamOffset = 0.25f;
@@ -56,10 +57,10 @@ public class PlayerController : MonoBehaviour
     }
     private void OnFire(InputValue value)
     {
-        if (GetComponent<GunSystem>())
+        if (currentWeapon.GetComponent<GunSystem>())
         {
-            Debug.Log("Calling Fire");
-            GetComponent<GunSystem>().Fire();
+            //Debug.Log("Calling Fire");
+            currentWeapon.GetComponent<GunSystem>().Fire();
         }
         
     }

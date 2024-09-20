@@ -337,6 +337,7 @@
 "Assets/Scripts/Enviroment/DayNightCycle.cs"
 "Assets/Scripts/Enviroment/InteractableObjects/Bed.cs"
 "Assets/Scripts/Enviroment/InteractableObjects/InteractableObject.cs"
+"Assets/Scripts/Other/GunScript.cs"
 "Assets/Scripts/Other/GunSystem.cs"
 "Assets/Scripts/Player/HealthSystem.cs"
 "Assets/Scripts/Player/Input/Wasteland-Survivor.cs"
