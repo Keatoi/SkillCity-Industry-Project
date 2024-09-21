@@ -41,6 +41,11 @@ public class PlayerController : MonoBehaviour
         crouchSpeed = speed / 2;
         Vector3 camPos = new Vector3(0f, camOffset, 0f);
         mainCam.transform.localPosition = camPos;
+        if (currentWeapon.GetComponent<GunSystem>())
+        {
+            //Debug.Log("Calling Fire");
+            currentWeapon.GetComponent<GunSystem>().defaultFOV = mainCam.fieldOfView;
+        }
     }
     private void OnLook(InputValue value)
     {
@@ -63,6 +68,14 @@ public class PlayerController : MonoBehaviour
             currentWeapon.GetComponent<GunSystem>().Fire();
         }
         
+    }
+    private void OnAim(InputValue value)
+    {
+        if (currentWeapon.GetComponent<GunSystem>())
+        {
+
+            currentWeapon.GetComponent<GunSystem>().SetAim();
+        }
     }
 
     private void OnMove(InputValue value)

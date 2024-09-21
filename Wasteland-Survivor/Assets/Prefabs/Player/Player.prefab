@@ -342,7 +342,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4514127615177098375}
   m_Father: {fileID: 2207910347188883912}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!20 &4674904620757778020
@@ -506,6 +507,37 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &7047833617256607292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4514127615177098375}
+  m_Layer: 0
+  m_Name: GunLoc
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4514127615177098375
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7047833617256607292}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9214377120670627532}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7443095820101425238
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,7 +698,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxMagazineSize: 30
-  projectile: {fileID: 0}
+  barrelPoint: {fileID: 0}
+  range: 100
+  damage: 30
 --- !u!114 &8224855509206211273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -682,6 +716,7 @@ MonoBehaviour:
   gravity: -9.81
   mainCam: {fileID: 4674904620757778020}
   playerBodyPos: {fileID: 2207910347188883912}
+  currentWeapon: {fileID: 0}
   camOffset: 0.5
   crouchCamOffset: 0.25
   minViewRotation: 25
