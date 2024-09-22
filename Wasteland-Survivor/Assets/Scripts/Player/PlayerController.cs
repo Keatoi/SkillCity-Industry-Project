@@ -21,9 +21,13 @@ public class PlayerController : MonoBehaviour
     float standingHeight,crouchingHeight;
     bool bIsCrouching = false;
     bool bIsJumping = false;
+    bool bIsSprinting = false;
     [SerializeField]float minViewRotation = -90f;//Limit how much the player can look down
     [SerializeField] float walkSpeed = 20f;
+    [SerializeField] float sprintSpeed = 40f;
     [SerializeField] float JumpSpeed = 2f;
+    [SerializeField] float sprintDuration = 3f;
+    private float maxSprintTime;
     private float maxJumps = 1;
     private float speed, crouchSpeed;
     
@@ -46,6 +50,7 @@ public class PlayerController : MonoBehaviour
             //Debug.Log("Calling Fire");
             currentWeapon.GetComponent<GunSystem>().defaultFOV = mainCam.fieldOfView;
         }
+        maxSprintTime = sprintDuration;
     }
     private void OnLook(InputValue value)
     {
@@ -98,6 +103,10 @@ public class PlayerController : MonoBehaviour
        
        
     }
+    private void OnSprint(InputValue value)
+    {
+        bIsSprinting = !bIsSprinting;
+    }
     void Movement()
     {
         Vector3 moveVelocity = transform.right * moveInput.x + transform.forward * moveInput.y;
@@ -131,6 +140,18 @@ public class PlayerController : MonoBehaviour
             bIsJumping = false;
             maxJumps++;
             
+        }
+        if(bIsSprinting)
+        {
+            speed = sprintSpeed;
+            sprintDuration -= Time.deltaTime;
+            sprintDuration = Mathf.Clamp(sprintDuration, 0f, maxSprintTime);
+        }
+        else 
+        {
+            speed = walkSpeed;
+            sprintDuration += Time.deltaTime;
+            sprintDuration = Mathf.Clamp(sprintDuration, 0f, maxSprintTime);
         }
         //FWD/Strafing movement
         moveVelocity.y += gravity * Time.deltaTime;
