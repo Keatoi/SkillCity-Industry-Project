@@ -10,6 +10,7 @@ public class GunSystem : MonoBehaviour
     [SerializeField] private Camera barrelCamera;
     [SerializeField] float range = 100f;
     [SerializeField] float damage = 30f;
+    [SerializeField] LineRenderer lineRenderer;
     public float defaultFOV = 90f;
     [SerializeField] float zoomDuration = 2f;
     [SerializeField] float magnification = 2;
@@ -40,9 +41,14 @@ public class GunSystem : MonoBehaviour
         //Raycast from gun barrel/camera to destination
         Debug.Log("Firing handgunne");
         RaycastHit hit;
-        if(Physics.Raycast(barrelCamera.transform.position, barrelCamera.transform.forward, out hit, range) && currentRounds > 0)
+        lineRenderer.enabled = true;
+        lineRenderer.SetPosition(0, barrelCamera.transform.position);
+        lineRenderer.SetPosition(1, barrelCamera.transform.forward);
+
+        if (Physics.Raycast(barrelCamera.transform.position, barrelCamera.transform.forward, out hit, range) && currentRounds > 0)
         {
             Debug.Log(hit.transform.name);
+            Debug.DrawRay(barrelCamera.transform.position, barrelCamera.transform.forward, Color.cyan, 3f);
             currentRounds--;
         }
 
