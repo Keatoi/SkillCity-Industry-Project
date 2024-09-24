@@ -74,6 +74,13 @@ public class PlayerController : MonoBehaviour
         }
         
     }
+    private void OnThrow(InputValue value)
+    {
+        if(GetComponent<ThrowScript>() != null)
+        {
+            GetComponent<ThrowScript>().Throw();
+        }
+    }
     private void OnAim(InputValue value)
     {
         if (currentWeapon.GetComponent<GunSystem>())

@@ -201,6 +201,37 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &2874072837961835251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1556297903383571880}
+  m_Layer: 0
+  m_Name: Throw Source
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1556297903383571880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2874072837961835251}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0, y: -0.301, z: 0.788}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9214377120670627532}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &2879366720625697684
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,14 +369,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3270077098595110923}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4514127615177098375}
+  - {fileID: 1556297903383571880}
   m_Father: {fileID: 2207910347188883912}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &4674904620757778020
 Camera:
   m_ObjectHideFlags: 0
@@ -549,10 +581,10 @@ GameObject:
   - component: {fileID: 2207910347188883912}
   - component: {fileID: 8822010700916404558}
   - component: {fileID: 7952534086203972495}
-  - component: {fileID: 1246107103967314503}
   - component: {fileID: 8224855509206211273}
   - component: {fileID: 8892258352595769541}
   - component: {fileID: 8044393254837786366}
+  - component: {fileID: 601142785585309035}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -685,22 +717,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1246107103967314503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7443095820101425238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d368e0a477a8b86468490a4c6414a452, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxMagazineSize: 30
-  barrelPoint: {fileID: 0}
-  range: 100
-  damage: 30
 --- !u!114 &8224855509206211273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -721,7 +737,9 @@ MonoBehaviour:
   crouchCamOffset: 0.25
   minViewRotation: 25
   walkSpeed: 2
+  sprintSpeed: 40
   JumpSpeed: 5
+  sprintDuration: 3
   mouseSensitivity: 100
 --- !u!136 &8892258352595769541
 CapsuleCollider:
@@ -760,6 +778,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 100
   maxHealth: 100
+--- !u!114 &601142785585309035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7443095820101425238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d415502f7ac1a1441854f47a48684459, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCam: {fileID: 9214377120670627532}
+  throwPos: {fileID: 4514127615177098375}
+  grenadePrefab: {fileID: 1163758135762650468, guid: 8b2a21643e190f842b3843e0cd3851f6, type: 3}
+  cooldown: 0
+  force: 0
+  upwardsForce: 0
+  throwDistance: 500
 --- !u!1 &8771797572633302666
 GameObject:
   m_ObjectHideFlags: 0

@@ -122,6 +122,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &180854838 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1556297903383571880, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+  m_PrefabInstance: {fileID: 659478299}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &326671504 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9020229562833664184, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
@@ -133,6 +138,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &584547761
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 182977361125028523, guid: 8b2a21643e190f842b3843e0cd3851f6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.16562891
+      objectReference: {fileID: 0}
+    - target: {fileID: 182977361125028523, guid: 8b2a21643e190f842b3843e0cd3851f6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.07500005
+      objectReference: {fileID: 0}
+    - target: {fileID: 182977361125028523, guid: 8b2a21643e190f842b3843e0cd3851f6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.59288824
+      objectReference: {fileID: 0}
+    - target: {fileID: 182977361125028523, guid: 8b2a21643e190f842b3843e0cd3851f6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 182977361125028523, guid: 8b2a21643e190f842b3843e0cd3851f6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 182977361125028523, guid: 8b2a21643e190f842b3843e0cd3851f6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 182977361125028523, guid: 8b2a21643e190f842b3843e0cd3851f6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 182977361125028523, guid: 8b2a21643e190f842b3843e0cd3851f6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 182977361125028523, guid: 8b2a21643e190f842b3843e0cd3851f6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 182977361125028523, guid: 8b2a21643e190f842b3843e0cd3851f6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1163758135762650468, guid: 8b2a21643e190f842b3843e0cd3851f6, type: 3}
+      propertyPath: m_Name
+      value: Rock
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8b2a21643e190f842b3843e0cd3851f6, type: 3}
 --- !u!1001 &659478299
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -141,6 +203,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 601142785585309035, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: force
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 601142785585309035, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: cooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 601142785585309035, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: throwPos
+      value: 
+      objectReference: {fileID: 180854838}
+    - target: {fileID: 601142785585309035, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: upwardsForce
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 601142785585309035, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: grenadePrefab
+      value: 
+      objectReference: {fileID: 1163758135762650468, guid: 8b2a21643e190f842b3843e0cd3851f6, type: 3}
+    - target: {fileID: 601142785585309035, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: throwDistance
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 2207910347188883912, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.75
@@ -750,3 +836,4 @@ SceneRoots:
   - {fileID: 707028574456238406}
   - {fileID: 2041651098}
   - {fileID: 659478299}
+  - {fileID: 584547761}
