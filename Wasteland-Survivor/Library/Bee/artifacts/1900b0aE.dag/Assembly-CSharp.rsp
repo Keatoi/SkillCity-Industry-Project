@@ -338,6 +338,7 @@
 "Assets/Scripts/Enviroment/InteractableObjects/Bed.cs"
 "Assets/Scripts/Enviroment/InteractableObjects/InteractableObject.cs"
 "Assets/Scripts/Other/Weapons/GunSystem.cs"
+"Assets/Scripts/Other/Weapons/MeleeSystem.cs"
 "Assets/Scripts/Other/Weapons/ThrowScript.cs"
 "Assets/Scripts/Player/HealthSystem.cs"
 "Assets/Scripts/Player/Input/Wasteland-Survivor.cs"

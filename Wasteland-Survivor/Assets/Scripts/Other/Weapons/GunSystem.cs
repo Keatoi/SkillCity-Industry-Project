@@ -15,6 +15,7 @@ public class GunSystem : MonoBehaviour
     [SerializeField] float zoomDuration = 2f;
     [SerializeField] float magnification = 2;
     bool bIsAimed = false;
+    public GameObject hitObject;
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +48,14 @@ public class GunSystem : MonoBehaviour
 
         if (Physics.Raycast(barrelCamera.transform.position, barrelCamera.transform.forward, out hit, range) && currentRounds > 0)
         {
-            Debug.Log(hit.transform.name);
+            if(hit.collider != null)
+            {
+                hitObject = hit.collider.gameObject;
+                if (hitObject.GetComponent<HealthSystem>() != null && hitObject.CompareTag("Enemy"))
+                {
+                    hitObject.GetComponent<HealthSystem>().ChangeHealth(-damage);
+                }
+            }            
             Debug.DrawRay(barrelCamera.transform.position, barrelCamera.transform.forward, Color.cyan, 3f);
             currentRounds--;
         }
