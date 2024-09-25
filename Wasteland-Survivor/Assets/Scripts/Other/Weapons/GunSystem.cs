@@ -16,10 +16,20 @@ public class GunSystem : MonoBehaviour
     [SerializeField] float magnification = 2;
     bool bIsAimed = false;
     public GameObject hitObject;
+    public AudioClip[] GunSFXArr;
+    public AudioClip reloadSFX;
+    public float GunShotVolume;
+    public float ReloadVolume;
+    private AudioSource m_Audio;
 
     // Start is called before the first frame update
     void Start()
     {
+        m_Audio = GetComponent<AudioSource>();
+        if(m_Audio != null )
+        {
+            Debug.Log("No AudioSource Found!");
+        }
         currentRounds = maxMagazineSize;
     }
 
@@ -48,6 +58,7 @@ public class GunSystem : MonoBehaviour
 
         if (Physics.Raycast(barrelCamera.transform.position, barrelCamera.transform.forward, out hit, range) && currentRounds > 0)
         {
+            
             if(hit.collider != null)
             {
                 hitObject = hit.collider.gameObject;
@@ -82,5 +93,25 @@ public class GunSystem : MonoBehaviour
     {
         float angle = Mathf.Abs((defaultFOV / magnification) - defaultFOV);
         barrelCamera.fieldOfView = Mathf.MoveTowards(barrelCamera.fieldOfView, target, angle / zoomDuration * Time.deltaTime);
+    }
+    private void PlayGunSFX()
+    {
+        if(currentRounds != 0)
+        {
+            //shoot gun sound
+            m_Audio.clip = GunSFXArr[0];
+        }
+        else 
+        {
+            //empty gun sound
+            m_Audio.clip = GunSFXArr[1];
+        }
+        //play the sound
+        m_Audio.PlayOneShot(m_Audio.clip);
+    }
+    private void PlayReloadSFX()
+    {
+        m_Audio.clip = reloadSFX;
+        m_Audio.PlayOneShot(m_Audio.clip);
     }
 }
