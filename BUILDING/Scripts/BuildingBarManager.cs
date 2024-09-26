@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,6 +12,9 @@ public class BuildingBarManager : MonoBehaviour
     public float buildingdistance;
     public float maxtime;
     public TextMeshProUGUI MoveText;
+    public TextMeshProUGUI MoveText1;
+    public AudioSource audioSource;
+    public AudioClip[] audioClips;
 
     [HideInInspector]
     public bool isbuilding;
@@ -39,10 +43,19 @@ public class BuildingBarManager : MonoBehaviour
     }
     public void EndBuildBar( bool completed )
     {
+        Debug.Log("build finnished");
         isbuilding = false; 
-        BuildingBar.SetActive(false);
-        if ( completed ) {buildscrip.finishedbuilding= true; }else { buildscrip.Destroyghost(true); }
         
+        if ( completed ) {
+         buildscrip.BuildStructure();
+        audioSource.clip = audioClips[0];
+        audioSource.Play();
+        }else if (!completed)
+        { buildscrip.Destroyghost(true);
+            audioSource.clip = audioClips[1];
+            audioSource.Play();
+        }
+        BuildingBar.SetActive(false);
 
     }
 
@@ -55,36 +68,45 @@ public class BuildingBarManager : MonoBehaviour
             bool isMoving = playerVelocity.magnitude > 0.2f; // You can adjust the threshold if needed
             Vector3 playerpos = player.transform.position;
             buildinpos = buildscrip.savedbuilinglocation.position;
+            if(buildscrip.strucIndex==1 ) { buildinpos = buildscrip.savedwalllocation.position; }
             float distance = Vector3.Distance(buildinpos, playerpos);
            
                 if (!isMoving&& distance<buildingdistance)
                 {
                     currentime += Time.deltaTime;
                     BuildingProgress.fillAmount = (currentime / maxtime);
-                    MoveText.gameObject.SetActive(false);
+                     MoveText.gameObject.SetActive(false);
 
 
-                }
-               
-            else if (distance>buildingdistance) {
-                StartCoroutine(Cancelltext());
-                
-
-            }
-            else if (isMoving) { MoveText.text = "Cant Build Whilst Moving"; MoveText.gameObject.SetActive(true); }
-
+                }else if (isMoving) { 
+                    MoveText.text = "Cant Build Whilst Moving"; MoveText.gameObject.SetActive(true); 
+                  }
+                     
+                 else if (distance>buildingdistance) {
+                 StartCoroutine(Cancelltext(null));
+                 }
             if (currentime >= maxtime) { EndBuildBar(true); MoveText.gameObject.SetActive(false); }
             
 
         }
     }
-    IEnumerator Cancelltext()
-    {
-        MoveText.text = "Too Far From Structure,Building Cancelled";
-        MoveText.gameObject.SetActive(true);
-       yield return new WaitForSeconds(1.0f);
-        MoveText.gameObject.SetActive(false) ;
+       
+    public IEnumerator Cancelltext(string text)
+    {Debug.Log("Cancelltextactive?");
+        if (text == null)
+        {
+            MoveText.text = "Too Far From Structure,Building Cancelled";
+            MoveText.gameObject.SetActive(true);
+            yield return new WaitForSeconds(1.0f);
+            MoveText.gameObject.SetActive(false);
+        }else
+        {
+            MoveText1.text = text;
+            MoveText1.gameObject.SetActive(true);
+            yield return new WaitForSeconds(1.0f);
+            MoveText1.gameObject.SetActive(false);
+        }
         EndBuildBar(false);
-
+       
     }
 }

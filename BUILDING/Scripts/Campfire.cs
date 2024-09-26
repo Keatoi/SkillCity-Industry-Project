@@ -10,7 +10,7 @@ public class Campfire : InteractableObject
     public override void InteractAction()
     {
         ison = !ison;
-        effects.gameObject.gameObject.SetActive(ison);
+        effects.gameObject.SetActive(ison);
     }
 
 }
