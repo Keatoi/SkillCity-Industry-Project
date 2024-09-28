@@ -341,10 +341,13 @@
 "Assets/Scripts/Other/Weapons/MeleeSystem.cs"
 "Assets/Scripts/Other/Weapons/ThrowScript.cs"
 "Assets/Scripts/Player/HealthSystem.cs"
+"Assets/Scripts/Player/HungerSystem.cs"
 "Assets/Scripts/Player/Input/Wasteland-Survivor.cs"
 "Assets/Scripts/Player/PlayerController.cs"
 "Assets/Scripts/Player/UX/AudioDamageResponse.cs"
 "Assets/Scripts/Player/UX/HealthBar.cs"
+"Assets/Scripts/Player/UX/HungerBar.cs"
+"Assets/Scripts/Player/UX/ThirstBar.cs"
 -langversion:9.0
 /deterministic
 /optimize+
