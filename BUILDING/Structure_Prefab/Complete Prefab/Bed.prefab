@@ -40,6 +40,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6150783679723729118}
     m_Modifications:
+    - target: {fileID: 83033122074963065, guid: 77b21a922c8070241a1aa36818cd92f3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 732691033918638324, guid: 77b21a922c8070241a1aa36818cd92f3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -96,7 +101,8 @@ PrefabInstance:
       value: BedSingle01emptyV1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 83033122074963065, guid: 77b21a922c8070241a1aa36818cd92f3, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77b21a922c8070241a1aa36818cd92f3, type: 3}
