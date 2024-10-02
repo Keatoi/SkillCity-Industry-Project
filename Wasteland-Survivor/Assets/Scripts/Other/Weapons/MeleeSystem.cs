@@ -28,6 +28,7 @@ public class MeleeSystem : MonoBehaviour
     {
         m_Audio = GetComponent<AudioSource>();
         m_PlayerController = GameObject.FindObjectOfType(typeof(PlayerController)) as PlayerController;
+        attackTotal = 0;
     }
 
     // Update is called once per frame
@@ -49,6 +50,7 @@ public class MeleeSystem : MonoBehaviour
         if (attackTotal == 0)
         {
             //Change Animation here
+            Debug.Log("Play attack 1");
             m_PlayerController.ChangeAnimationState("Attack 1");
             attackTotal++;
         }
@@ -56,6 +58,7 @@ public class MeleeSystem : MonoBehaviour
         {
             //same as above
             m_PlayerController.ChangeAnimationState("Attack 2");
+            Debug.Log("Play attack 2");
             attackTotal = 0;
 
         }

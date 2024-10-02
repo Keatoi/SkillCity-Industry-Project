@@ -76,6 +76,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (currentWeapon.GetComponent<MeleeSystem>())
         {
+            Debug.Log("Calling Melee");
             currentWeapon.GetComponent<MeleeSystem>().Attack();
         }
         
@@ -122,7 +123,7 @@ public class PlayerController : MonoBehaviour
     }
     void Movement()
     {
-        Vector3 moveVelocity = transform.right * moveInput.x + transform.forward * moveInput.y;
+        moveVelocity = transform.right * moveInput.x + transform.forward * moveInput.y;
         bisGrounded = controller.isGrounded;
         //Crouching
         if(bIsCrouching)
@@ -186,9 +187,10 @@ public class PlayerController : MonoBehaviour
     string currentAnimationState;
     public void ChangeAnimationState(string newState)
     {
+       // Debug.Log("Change anim state called: " + newState);
         // STOP THE SAME ANIMATION FROM INTERRUPTING WITH ITSELF //
         if (currentAnimationState == newState) return;
-
+        Debug.Log("Changing Animation State");
         // PLAY THE ANIMATION //
         currentAnimationState = newState;
         animator.CrossFadeInFixedTime(currentAnimationState, 0.2f);
@@ -196,13 +198,16 @@ public class PlayerController : MonoBehaviour
 
     void SetAnim()
     {
+        
         if (moveVelocity.x == 0 && moveVelocity.z == 0)
         {
             ChangeAnimationState(IDLE);
+           // Debug.Log("Changing Animation State to IDLE");
         }
         else
         {
             ChangeAnimationState(WALK);
+           Debug.Log(moveVelocity.ToString());
         }
     }
 
