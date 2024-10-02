@@ -14,11 +14,9 @@ public class HealthSystem : MonoBehaviour
     void Start()
     {
         health = startingHealth;
-        parent = this.transform.parent.gameObject;
-        if (parent.CompareTag("Player"))
-        {
-            OnHealthChange?.Invoke(health, maxHealth);
-        }
+       
+       OnHealthChange?.Invoke(health, maxHealth);
+        
     }
     public void ChangeHealth(float hp)
     {
@@ -27,15 +25,13 @@ public class HealthSystem : MonoBehaviour
         Debug.Log(health);
         //check for 0  health then die or something I guess 
         //make sure only the player can affect UI
-        if (parent.CompareTag("Player"))
-        {
-            OnHealthChange?.Invoke(health, maxHealth);
-        }
         
-        if(health <= 0)
-        {
+            OnHealthChange?.Invoke(health, maxHealth);
+        
+        
+       
             Debug.Log(this.name + "is Dead");
-        }
+        
 
 
     }

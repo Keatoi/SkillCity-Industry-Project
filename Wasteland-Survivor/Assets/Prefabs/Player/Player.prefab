@@ -1331,6 +1331,7 @@ GameObject:
   - component: {fileID: 4507285907233984340}
   - component: {fileID: 5564045773998884588}
   - component: {fileID: 1446724701072076196}
+  - component: {fileID: 220703957744308241}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1602,6 +1603,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hungerSlider: {fileID: 1098762236886502203}
+--- !u!95 &220703957744308241
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7443095820101425238}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4a3cccb941b73064589bb57ab0912b80, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8725260909573966391
 GameObject:
   m_ObjectHideFlags: 0

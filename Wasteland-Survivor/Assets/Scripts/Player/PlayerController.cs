@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject currentWeapon;
 
     private CharacterController controller;
+    Animator animator;
     [SerializeField] float camOffset = 0.5f;
     [SerializeField] float crouchCamOffset = 0.25f;
     float xRotation = 0;
@@ -22,7 +23,8 @@ public class PlayerController : MonoBehaviour
     bool bIsCrouching = false;
     bool bIsJumping = false;
     bool bIsSprinting = false;
-    [SerializeField]float minViewRotation = -90f;//Limit how much the player can look down
+    Vector3 moveVelocity = new Vector3();
+   [SerializeField]float minViewRotation = -90f;//Limit how much the player can look down
     [SerializeField] float walkSpeed = 20f;
     [SerializeField] float sprintSpeed = 40f;
     [SerializeField] float JumpSpeed = 2f;
@@ -39,6 +41,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
         speed = walkSpeed;
         controller.height = standingHeight;
         crouchingHeight = standingHeight / 2;
@@ -170,12 +173,43 @@ public class PlayerController : MonoBehaviour
        
     }
    public void ChangeMouseSensitivity(float newMouseSensitivity) { mouseSensitivity = newMouseSensitivity; }
-    
-   
+
+    // ---------- //
+    // ANIMATIONS //
+    // ---------- //
+
+    public const string IDLE = "Idle";
+    public const string WALK = "Walk";
+    public const string ATTACK1 = "Attack 1";
+    public const string ATTACK2 = "Attack 2";
+
+    string currentAnimationState;
+    public void ChangeAnimationState(string newState)
+    {
+        // STOP THE SAME ANIMATION FROM INTERRUPTING WITH ITSELF //
+        if (currentAnimationState == newState) return;
+
+        // PLAY THE ANIMATION //
+        currentAnimationState = newState;
+        animator.CrossFadeInFixedTime(currentAnimationState, 0.2f);
+    }
+
+    void SetAnim()
+    {
+        if (moveVelocity.x == 0 && moveVelocity.z == 0)
+        {
+            ChangeAnimationState(IDLE);
+        }
+        else
+        {
+            ChangeAnimationState(WALK);
+        }
+    }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         Movement();
+        SetAnim();
     }
 }

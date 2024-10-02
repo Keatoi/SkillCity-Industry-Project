@@ -23,9 +23,11 @@ public class MeleeSystem : MonoBehaviour
     RaycastHit m_hit;
     bool m_hasHit;
     int attackTotal;
+    PlayerController m_PlayerController;
     void Start()
     {
         m_Audio = GetComponent<AudioSource>();
+        m_PlayerController = GameObject.FindObjectOfType(typeof(PlayerController)) as PlayerController;
     }
 
     // Update is called once per frame
@@ -47,11 +49,13 @@ public class MeleeSystem : MonoBehaviour
         if (attackTotal == 0)
         {
             //Change Animation here
+            m_PlayerController.ChangeAnimationState("Attack 1");
             attackTotal++;
         }
         else
         {
             //same as above
+            m_PlayerController.ChangeAnimationState("Attack 2");
             attackTotal = 0;
 
         }
