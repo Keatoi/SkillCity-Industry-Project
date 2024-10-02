@@ -9,11 +9,16 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] float startingHealth = 100f;
     [SerializeField] float maxHealth = 100f;
     private float health;
+    GameObject parent;
     // Start is called before the first frame update
     void Start()
     {
         health = startingHealth;
-        OnHealthChange?.Invoke(health, maxHealth);
+        parent = this.transform.parent.gameObject;
+        if (parent.CompareTag("Player"))
+        {
+            OnHealthChange?.Invoke(health, maxHealth);
+        }
     }
     public void ChangeHealth(float hp)
     {
@@ -21,10 +26,15 @@ public class HealthSystem : MonoBehaviour
         health += hp;
         Debug.Log(health);
         //check for 0  health then die or something I guess 
-        OnHealthChange?.Invoke(health,maxHealth);
+        //make sure only the player can affect UI
+        if (parent.CompareTag("Player"))
+        {
+            OnHealthChange?.Invoke(health, maxHealth);
+        }
+        
         if(health <= 0)
         {
-            Debug.Log("Player is Dead");
+            Debug.Log(this.name + "is Dead");
         }
 
 

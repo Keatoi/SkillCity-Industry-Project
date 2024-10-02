@@ -47,7 +47,6 @@ public class PlayerController : MonoBehaviour
         mainCam.transform.localPosition = camPos;
         if (currentWeapon.GetComponent<GunSystem>())
         {
-            //Debug.Log("Calling Fire");
             currentWeapon.GetComponent<GunSystem>().defaultFOV = mainCam.fieldOfView;
         }
         maxSprintTime = sprintDuration;
@@ -71,6 +70,10 @@ public class PlayerController : MonoBehaviour
         {
             //Debug.Log("Calling Fire");
             currentWeapon.GetComponent<GunSystem>().Fire();
+        }
+        else if (currentWeapon.GetComponent<MeleeSystem>())
+        {
+            currentWeapon.GetComponent<MeleeSystem>().Attack();
         }
         
     }
