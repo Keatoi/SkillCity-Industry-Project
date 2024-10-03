@@ -190,7 +190,7 @@ public class PlayerController : MonoBehaviour
        // Debug.Log("Change anim state called: " + newState);
         // STOP THE SAME ANIMATION FROM INTERRUPTING WITH ITSELF //
         if (currentAnimationState == newState) return;
-        Debug.Log("Changing Animation State");
+        //Debug.Log("Changing Animation State");
         // PLAY THE ANIMATION //
         currentAnimationState = newState;
         animator.CrossFadeInFixedTime(currentAnimationState, 0.2f);
@@ -207,7 +207,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             ChangeAnimationState(WALK);
-           Debug.Log(moveVelocity.ToString());
+          // Debug.Log(moveVelocity.ToString());
         }
     }
 
@@ -216,5 +216,6 @@ public class PlayerController : MonoBehaviour
     {
         Movement();
         SetAnim();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

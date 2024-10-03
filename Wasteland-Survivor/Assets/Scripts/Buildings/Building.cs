@@ -13,10 +13,15 @@ public class Building : MonoBehaviour
 
     [HideInInspector]
     public bool currentlyBuilding;   //structure is actively being built    
+    [HideInInspector] 
     public bool finishedbuilding;    //structure has been built
+    [HideInInspector] 
     public Transform savedbuilinglocation;// transform location of the ghost building
+    [HideInInspector] 
     public Transform savedwalllocation;
+    [HideInInspector] 
     public GameObject savedbuilding; //gameobject ref for transform
+    [HideInInspector] 
     public GameObject savedwall; //gameobject ref for transform
 
 
