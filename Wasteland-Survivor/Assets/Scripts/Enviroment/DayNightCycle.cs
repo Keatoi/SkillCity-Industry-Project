@@ -16,7 +16,9 @@ public class DayNightCycle : MonoBehaviour
     private float minuteResetValue;
     [SerializeField] private Vector3 rotationperMinute = new Vector3(0.25f, 0, 0);
     public bool bIsWinter { get; private set; }
+    public WeatherState currentWeather;
    
+
     void Start()
     {
         minuteResetValue = inGameMinute;
@@ -27,6 +29,8 @@ public class DayNightCycle : MonoBehaviour
         transform.Rotate(newSunRotation);
         //check date to determine if winter should be enabled
         CheckDate();
+        //Set weather
+        currentWeather = WeatherState.Clear;
 
     }
 
@@ -53,6 +57,7 @@ public class DayNightCycle : MonoBehaviour
                 //Reset Hour, Check if 24 hours have passed
                 timeOfHour = 0;
                 timeOfDay++;
+                
                 if (timeOfDay >= 24)
                 {
                     //Increment Day, check month,Reset all values
@@ -62,6 +67,7 @@ public class DayNightCycle : MonoBehaviour
                     timeOfHour = 0;
                     inGameMinute = minuteResetValue;
                     CheckDate();
+                    RandomWeather();
                 }
 
             }
@@ -91,5 +97,26 @@ public class DayNightCycle : MonoBehaviour
     {
         currentDay += amountToIncrease;
     }
+    public void RandomWeather()
+    {
+        if(bIsWinter)
+        {
+            //If its winter set to permanent snow
+            currentWeather = WeatherState.Snow;
+        }
+        else
+        {
+            //currently an equal weighting, may replace with weighted distribution later on after we test the effects
+            //This should give a Random enum(excluding Snow, hence the -1) equally weighted between the 3 of them.
+            currentWeather = (WeatherState)Random.Range(0, System.Enum.GetValues(typeof(WeatherState)).Length - 1);
+        }
+    }
+}
+public enum WeatherState
+{
+    Clear,
+    Rain,
+    RadStorm,
+    Snow
 }
 
