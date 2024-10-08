@@ -66,7 +66,8 @@ public class MeeleAIController : MonoBehaviour
         if (enemyref.playerspotted == true)
         {
             enemyref.playerwasspotted = true;
-            enemyref.agent.speed = 4;
+            enemyref.agent.speed = 5;
+          
 
             if (!inrange)
             {
@@ -227,17 +228,26 @@ public class MeeleAIController : MonoBehaviour
         {
             Debug.Log("attacking");
             attackdelay = Time.time + enemyref.attackdelay;
-            if (Physics.BoxCast(transform.position, attacksize, enemydirection,out RaycastHit hit,Quaternion.identity,2f))
-            {   
-                if (hit.collider != null) {Debug.Log("Hit an object with BoxCast: " + hit.collider.name + hit.transform.gameObject.name); }
-                attackSource.Play();
-                playerhealth.ChangeHealth(-15);
+
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("uppercut")) { animator.SetTrigger("attack"); }
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("uppercut") )
+            {
+                animator.SetTrigger("attack");
             }
+
+                if (Physics.BoxCast(transform.position, attacksize, enemydirection, out RaycastHit hit, Quaternion.identity, 2f))
+                {
+                    if (hit.collider.gameObject.name == "Player") { Debug.Log("Hit an object with BoxCast: " + hit.collider.name + hit.transform.gameObject.name); }
+
+
+                    animator.SetTrigger("attack"); playerhealth.ChangeHealth(-15); attackSource.Play();
+                }
+            
         }
 
 
     }
-   /* private void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
         // Start position of the box cast
         Vector3 startPos = transform.position;
@@ -256,6 +266,6 @@ public class MeeleAIController : MonoBehaviour
         // Draw a line connecting the start and end positions
         Gizmos.matrix = Matrix4x4.identity;
         Gizmos.DrawLine(startPos, endPos);
-    }*/
+    }
 }
 

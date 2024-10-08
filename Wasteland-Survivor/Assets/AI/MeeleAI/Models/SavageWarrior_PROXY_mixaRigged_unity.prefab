@@ -52,6 +52,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: SavageWarrior_PROXY_mixaRigged_unity
       objectReference: {fileID: 0}
+    - target: {fileID: 2382435067320288548, guid: fae0cda9381b41f408adc76286af835a, type: 3}
+      propertyPath: m_AABB.m_Center.x
+      value: 0.011381865
+      objectReference: {fileID: 0}
+    - target: {fileID: 2382435067320288548, guid: fae0cda9381b41f408adc76286af835a, type: 3}
+      propertyPath: m_AABB.m_Center.y
+      value: -0.092763245
+      objectReference: {fileID: 0}
+    - target: {fileID: 2382435067320288548, guid: fae0cda9381b41f408adc76286af835a, type: 3}
+      propertyPath: m_AABB.m_Center.z
+      value: -0.031060606
+      objectReference: {fileID: 0}
+    - target: {fileID: 2382435067320288548, guid: fae0cda9381b41f408adc76286af835a, type: 3}
+      propertyPath: m_AABB.m_Extent.x
+      value: 1.0709114
+      objectReference: {fileID: 0}
+    - target: {fileID: 2382435067320288548, guid: fae0cda9381b41f408adc76286af835a, type: 3}
+      propertyPath: m_AABB.m_Extent.y
+      value: 0.87973076
+      objectReference: {fileID: 0}
+    - target: {fileID: 2382435067320288548, guid: fae0cda9381b41f408adc76286af835a, type: 3}
+      propertyPath: m_AABB.m_Extent.z
+      value: 0.2007109
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -99,10 +123,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.37
-  m_Height: 7.82
+  m_Radius: 3.37
+  m_Height: 22.1
   m_Direction: 2
-  m_Center: {x: 0, y: 0.88, z: 3.46}
+  m_Center: {x: -0.20705271, y: 0.6, z: 8.13}
 --- !u!195 &6537742104456579328
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -122,7 +146,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0.01
+  m_BaseOffset: -0.04
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &9057430240988917219
@@ -137,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2470ff8dbecb54c42907f70ecd3e2a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  square: {fileID: 0}
+  animator: {fileID: 0}
   player: {fileID: 0}
   boxSize: {x: 1, y: 1, z: 1}
   boxColor: {r: 1, g: 0, b: 0, a: 1}
