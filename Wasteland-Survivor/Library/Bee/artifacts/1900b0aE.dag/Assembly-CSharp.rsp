@@ -367,6 +367,7 @@
 "Assets/Scripts/Player/HungerSystem.cs"
 "Assets/Scripts/Player/Input/Wasteland-Survivor.cs"
 "Assets/Scripts/Player/PlayerController.cs"
+"Assets/Scripts/Player/ResourceSystem.cs"
 "Assets/Scripts/Player/UX/AudioDamageResponse.cs"
 "Assets/Scripts/Player/UX/HealthBar.cs"
 "Assets/Scripts/Player/UX/HungerBar.cs"
