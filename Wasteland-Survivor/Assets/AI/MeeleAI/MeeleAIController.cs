@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class MeeleAIController : MonoBehaviour
 {
+    public Animator animator;
     public Transform player;
     private GameObject Player;
     private HealthSystem playerhealth;
@@ -14,9 +17,10 @@ public class MeeleAIController : MonoBehaviour
     private float attackdelay;
     private AudioSource attackSource;
 
+
     //attack varibales
     private Vector3 enemydirection; 
-    public Vector3 boxSize = new Vector3(1, 1, 1);
+    public Vector3 boxSize = new(1, 1, 1);
     public Color boxColor = Color.red;
     public CapsuleCollider eyesight;
 
@@ -25,11 +29,13 @@ public class MeeleAIController : MonoBehaviour
     public float patrolRadius = 10f;  // Radius of the patrol area
     public float patrolWaitTime = 3f; // Time to wait at each patrol point
     private Vector3 patrolDestination;
-    private bool isPatrolling = true;
-    private bool waitingAtPoint = false;
+    public bool isPatrolling = true;
+    public bool waitingAtPoint = false;
     private float waitTimer;
     public Vector3 Patrolcenter;
+    Vector3 lastplayerpos;
 
+    public float stucktimer=10f;
 
     // Start is called before the first frame update
     public void Awake()
@@ -39,6 +45,7 @@ public class MeeleAIController : MonoBehaviour
         player = Player.GetComponent<Transform>();  
         playerhealth = player.GetComponent<HealthSystem>();
         attackSource = enemyref.GetComponent<AudioSource>();
+        animator = enemyref.GetComponent<Animator>(); 
         Debug.Log("AWAKED");
        
         // Initialize patrol destination
@@ -58,7 +65,9 @@ public class MeeleAIController : MonoBehaviour
 
         if (enemyref.playerspotted == true)
         {
+            enemyref.playerwasspotted = true;
             enemyref.agent.speed = 4;
+
             if (!inrange)
             {
                 UpdatePath();
@@ -66,32 +75,67 @@ public class MeeleAIController : MonoBehaviour
             }
             else
             {
-                
+
                 attack();
                 Debug.Log("attacking");
             }
         }
-        else { Patrol();}
+        else { Patrol(); }
+
+        if (enemyref.playerwasspotted)
+        {
+            if (enemyref.playerspotted == false)
+            {
+                Debug.Log("playerlost");
+                lastplayerpos = player.position;
+                Patrolcenter = lastplayerpos;
+                enemyref.playerwasspotted = false;
+                //Instantiate<GameObject>(square,lastplayerpos,Quaternion.identity);  
+            }
+        }
+
+        if (enemyref.agent.velocity.magnitude <= 0.5f&& !waitingAtPoint&& !enemyref.playerspotted)
+        {
+            animator.SetBool("Moving", false);
+            Debug.Log("checking if stuck");
+            stucktimer -= Time.deltaTime;
+            if (stucktimer <= 0.1f)
+            {
+                if (enemyref.agent.velocity.magnitude <= 0.7f)
+                {  patrolDestination = GetRandomPatrolPoint();
+                Debug.Log("Stuck, Changing point");}
+                stucktimer= 10f;
+                   
+            }
+
+        }
+        else { stucktimer = 10f; }
     }
     // Generates a random patrol point within the patrol radius
     Vector3 GetRandomPatrolPoint()
     {
+       
         Vector3 randomDirection = Random.insideUnitSphere * patrolRadius;
         randomDirection += Patrolcenter; // Center around the patrol center
         NavMesh.SamplePosition(randomDirection, out NavMeshHit navHit, patrolRadius, NavMesh.AllAreas);
+        enemyref.playerwasspotted = false;
         return navHit.position;
     }
     void Patrol()
-    { Debug.Log("PAtrolling" + Vector3.Distance(patrolDestination, transform.position).ToString());
+    {
+        Vector3 Distance = patrolDestination- transform.position;
+      //  Instantiate<GameObject>(square,patrolDestination,Quaternion.identity);  
+      //  Debug.Log(Distance.magnitude.ToString()) ;
+     //   Debug.Log("PAtrolling" + Vector3.Distance(patrolDestination, transform.position).ToString());
 
         if (!isPatrolling) return; // Skip if we're not in patrolling mode
         enemyref.agent.speed = 2;
-
-        if  (Vector3.Distance(patrolDestination, transform.position) >= 2.5f&& !waitingAtPoint) { 
-        
+        animator.SetBool("Moving", true);
+        if  (Distance.magnitude >=3.0f && !waitingAtPoint) {
+           // Debug.Log("patrolling to location "+Distance.magnitude.ToString());
             enemyref.agent.SetDestination(patrolDestination);
 
-            if (Vector3.Distance(patrolDestination, transform.position) <=3f )
+            if (Distance.magnitude <=3.1f )
              {
                 Debug.Log("Close to point");
             waitingAtPoint = true; // Start waiting
@@ -104,29 +148,21 @@ public class MeeleAIController : MonoBehaviour
         // While waiting at the patrol point
         if (waitingAtPoint)
         {
+            
             Debug.Log("WAITING");
             waitatpoint();
         }
-      /*  if (!waitingAtPoint&& enemyref.agent.velocity.magnitude<=0.5f) {
-            Debug.Log("checking if stuck");
-            waitTimer -= Time.deltaTime;
-            if (waitTimer <= 0.1f)
-            { if (enemyref.agent.velocity.magnitude <= 0.5f){ } 
-                patrolDestination = GetRandomPatrolPoint();
-                Debug.Log("Stuck, Changing point");
-            }
-                
-        
-        }*/
+  
     }
     void waitatpoint()
     {
+        animator.SetBool("Moving", false);
         waitTimer -= Time.deltaTime;
         if (waitTimer <= 0.1f)
         {
             Debug.Log("Moving to next point");
-            waitingAtPoint = false;
-            patrolDestination = GetRandomPatrolPoint(); // Get a new patrol point
+              patrolDestination = GetRandomPatrolPoint(); waitingAtPoint = false;
+            
 
         }
     
@@ -145,21 +181,38 @@ public class MeeleAIController : MonoBehaviour
     
     }
     void UpdatePath()
-    {   lookattarget();
-        if(Time.time >= PathUpdateDelay) {
+    {
+        animator.SetBool("Moving", true);
+        lookattarget();
+        if (Time.time >= PathUpdateDelay)
+        {
             Debug.Log("Updating enenmy Path");
-            PathUpdateDelay = Time.time+ enemyref.updatepathdelay;
+            PathUpdateDelay = Time.time + enemyref.updatepathdelay;
             enemyref.agent.SetDestination(player.position);
         }
-        
     }
+
 
     public void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player")) { 
-            enemyref.playerspotted = true;
+        if (other.CompareTag("Player"))
+        {
+            Vector3 directionToPlayer = other.transform.position - transform.position;
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, directionToPlayer.normalized, out hit, Mathf.Infinity))
+            {
+                // Check if the raycast hit the player
+                if (hit.collider.CompareTag("Player"))
+                {
+                    // If we hit the player directly, the enemy can see the player
+                    enemyref.playerspotted = true;
+                }
+           
+            }
         }
     }
+
+
     public void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))

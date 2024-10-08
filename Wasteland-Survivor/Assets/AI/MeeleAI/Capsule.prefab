@@ -145,13 +145,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2470ff8dbecb54c42907f70ecd3e2a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  square: {fileID: 0}
   player: {fileID: 0}
   boxSize: {x: 1, y: 1, z: 1}
   boxColor: {r: 1, g: 0, b: 0, a: 1}
   eyesight: {fileID: 0}
-  Patrolcenter: {fileID: 0}
   patrolRadius: 10
   patrolWaitTime: 2
+  isPatrolling: 1
+  waitingAtPoint: 0
+  Patrolcenter: {x: 0, y: 0, z: 0}
+  stucktimer: 10
 --- !u!136 &2322433935271161598
 CapsuleCollider:
   m_ObjectHideFlags: 0

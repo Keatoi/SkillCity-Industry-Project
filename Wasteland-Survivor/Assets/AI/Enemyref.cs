@@ -12,6 +12,7 @@ public class Enemyref : MonoBehaviour
     public float attackdelay = 1.0f;
     public AudioSource attackSound;
     public bool playerspotted= false;
+    public bool playerwasspotted= false;
 
     public void Awake()
     {
