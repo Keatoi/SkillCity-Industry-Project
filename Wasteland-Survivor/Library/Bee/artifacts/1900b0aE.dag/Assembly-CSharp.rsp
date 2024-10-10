@@ -358,6 +358,7 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.46f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/AI/Enemyref.cs"
 "Assets/AI/MeeleAI/MeeleAIController.cs"
+"Assets/NpcController.cs"
 "Assets/Scripts/Buildings/Building.cs"
 "Assets/Scripts/Buildings/BuildingBarManager.cs"
 "Assets/Scripts/Buildings/Campfire.cs"

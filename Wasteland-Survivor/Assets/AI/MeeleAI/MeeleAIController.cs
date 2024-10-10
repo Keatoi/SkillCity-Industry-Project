@@ -8,25 +8,23 @@ using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class MeeleAIController : MonoBehaviour
 {
-    public Animator animator;
-    public Transform player;
+    private Animator animator;
+    private Transform player;
     private GameObject Player;
     private HealthSystem playerhealth;
-    private Enemyref enemyref;
+    private AiRef enemyref;
     private float PathUpdateDelay;
     private float attackdelay;
     private AudioSource attackSource;
 
-
     //attack varibales
     private Vector3 enemydirection; 
-    public Vector3 boxSize = new(1, 1, 1);
-    public Color boxColor = Color.red;
-    public CapsuleCollider eyesight;
+    private Vector3 boxSize = new(1, 1, 1);
+    private Color boxColor = Color.red;
 
 
     // Patrol variables
-    public float patrolRadius = 10f;  // Radius of the patrol area
+    private float patrolRadius = 10f;  // Radius of the patrol area
     public float patrolWaitTime = 3f; // Time to wait at each patrol point
     private Vector3 patrolDestination;
     public bool isPatrolling = true;
@@ -40,7 +38,7 @@ public class MeeleAIController : MonoBehaviour
     // Start is called before the first frame update
     public void Awake()
     {
-        enemyref = GetComponent<Enemyref>();
+        enemyref = GetComponent<AiRef>();
         Player = GameObject.FindGameObjectWithTag("Player");
         player = Player.GetComponent<Transform>();  
         playerhealth = player.GetComponent<HealthSystem>();

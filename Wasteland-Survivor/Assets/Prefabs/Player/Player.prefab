@@ -2132,6 +2132,10 @@ PrefabInstance:
       propertyPath: Camera
       value: 
       objectReference: {fileID: 4674904620757778020}
+    - target: {fileID: 1184311058228927866, guid: 873e6863243afe544b0faa4aa5e18346, type: 3}
+      propertyPath: decalLayer.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 8102421594978315690, guid: 873e6863243afe544b0faa4aa5e18346, type: 3}
       propertyPath: m_Icon
       value: 

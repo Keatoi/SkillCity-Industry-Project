@@ -79,9 +79,9 @@ public class MeleeSystem : MonoBehaviour
             if (m_hit.collider != null)
             {
                 hitActor = m_hit.collider.gameObject;
-                if (hitActor.GetComponent<HealthSystem>() != null && hitActor.CompareTag("Enemy"))
+                if (hitActor.GetComponent<AiRef>() != null && hitActor.CompareTag("Enemy"))
                 {
-                    hitActor.GetComponent<HealthSystem>().ChangeHealth(-damage);
+                    hitActor.GetComponent<AiRef>().changehealth(damage);
                     
                 }
             }
