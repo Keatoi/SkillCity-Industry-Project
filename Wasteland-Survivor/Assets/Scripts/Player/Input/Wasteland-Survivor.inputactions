@@ -85,6 +85,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Torch",
+                    "type": "Button",
+                    "id": "37ba3d97-038b-4c96-a08e-e9a3f31be35f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -382,6 +391,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Throw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "75d4365a-1843-410c-8758-101e4a58c056",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Torch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

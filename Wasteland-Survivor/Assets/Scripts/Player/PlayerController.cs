@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Camera mainCam;
     [SerializeField] Transform playerBodyPos;
     [SerializeField] GameObject currentWeapon;
+    [SerializeField] GameObject Torch;
 
     private CharacterController controller;
     Animator animator;
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour
         controller.height = standingHeight;
         crouchingHeight = standingHeight / 2;
         crouchSpeed = speed / 2;
+       
         Vector3 camPos = new Vector3(0f, camOffset, 0f);
         mainCam.transform.localPosition = camPos;
         if (currentWeapon.GetComponent<GunSystem>())
@@ -120,6 +122,10 @@ public class PlayerController : MonoBehaviour
     private void OnSprint(InputValue value)
     {
         bIsSprinting = !bIsSprinting;
+    }
+    private void OnTorch(InputValue value)
+    {
+        //Torch.enabled = !Torch.enabled;
     }
     void Movement()
     {
