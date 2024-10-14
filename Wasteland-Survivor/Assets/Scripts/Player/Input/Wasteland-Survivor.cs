@@ -116,6 +116,33 @@ public partial class @WastelandSurvivor: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pistol"",
+                    ""type"": ""Button"",
+                    ""id"": ""92f047ab-ee52-4844-942e-0620d1c211b5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rifle"",
+                    ""type"": ""Button"",
+                    ""id"": ""3e6d8365-99f5-49bd-89f2-e2d55e3f758e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sword"",
+                    ""type"": ""Button"",
+                    ""id"": ""57b2ef6c-3303-4d25-ade3-ab950a9037cc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -424,6 +451,39 @@ public partial class @WastelandSurvivor: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Torch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""878797a5-627b-4c4b-beda-00fc32ecc225"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pistol"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""48b7e4ec-f1b0-4dab-8dba-ad7fac7b3d8f"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rifle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c55b5641-8bd6-4af6-b575-d79b8c63c26d"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sword"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1021,6 +1081,9 @@ public partial class @WastelandSurvivor: IInputActionCollection2, IDisposable
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Throw = m_Player.FindAction("Throw", throwIfNotFound: true);
         m_Player_Torch = m_Player.FindAction("Torch", throwIfNotFound: true);
+        m_Player_Pistol = m_Player.FindAction("Pistol", throwIfNotFound: true);
+        m_Player_Rifle = m_Player.FindAction("Rifle", throwIfNotFound: true);
+        m_Player_Sword = m_Player.FindAction("Sword", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1104,6 +1167,9 @@ public partial class @WastelandSurvivor: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Throw;
     private readonly InputAction m_Player_Torch;
+    private readonly InputAction m_Player_Pistol;
+    private readonly InputAction m_Player_Rifle;
+    private readonly InputAction m_Player_Sword;
     public struct PlayerActions
     {
         private @WastelandSurvivor m_Wrapper;
@@ -1118,6 +1184,9 @@ public partial class @WastelandSurvivor: IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @Throw => m_Wrapper.m_Player_Throw;
         public InputAction @Torch => m_Wrapper.m_Player_Torch;
+        public InputAction @Pistol => m_Wrapper.m_Player_Pistol;
+        public InputAction @Rifle => m_Wrapper.m_Player_Rifle;
+        public InputAction @Sword => m_Wrapper.m_Player_Sword;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1157,6 +1226,15 @@ public partial class @WastelandSurvivor: IInputActionCollection2, IDisposable
             @Torch.started += instance.OnTorch;
             @Torch.performed += instance.OnTorch;
             @Torch.canceled += instance.OnTorch;
+            @Pistol.started += instance.OnPistol;
+            @Pistol.performed += instance.OnPistol;
+            @Pistol.canceled += instance.OnPistol;
+            @Rifle.started += instance.OnRifle;
+            @Rifle.performed += instance.OnRifle;
+            @Rifle.canceled += instance.OnRifle;
+            @Sword.started += instance.OnSword;
+            @Sword.performed += instance.OnSword;
+            @Sword.canceled += instance.OnSword;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1191,6 +1269,15 @@ public partial class @WastelandSurvivor: IInputActionCollection2, IDisposable
             @Torch.started -= instance.OnTorch;
             @Torch.performed -= instance.OnTorch;
             @Torch.canceled -= instance.OnTorch;
+            @Pistol.started -= instance.OnPistol;
+            @Pistol.performed -= instance.OnPistol;
+            @Pistol.canceled -= instance.OnPistol;
+            @Rifle.started -= instance.OnRifle;
+            @Rifle.performed -= instance.OnRifle;
+            @Rifle.canceled -= instance.OnRifle;
+            @Sword.started -= instance.OnSword;
+            @Sword.performed -= instance.OnSword;
+            @Sword.canceled -= instance.OnSword;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1383,6 +1470,9 @@ public partial class @WastelandSurvivor: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnThrow(InputAction.CallbackContext context);
         void OnTorch(InputAction.CallbackContext context);
+        void OnPistol(InputAction.CallbackContext context);
+        void OnRifle(InputAction.CallbackContext context);
+        void OnSword(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

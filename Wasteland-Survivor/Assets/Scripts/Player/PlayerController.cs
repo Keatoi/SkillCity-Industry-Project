@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     private bool bisGrounded;
     [SerializeField] private Camera mainCam;
     [SerializeField] Transform playerBodyPos;
+    [SerializeField] GameObject pistol;
+    [SerializeField] GameObject rifle;
+    [SerializeField] GameObject sword;
     [SerializeField] GameObject currentWeapon;
     [SerializeField] GameObject Torch;
 
@@ -125,7 +128,41 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTorch(InputValue value)
     {
-        //Torch.enabled = !Torch.enabled;
+        if (Torch.activeSelf)
+        {
+            Torch.SetActive(false);
+        }
+        else 
+        {
+            Torch.SetActive(true);
+        }
+    }
+    ///////////////////////
+    /////WEAPON SWAPS/////
+    /////////////////////
+    private void OnPistol(InputValue value)
+    {
+        if(currentWeapon == pistol) { return; }
+        currentWeapon = pistol;
+        pistol.SetActive(true);
+        sword.SetActive(false);
+        rifle.SetActive(false);
+    }
+    private void OnSword(InputValue value)
+    {
+        if (currentWeapon == sword) { return; }
+        currentWeapon = sword;
+        pistol.SetActive(false);
+        sword.SetActive(true);
+        rifle.SetActive(false);
+    }
+    private void OnRifle(InputValue value)
+    {
+        if (currentWeapon == rifle) { return; }
+        currentWeapon = rifle;
+        pistol.SetActive(false);
+        sword.SetActive(false);
+        rifle.SetActive(true);
     }
     void Movement()
     {
@@ -223,4 +260,5 @@ public class PlayerController : MonoBehaviour
         Movement();
         SetAnim();
     }
+    
 }
