@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - CampCenter
+  - NPC
   layers:
   - Default
   - TransparentFX

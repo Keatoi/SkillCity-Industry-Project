@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
             currentWeapon.GetComponent<GunSystem>().defaultFOV = mainCam.fieldOfView;
         }
         maxSprintTime = sprintDuration;
+        Cursor.lockState = CursorLockMode.Locked;
     }
     private void OnLook(InputValue value)
     {
@@ -216,6 +217,6 @@ public class PlayerController : MonoBehaviour
     {
         Movement();
         SetAnim();
-        Cursor.lockState = CursorLockMode.Locked;
+        
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class NpcController : MonoBehaviour
 {
-    public AiRef AiRef;
+    private AiRef AiRef;
     private GameObject Player;
     private Transform player;
     private GameObject campcenter;
@@ -14,11 +14,16 @@ public class NpcController : MonoBehaviour
     private float attackdelay;
     private AudioSource audioSource;
     private Animator animator;
+    public GameObject NPCcanvas;
+    private bool talkingtoNpc= false;
+    public GameObject talkinstruction;
+    public PlayerInput playerInput;
 
     //Bools
-    public bool findcamp, patrol, waitingAtPoint;
-    public float waitTimer; public float patrolWaitTime = 3f;public float stucktimer = 10f;
-    Vector3 patrolDestination;
+    public bool findcamp, patrol, waitingAtPoint,following;
+    public float waitTimer; public float patrolWaitTime = 3f; public float stucktimer = 10f;
+    private Vector3 patrolDestination;
+    public float patrolradius = 300f;
 
     public void Awake()
     {
@@ -28,14 +33,15 @@ public class NpcController : MonoBehaviour
         audioSource = AiRef.GetComponent<AudioSource>();
         animator = AiRef.GetComponent<Animator>();
         campcenter = GameObject.FindGameObjectWithTag("CampCenter");
+        talkinstruction.SetActive(false);
+        NPCcanvas.SetActive(false);
         Debug.Log("AWAKED");
-
     }
 
     public void Update()
     {
 
-        if (AiRef.following)
+        if (following)
         {
             Following();
             AiRef.agent.stoppingDistance = 3f;
@@ -51,36 +57,67 @@ public class NpcController : MonoBehaviour
         }
         else if (patrol)
         {
-            AiRef.agent.stoppingDistance = 0;
-            Patrol(); 
+            AiRef.agent.stoppingDistance = 1;
+            Patrol();
             if (waitingAtPoint)
             {
                 Waitatpoint();
-                Debug.Log("WAIT");
             }
 
         }
-        
-       
-        if (AiRef.agent.velocity.magnitude <= 0.7f && !waitingAtPoint&& patrol )
+
+
+        if (AiRef.agent.velocity.magnitude <= 0.7f && !waitingAtPoint && patrol)
         {
-    
+
             Debug.Log("checking if stuck");
             stucktimer -= Time.deltaTime;
             if (stucktimer <= 0.1f)
             {
-                if (AiRef.agent.velocity.magnitude <= 0.7f)
-                {
-                    patrolDestination = GetRandomPatrolPoint();
+                
+                    
                     Debug.Log("Stuck, Changing point");
-                }
+                Patrol();
+               
                 stucktimer = 10f;
 
             }
 
         }
         else { stucktimer = 10f; }
+
+        if (Raycastcheck.hitpos.collider != null && Raycastcheck.hitpos.collider.gameObject.CompareTag("NPC"))
+            {
+                talkinstruction.SetActive(!talkingtoNpc);
+
+                // Debug.Log("looking at " + Raycastcheck.hitpos.collider.gameObject.name + talkingtoNpc);
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    NPCTALK();
+
+                }
+
+            } else {talkinstruction.SetActive(talkingtoNpc); }
+
+        
+       
+
     }
+   public void NPCTALK()
+    {
+        
+        Debug.Log("TALK");talkingtoNpc = !talkingtoNpc; 
+        if (!talkingtoNpc) { Cursor.lockState = CursorLockMode.Locked; Cursor.visible = false;playerInput.ActivateInput(); }
+        else { Cursor.lockState = CursorLockMode.None; Cursor.visible = true;playerInput.DeactivateInput(); }
+        
+        NPCcanvas.SetActive(talkingtoNpc);
+        talkinstruction.SetActive(talkingtoNpc);
+
+
+    } 
+
+
     void Following()
     {
         if (Time.time >= PathUpdateDelay)
@@ -109,16 +146,18 @@ public class NpcController : MonoBehaviour
 
         Vector3 randomDirection = Random.insideUnitSphere * 10;
         randomDirection += campcenter.transform.position; // Center around the patrol center
-        NavMesh.SamplePosition(randomDirection, out NavMeshHit navHit, 240f, NavMesh.AllAreas);
-        
+        NavMesh.SamplePosition(randomDirection, out NavMeshHit navHit, patrolradius, NavMesh.AllAreas);
+        //Instantiate<GameObject>(campcenter, navHit.position, Quaternion.identity);
         return navHit.position;
+        //   Patrol(navHit.position);
+
     }
-    void Patrol()
+    void Patrol( )
     {Vector3 patrolDestination= GetRandomPatrolPoint();
         Vector3 Distance = patrolDestination - transform.position;
-        //  Instantiate<GameObject>(square,patrolDestination,Quaternion.identity);  
+        // Instantiate<GameObject>(campcenter,patrolDestination,Quaternion.identity);  
         //  Debug.Log(Distance.magnitude.ToString()) ;
-        //   Debug.Log("PAtrolling" + Vector3.Distance(patrolDestination, transform.position).ToString());
+           Debug.Log("PAtrolling" + Vector3.Distance(patrolDestination, transform.position).ToString());
 
         if (!patrol) return; // Skip if we're not in patrolling mode
        
@@ -141,12 +180,12 @@ public class NpcController : MonoBehaviour
     }
     void Waitatpoint()
     {
-        Debug.Log("waiting");
+        //Debug.Log("waiting");
         waitTimer -= Time.deltaTime;
         if (waitTimer <= 0)
         {
             Debug.Log("Moving to next point");
-            patrolDestination = GetRandomPatrolPoint(); waitingAtPoint = false;
+            GetRandomPatrolPoint(); waitingAtPoint = false;
             waitTimer = 3f;
 
         }
@@ -155,12 +194,14 @@ public class NpcController : MonoBehaviour
 
 
     //for UI
-    public    void followingswicth()
-    {
-        AiRef.following = !AiRef.following;
-    }
+  public    void followingswicth()
+  {
+        following = !following;
+        findcamp = false;
+  }
   public  void findcampswicth()
     {
         findcamp = !findcamp;
+        following= false;
     }
 }
