@@ -24,6 +24,7 @@ public class BuildingBarManager : MonoBehaviour
     private CharacterController Controller;
     private Building buildscrip;
     private Vector3 buildinpos;
+    private GameObject campcenter;
 
 
     private void Start()
@@ -64,6 +65,7 @@ public class BuildingBarManager : MonoBehaviour
     {
         if (isbuilding)
         {
+            campcenter = GameObject.FindGameObjectWithTag("CampCenter");
             Vector3 playerVelocity = Controller.velocity;
             bool isMoving = playerVelocity.magnitude > 0.2f; // You can adjust the threshold if needed
             Vector3 playerpos = player.transform.position;
@@ -80,7 +82,7 @@ public class BuildingBarManager : MonoBehaviour
 
                 }else if (isMoving) { 
                     MoveText.text = "Cant Build Whilst Moving"; MoveText.gameObject.SetActive(true); 
-                  }
+                }
                      
                  else if (distance>buildingdistance) {
                  StartCoroutine(Cancelltext(null));
