@@ -317,11 +317,23 @@ PrefabInstance:
     - target: {fileID: 8224855509206211273, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
       propertyPath: Torch
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 659478300}
+    - target: {fileID: 8224855509206211273, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: rifle
+      value: 
+      objectReference: {fileID: 659478301}
+    - target: {fileID: 8224855509206211273, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: sword
+      value: 
+      objectReference: {fileID: 1985560238}
+    - target: {fileID: 8224855509206211273, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: pistol
+      value: 
+      objectReference: {fileID: 659478303}
     - target: {fileID: 8224855509206211273, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
       propertyPath: currentWeapon
       value: 
-      objectReference: {fileID: 1985560238}
+      objectReference: {fileID: 659478303}
     - target: {fileID: 8224855509206211273, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
       propertyPath: crouchCamOffset
       value: 0.25
@@ -382,9 +394,24 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 921579923}
   m_SourcePrefab: {fileID: 100100000, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+--- !u!1 &659478300 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7972822046053012202, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+  m_PrefabInstance: {fileID: 659478299}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &659478301 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4627005358822884066, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+  m_PrefabInstance: {fileID: 659478299}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &659478302 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9214377120670627532, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+  m_PrefabInstance: {fileID: 659478299}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &659478303 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1305132493461646269, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
   m_PrefabInstance: {fileID: 659478299}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &796404065

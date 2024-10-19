@@ -57,6 +57,9 @@ public class PlayerController : MonoBehaviour
         {
             currentWeapon.GetComponent<GunSystem>().defaultFOV = mainCam.fieldOfView;
         }
+        //sett all weapons to be inactive then make the current weapon only to be active
+        DisableAll();
+        currentWeapon.SetActive(true);
         maxSprintTime = sprintDuration;
     }
     private void OnLook(InputValue value)
@@ -136,6 +139,13 @@ public class PlayerController : MonoBehaviour
         {
             Torch.SetActive(true);
         }
+    }
+    public void DisableAll()
+    {
+        //I dont think we'll really need this outside of initilisation but might be useful in the future for cutscenes etc.
+        pistol.SetActive(false);
+        rifle.SetActive(false);
+        sword.SetActive(false);
     }
     ///////////////////////
     /////WEAPON SWAPS/////
