@@ -1378,6 +1378,7 @@ GameObject:
   - component: {fileID: 5564045773998884588}
   - component: {fileID: 1446724701072076196}
   - component: {fileID: 220703957744308241}
+  - component: {fileID: 1965122627309790765}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1674,6 +1675,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1965122627309790765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7443095820101425238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2d2016e0e455d744a0466306928c150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stone: 0
+  steel: 0
+  wood: 0
+  smallcalibre: 30
+  largecalibre: 30
 --- !u!1 &7972822046053012202
 GameObject:
   m_ObjectHideFlags: 0
@@ -2056,11 +2074,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxMagazineSize: 20
+  currentRounds: 0
   barrelPoint: {fileID: 0}
   barrelCamera: {fileID: 4674904620757778020}
   range: 200
   damage: 50
-  lineRenderer: {fileID: 0}
+  accuracy: 0.9
   defaultFOV: 90
   zoomDuration: 2
   magnification: 2

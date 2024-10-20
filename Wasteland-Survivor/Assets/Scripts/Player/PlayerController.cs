@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
         currentWeapon.SetActive(true);
         maxSprintTime = sprintDuration;
     }
+
     private void OnLook(InputValue value)
     {
         //Get and clamp look values
@@ -88,6 +89,13 @@ public class PlayerController : MonoBehaviour
             currentWeapon.GetComponent<MeleeSystem>().Attack();
         }
         
+    }
+    private void OnReload(InputValue value)
+    {
+        if (currentWeapon.GetComponent<GunSystem>())
+        {
+            currentWeapon.GetComponent<GunSystem>().Reload();
+        }
     }
     private void OnThrow(InputValue value)
     {

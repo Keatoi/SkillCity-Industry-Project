@@ -26,12 +26,11 @@ public class HealthSystem : MonoBehaviour
         //check for 0  health then die or something I guess 
         //make sure only the player can affect UI
         
-            OnHealthChange?.Invoke(health, maxHealth);
-        
-        
-       
-            Debug.Log(this.name + "is Dead");
-        
+         OnHealthChange?.Invoke(health, maxHealth);
+        if (health <= 0)
+        {
+            Debug.Log(gameObject.name + " is Dead");
+        }
 
 
     }

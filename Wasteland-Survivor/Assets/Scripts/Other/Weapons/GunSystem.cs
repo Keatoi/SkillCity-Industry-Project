@@ -5,12 +5,13 @@ using UnityEngine;
 public class GunSystem : MonoBehaviour
 {
     [SerializeField] float maxMagazineSize = 30;
-    private float currentRounds;//amount of rounds in magazine
+    public float currentRounds;//amount of rounds in magazine
     [SerializeField] private GameObject barrelPoint;
     [SerializeField] private Camera barrelCamera;
     [SerializeField] float range = 100f;
     [SerializeField] float damage = 30f;
-    [SerializeField] LineRenderer lineRenderer;
+    [SerializeField] float accuracy = 0.9f;
+
     public float defaultFOV = 90f;
     [SerializeField] float zoomDuration = 2f;
     [SerializeField] float magnification = 2;
@@ -49,26 +50,45 @@ public class GunSystem : MonoBehaviour
     }
     public void Fire()
     {
-        //TODO ADD SOUND AND FLASH
+        //TODO ADD FLASH AND BULLET MARKERS
         //Raycast from gun barrel/camera to destination
         Debug.Log("Firing handgunne");
         RaycastHit hit;
-        lineRenderer.enabled = true;
-        lineRenderer.SetPosition(0, barrelCamera.transform.position);
-        lineRenderer.SetPosition(1, barrelCamera.transform.forward);
 
-        if (Physics.Raycast(barrelCamera.transform.position, barrelCamera.transform.forward, out hit, range) && currentRounds > 0)
+        Vector3 origin = barrelCamera.transform.position;
+        Vector3 dir = barrelCamera.transform.forward;
+        if (!bIsAimed)
         {
+            //If we aren't aimed down the sights,nthen add a small amount of random variance to direction vector to simulate weapon sway
+            //Subtract accuracy var from 1 to get a range between -(1-accuracy) to (1-accuracy)eg. if the gun has accuracy stat of 90% (0.9) then the range is -0.1 to 0.1
+            //add this to all three axes to produce a random direction.
+            float RandDirX = Random.Range(-(1 - accuracy), 1 - accuracy);
+            float RandDirY = Random.Range(-(1 - accuracy), 1 - accuracy);
+            float RandDirZ = Random.Range(-(1 - accuracy), 1 - accuracy);
+            dir.x += RandDirX;
+            dir.y += RandDirY;
+            dir.z += RandDirZ;
 
+        }
+       
+        
+
+        if (Physics.Raycast(origin, dir, out hit, range) && currentRounds > 0)
+        {
+            //If we have ammo then play SFX and if the hit collider has the health component then subtract health
+            Debug.DrawLine(origin, dir);//Only works in scene view, so the player won't see this
+            //PlayGunSFX();
             if (hit.collider != null)
             {
                 hitObject = hit.collider.gameObject;
+                Debug.Log(hitObject.name);
                 if (hitObject.GetComponent<HealthSystem>() != null && hitObject.CompareTag("Enemy"))
                 {
+                    Debug.Log(hitObject.name + "Has been hurt!");
                     hitObject.GetComponent<HealthSystem>().ChangeHealth(-damage);
                 }
             }
-            Debug.DrawRay(barrelCamera.transform.position, barrelCamera.transform.forward, Color.cyan, 3f);
+            //Decrement ammo from magazine
             currentRounds--;
         }
 
@@ -76,7 +96,7 @@ public class GunSystem : MonoBehaviour
     public void Reload()
     {
         UnityEngine.Debug.Log("Reload Gun");
-        ResourceSystem ammo = transform.parent.gameObject.GetComponent<ResourceSystem>();
+        ResourceSystem ammo = transform.root.gameObject.GetComponent<ResourceSystem>();
         float currentreserve = isSmallCalibre ? ammo.smallcalibre : ammo.largecalibre;
         if (currentreserve > 0)
         {
@@ -98,7 +118,7 @@ public class GunSystem : MonoBehaviour
                 if (isSmallCalibre) { ammo.ChangeSmallCal(-currentreserve); } else { ammo.ChangeBigCal(-currentreserve); }
             }
         }
-        //Refill magazine
+        //Refill magazine (with one in chamber if magazine was not empty)
         if (currentRounds > 0)
         {
             currentRounds = maxMagazineSize + 1;
