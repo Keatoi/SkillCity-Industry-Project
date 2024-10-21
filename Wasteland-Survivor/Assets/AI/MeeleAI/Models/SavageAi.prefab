@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: fae0cda9381b41f408adc76286af835a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 27.926163
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fae0cda9381b41f408adc76286af835a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.0034980774
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fae0cda9381b41f408adc76286af835a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 39.853203
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fae0cda9381b41f408adc76286af835a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -54,7 +54,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: c8c42662026a30544a7c3bb902859d48, type: 2}
     - target: {fileID: 919132149155446097, guid: fae0cda9381b41f408adc76286af835a, type: 3}
       propertyPath: m_Name
-      value: SavageWarrior_PROXY_mixaRigged_unity
+      value: SavageAi
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fae0cda9381b41f408adc76286af835a, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 2382435067320288548, guid: fae0cda9381b41f408adc76286af835a, type: 3}
       propertyPath: m_AABB.m_Center.x
@@ -192,6 +196,7 @@ MonoBehaviour:
   playerspotted: 0
   playerwasspotted: 0
   following: 0
+  Rescued: 0
   health: 100
 --- !u!1 &8859246820036540241 stripped
 GameObject:
