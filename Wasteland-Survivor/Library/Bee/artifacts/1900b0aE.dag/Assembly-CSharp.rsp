@@ -380,7 +380,6 @@
 "Assets/Scripts/Player/UX/HealthBar.cs"
 "Assets/Scripts/Player/UX/HungerBar.cs"
 "Assets/Scripts/Player/UX/ThirstBar.cs"
-"Assets/whyy.cs"
 -langversion:9.0
 /deterministic
 /optimize+
