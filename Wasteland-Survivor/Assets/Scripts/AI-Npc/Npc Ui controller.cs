@@ -32,15 +32,20 @@ public class NpcUicontroller : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
 
-                if (npcController == null) {
+                if (npcController == null)
+                {
                     npcController = Raycastcheck.hitpos.collider.gameObject.GetComponentInParent<NpcController>(); //gets npc ref of npc in sight 
                     Debug.Log("cont " + npcController.name);
-                    if (!npcController.rescued) {
+                    if (!npcController.rescued)
+                    {
 
-                        npcController.rescued = true; }
-                    if (npcController.rescued) {
-    
-                        NPCTALK(); }
+                        npcController.rescued = true;
+                    }
+                    if (npcController.rescued)
+                    {
+
+                        NPCTALK();
+                    }
 
                 }
             }
@@ -79,10 +84,10 @@ public class NpcUicontroller : MonoBehaviour
 
     public void LockPlayer()
     {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            playerInput.DeactivateInput();
-        
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        playerInput.DeactivateInput();
+
     }
 
     ////////////////Button logic for npc behavior/////////////////////////////////////////////////////////////////////////////
@@ -104,7 +109,7 @@ public class NpcUicontroller : MonoBehaviour
         {
             NPCcanvas.SetActive(false);
             talkinstruction.SetActive(false);
-            UnlockPlayer() ;
+            UnlockPlayer();
             return;
         }
         npcController.findcamp = !npcController.findcamp;
@@ -119,7 +124,7 @@ public class NpcUicontroller : MonoBehaviour
         camptext.SetActive(true);
         yield return new WaitForSeconds(1.0f);
         camptext.SetActive(false);
-    } 
+    }
 
- }
+}
 

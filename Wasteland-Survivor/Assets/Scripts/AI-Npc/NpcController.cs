@@ -14,13 +14,13 @@ public class NpcController : MonoBehaviour
     private float attackdelay;
     private AudioSource audioSource;
     private Animator animator;
-    private GameObject Enemy=null;
+    private GameObject Enemy = null;
     private AiRef EnemyRef = null;
     public bool enemmyspotted = false;
-    public NpcUicontroller npcUicontroller ;
+    public NpcUicontroller npcUicontroller;
 
     //Bools
-    public bool findcamp, patrol, waitingAtPoint,following,rescued;
+    public bool findcamp, patrol, waitingAtPoint, following, rescued;
     public float waitTimer; public float patrolWaitTime = 3f; public float stucktimer = 10f;
     private Vector3 patrolDestination;
     public float patrolradius = 300f;
@@ -35,12 +35,13 @@ public class NpcController : MonoBehaviour
         audioSource = AiRef.GetComponent<AudioSource>();
         animator = AiRef.GetComponent<Animator>();
         campcenter = GameObject.FindGameObjectWithTag("CampCenter");
-                Debug.Log("AWAKED");
+        Debug.Log("AWAKED");
     }
 
     public void Update()
-    {AiRef.Rescued= rescued;
-        if(!AiRef.Rescued) { return; }
+    {
+        AiRef.Rescued = rescued;
+        if (!AiRef.Rescued) { return; }
         if (following)
         {
             Following();
@@ -50,7 +51,6 @@ public class NpcController : MonoBehaviour
         else if (findcamp)
         {
             Findcamp();
-            
         }
         else if (patrol)
         {
@@ -66,19 +66,21 @@ public class NpcController : MonoBehaviour
         {
             AiRef.agent.speed = 5;
 
-            if (Enemy != null) { 
-                 inrange = Vector3.Distance(transform.position, Enemy.transform.position) <= 1.5f; }
+            if (Enemy != null)
+            {
+                inrange = Vector3.Distance(transform.position, Enemy.transform.position) <= 1.5f;
+            }
 
             if (!inrange)
             {
                 UpdatePath();
-              //  Debug.Log("Chasing");
+                //  Debug.Log("Chasing");
             }
             else
             {
                 lookattarget();
                 attack();
-               // Debug.Log("attacking");
+                // Debug.Log("attacking");
             }
         }
 
@@ -89,11 +91,11 @@ public class NpcController : MonoBehaviour
             stucktimer -= Time.deltaTime;
             if (stucktimer <= 0.1f)
             {
-                
-                    
-               //  Debug.Log("Stuck, Changing point");
+
+
+                //  Debug.Log("Stuck, Changing point");
                 Patrol();
-               
+
                 stucktimer = 10f;
 
             }
@@ -105,31 +107,42 @@ public class NpcController : MonoBehaviour
 
 
 
-//////////////Following state////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////Following state////////////////////////////////////////////////////////////////////////////////////////////////////
     void Following()
     {
         if (Time.time >= PathUpdateDelay)
         {
-           // Debug.Log("Updating AI Path");
+            // Debug.Log("Updating AI Path");
             PathUpdateDelay = Time.time + AiRef.updatepathdelay;
             AiRef.agent.SetDestination(player.position);
         }
     }
 
     //////////////Go to camp state////////////////////////////////////////////////////////////////////////////////////////////////////
-    void Findcamp()
+
+    public void Findcamp()
     {
         if (campcenter == null)
         {
-
             campcenter = GameObject.FindGameObjectWithTag("CampCenter");
-            npcUicontroller.NocampText();
+
+            if (campcenter == null)
+            {
+                npcUicontroller.NocampText();
+                findcamp = false;
+                return;
+            }
         }
+        else { GoToCamp(); }
+    }
+
+    void GoToCamp()
+    {
         if (campcenter != null)
         {
             if (Time.time >= PathUpdateDelay)
             {
-               // Debug.Log("Path Going To Camp Center");
+                // Debug.Log("Path Going To Camp Center");
                 PathUpdateDelay = Time.time + AiRef.updatepathdelay;
                 AiRef.agent.SetDestination(campcenter.transform.position);
             }
@@ -152,16 +165,17 @@ public class NpcController : MonoBehaviour
         //   Patrol(navHit.position);
 
     }
-    void Patrol( )
-    {Vector3 patrolDestination= GetRandomPatrolPoint();
+    void Patrol()
+    {
+        Vector3 patrolDestination = GetRandomPatrolPoint();
         Vector3 Distance = patrolDestination - transform.position;
         // Instantiate<GameObject>(campcenter,patrolDestination,Quaternion.identity);  
         //  Debug.Log(Distance.magnitude.ToString()) ;
-       //    Debug.Log("PAtrolling" + Vector3.Distance(patrolDestination, transform.position).ToString());
+        //    Debug.Log("PAtrolling" + Vector3.Distance(patrolDestination, transform.position).ToString());
 
         if (!patrol) return; // Skip if we're not in patrolling mode
-       
-      
+
+
         if (Distance.magnitude <= 2f && !waitingAtPoint)
         {
             // Debug.Log("patrolling to location "+Distance.magnitude.ToString());
@@ -169,10 +183,10 @@ public class NpcController : MonoBehaviour
 
             if (Distance.magnitude <= 1f)
             {
-              //  Debug.Log("Close to point");
+                //  Debug.Log("Close to point");
                 waitingAtPoint = true; // Start waiting
-              
-                
+
+
 
             }
 
@@ -222,16 +236,16 @@ public class NpcController : MonoBehaviour
             Vector3 halfExtents = new(4f / 2, 4f / 2, 4f / 2);
             attackdelay = Time.time + AiRef.attackdelay;
 
-    
-           
-            if (Physics.BoxCast(startPos, halfExtents, Enemydirection.normalized, out RaycastHit hit,transform.rotation, 2f))
+
+
+            if (Physics.BoxCast(startPos, halfExtents, Enemydirection.normalized, out RaycastHit hit, transform.rotation, 2f))
             {
                 Debug.Log("ATT box cast");
                 if (hit.collider.gameObject.name == "Enemy") { Debug.Log("Hit an object with BoxCast: " + hit.collider.name + hit.transform.gameObject.name); }
 
                 Debug.Log("attacking");
-               // animator.SetTrigger("attack"); 
-                EnemyRef.changehealthNPC(10,this);    if( EnemyRef.health <= 0 ) { enemmyspotted=false; }
+                // animator.SetTrigger("attack"); 
+                EnemyRef.changehealthNPC(10, this); if (EnemyRef.health <= 0) { enemmyspotted = false; }
             }
 
         }
@@ -247,7 +261,7 @@ public class NpcController : MonoBehaviour
 
             Enemy = other.gameObject;
             enemmyspotted = true;
-            findcamp = false; patrol = false; waitingAtPoint = false; following=false;
+            findcamp = false; patrol = false; waitingAtPoint = false; following = false;
             EnemyRef = Enemy.GetComponent<AiRef>();
             Debug.Log("enemy in sight" + Enemy.name + other.name);
 
@@ -263,5 +277,6 @@ public class NpcController : MonoBehaviour
             Enemy = null;
         }
     }
-  
+
+
 }

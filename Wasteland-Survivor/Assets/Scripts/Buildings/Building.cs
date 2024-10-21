@@ -7,16 +7,22 @@ using UnityEngine;
 public class Building : MonoBehaviour
 {
     public GameObject[] strucprefab;// array of all buildables 
+    public GameObject campcenterstuc,campcenterinworld;
     public Material ghostMat;
     public float rotationspeed = 5f; //speed of rotation for the ghost-obj
     public bool isbuilding = false;  //flag for building mode   
 
     [HideInInspector]
     public bool currentlyBuilding;   //structure is actively being built    
+    [HideInInspector] 
     public bool finishedbuilding;    //structure has been built
+    [HideInInspector] 
     public Transform savedbuilinglocation;// transform location of the ghost building
+    [HideInInspector] 
     public Transform savedwalllocation;
+    [HideInInspector] 
     public GameObject savedbuilding; //gameobject ref for transform
+    [HideInInspector] 
     public GameObject savedwall; //gameobject ref for transform
 
 
@@ -31,15 +37,21 @@ public class Building : MonoBehaviour
 
     void Createghost()//handles ghost creation
     {
-        if( currentghost == null ) {
+        campcenterinworld = GameObject.FindGameObjectWithTag("CampCenter");
+      
+        if (campcenterinworld == null) {
+            currentghost = Instantiate(campcenterstuc);
+            currentghost.name = campcenterstuc.name + 1;
+        }
+        if (currentghost == null && campcenterinworld != null) {
             currentghost = Instantiate(strucprefab[strucIndex]);
             currentghost.name = strucprefab[strucIndex].name + 1;
         }
-        else
-        {
-            currentghost = Instantiate(strucprefab[strucIndex]);
-            currentghost.name = strucprefab[strucIndex].name + 2;
-        }
+       // if(currentghost != null && campcenterinworld != null) { }
+   //     {
+    //        currentghost = Instantiate(strucprefab[strucIndex]);
+    //        currentghost.name = strucprefab[strucIndex].name + 2;
+   //     }
 
             // Instantiate each ghost object
          MeshRenderer[] childMeshRenderers = currentghost.GetComponentsInChildren<MeshRenderer>();  
@@ -128,9 +140,21 @@ public class Building : MonoBehaviour
             }
          
         }
+        Checkdistance(currentghost.transform, campcenterinworld.transform);
         BuildingBar.StartBuildBar();
 
     }
+
+    public void Checkdistance(Transform ghostpos,Transform Campcenter)
+    {   if (Campcenter == null)  return;
+        bool inrange = Vector3.Distance(ghostpos.position, Campcenter.transform.position) <= 10;
+        if (!inrange) { StartCoroutine(BuildingBar.Cancelltext("Too Far From CampCenter")); } 
+        
+    
+       
+    }
+
+
 
     public void BuildWall(Transform endPoint, Transform startPoint)
     {
@@ -166,14 +190,18 @@ public class Building : MonoBehaviour
 
     public void BuildStructure()
     {
-        
+        if (campcenterinworld == null) { Checkdistance(currentghost.transform, null); }
+        else { Checkdistance(currentghost.transform, campcenterinworld.transform); }
+
         if (savedbuilinglocation != null && strucIndex == 1)
         {
             BuildWall(savedwalllocation, savedbuilinglocation);
         }
         else if (savedbuilinglocation != null)
         {
-            Instantiate(strucprefab[strucIndex], savedbuilinglocation.position, savedbuilinglocation.rotation);
+            if (campcenterinworld != null) Instantiate(strucprefab[strucIndex], savedbuilinglocation.position, savedbuilinglocation.rotation);
+            else Instantiate(campcenterstuc, savedbuilinglocation.position, savedbuilinglocation.rotation);
+            
         }
        Destroyghost(false); //destroys ghost as its replaced with the real obj
 
@@ -289,7 +317,8 @@ public class Building : MonoBehaviour
                     savedwalllocation = savedwall.transform;
                     savedwalllocation.SetPositionAndRotation(currentghost.transform.position, currentghost.transform.rotation);
                     CheckWall(savedwalllocation,savedbuilinglocation);
-               
+                    Checkdistance(savedbuilinglocation.transform, campcenterinworld.transform);
+
                 }
                 
             }
@@ -303,6 +332,9 @@ public class Building : MonoBehaviour
                     savedbuilinglocation =savedbuilding.transform;
                     savedbuilinglocation.SetPositionAndRotation(currentghost.transform.position, currentghost.transform.rotation);
                 } else { return; }
+                if (campcenterinworld == null) Checkdistance(currentghost.transform, null);
+                else { Checkdistance(currentghost.transform, campcenterinworld.transform); };
+
 
                 BuildingBar.StartBuildBar();
                  }

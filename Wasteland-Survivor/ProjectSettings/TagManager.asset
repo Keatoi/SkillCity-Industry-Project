@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - NPCcanvas
+  - NPC
+  - CampCenter
   layers:
   - Default
   - TransparentFX
