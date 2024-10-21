@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class NpcUicontroller : MonoBehaviour
 {
@@ -9,7 +12,7 @@ public class NpcUicontroller : MonoBehaviour
     private bool talkingtoNpc = false;
     public GameObject talkinstruction, camptext;
     private PlayerInput playerInput;
-    private NpcController npcController = null;
+    public NpcController npcController = null;
 
     void Awake()//Finds and sets references and ui
     {
@@ -32,53 +35,86 @@ public class NpcUicontroller : MonoBehaviour
                 if (npcController == null) {
                     npcController = Raycastcheck.hitpos.collider.gameObject.GetComponentInParent<NpcController>(); //gets npc ref of npc in sight 
                     Debug.Log("cont " + npcController.name);
-                    if (!npcController.rescued) { npcController.rescued = true; }
-                    if (npcController.rescued) { NPCTALK(); }
+                    if (!npcController.rescued) {
+
+                        npcController.rescued = true; }
+                    if (npcController.rescued) {
+    
+                        NPCTALK(); }
 
                 }
             }
 
         }
-        else { talkinstruction.SetActive(talkingtoNpc); }
+        else { talkinstruction.SetActive(false); }
 
     }
 
     public void NPCTALK()//manages payer interaction and movement for UI interaction
     {
+        if (npcController != null)
+        {
+            Debug.Log("TALK" + npcController.gameObject.name);
+            talkingtoNpc = !talkingtoNpc;
+            if (!talkingtoNpc)
+            {               //if not talking to npc resume player actions and turn off cursor
+                UnlockPlayer();
+                npcController = null;
+            }
+            else
+            {                             //if talking to npc stop player movement, unlock mouse 
+                LockPlayer();
+                NPCcanvas.SetActive(talkingtoNpc);
+                talkinstruction.SetActive(talkingtoNpc);
+            }
+        }
+    }
+    ////////////////Player movement Unocking/////////////////////////////////////////////////////////////////////////////
+    public void UnlockPlayer()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        playerInput.ActivateInput();
+    }
 
-        Debug.Log("TALK" + npcController.gameObject.name);
-        talkingtoNpc = !talkingtoNpc;
-        if (!talkingtoNpc) {               //if not talking to npc resume player actions and turn off cursor
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            playerInput.ActivateInput();
-            npcController = null; }
-        else {                             //if talking to npc stop player movement, unlock mouse 
+    public void LockPlayer()
+    {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            playerInput.DeactivateInput(); }
-
-
-        NPCcanvas.SetActive(talkingtoNpc);
-        talkinstruction.SetActive(talkingtoNpc);
-
+            playerInput.DeactivateInput();
+        
     }
+
     ////////////////Button logic for npc behavior/////////////////////////////////////////////////////////////////////////////
     public void followingswicth()
     {
+        if (npcController == null)
+        {
+            NPCcanvas.SetActive(false);
+            talkinstruction.SetActive(false);
+            UnlockPlayer();
+            return;
+        }
         npcController.following = !npcController.following;
         npcController.findcamp = false;
     }
     public void findcampswicth()
     {
+        if (npcController == null)
+        {
+            NPCcanvas.SetActive(false);
+            talkinstruction.SetActive(false);
+            UnlockPlayer() ;
+            return;
+        }
         npcController.findcamp = !npcController.findcamp;
         npcController.following = false;
     }
-    public void cancelltext()
+    public void NocampText()
     {
-        StartCoroutine(Cancelltext());
+        StartCoroutine(ErrorText());
     }
-    public IEnumerator Cancelltext()
+    public IEnumerator ErrorText()
     {
         camptext.SetActive(true);
         yield return new WaitForSeconds(1.0f);

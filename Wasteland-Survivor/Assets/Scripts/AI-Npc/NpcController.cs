@@ -123,7 +123,7 @@ public class NpcController : MonoBehaviour
         {
 
             campcenter = GameObject.FindGameObjectWithTag("CampCenter");
-            npcUicontroller.cancelltext();
+            npcUicontroller.NocampText();
         }
         if (campcenter != null)
         {

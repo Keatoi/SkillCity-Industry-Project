@@ -842,7 +842,7 @@ PrefabInstance:
       objectReference: {fileID: 2106389388}
     - target: {fileID: 1618675835710720261, guid: fc13864f8dba52a489fcfc75089dca59, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 55.66
+      value: 32.36
       objectReference: {fileID: 0}
     - target: {fileID: 1618675835710720261, guid: fc13864f8dba52a489fcfc75089dca59, type: 3}
       propertyPath: m_LocalPosition.y
@@ -850,7 +850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1618675835710720261, guid: fc13864f8dba52a489fcfc75089dca59, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 27.36
+      value: 34.87
       objectReference: {fileID: 0}
     - target: {fileID: 1618675835710720261, guid: fc13864f8dba52a489fcfc75089dca59, type: 3}
       propertyPath: m_LocalRotation.w
@@ -902,7 +902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5009610244786641783, guid: fc13864f8dba52a489fcfc75089dca59, type: 3}
       propertyPath: health
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5009610244786641783, guid: fc13864f8dba52a489fcfc75089dca59, type: 3}
       propertyPath: playerspotted
@@ -2398,6 +2398,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1092971603}
+        m_TargetAssemblyTypeName: NpcUicontroller, Assembly-CSharp
+        m_MethodName: UnlockPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &818086517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3673,6 +3685,7 @@ MonoBehaviour:
   NPCcanvas: {fileID: 734027594}
   talkinstruction: {fileID: 449712656}
   camptext: {fileID: 1693246570}
+  npcController: {fileID: 0}
 --- !u!1 &1154538209
 GameObject:
   m_ObjectHideFlags: 0
