@@ -56,6 +56,7 @@ public class BuildingBarManager : MonoBehaviour
         {   buildscrip.Destroyghost(true);
             audioSource.clip = audioClips[1];
             audioSource.Play();
+            
         }
         BuildingBar.SetActive(false);
 
