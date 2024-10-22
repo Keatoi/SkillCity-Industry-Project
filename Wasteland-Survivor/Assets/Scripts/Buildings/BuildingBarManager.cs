@@ -16,7 +16,7 @@ public class BuildingBarManager : MonoBehaviour
     public AudioClip[] audioClips;
 
     [HideInInspector]
-    public bool isbuilding;
+    public bool isbuilding,Ischeck;
     private float currentime = 0;
 
     private Image BuildingProgress;
@@ -34,8 +34,9 @@ public class BuildingBarManager : MonoBehaviour
         buildscrip = player.GetComponent<Building>();
     }
   
-    public bool StartBuildBar()
+    public bool StartBuildBar(bool ischeck)
     {
+        Ischeck = ischeck;
         isbuilding = true;
         BuildingBar.SetActive(true);
         currentime = 0;
@@ -48,10 +49,11 @@ public class BuildingBarManager : MonoBehaviour
         
         if ( completed ) {
          buildscrip.BuildStructure();
-        audioSource.clip = audioClips[0];
-        audioSource.Play();
+         audioSource.clip = audioClips[0];
+         audioSource.Play();
+ 
         }else if (!completed)
-        { buildscrip.Destroyghost(true);
+        {   buildscrip.Destroyghost(true);
             audioSource.clip = audioClips[1];
             audioSource.Play();
         }
@@ -72,7 +74,7 @@ public class BuildingBarManager : MonoBehaviour
             if(buildscrip.strucIndex==1 ) { buildinpos = buildscrip.savedwalllocation.position; }
             float distance = Vector3.Distance(buildinpos, playerpos);
            
-                if (!isMoving&& distance<buildingdistance)
+                if (!isMoving&& distance<buildingdistance&& !Ischeck)
                 {
                     currentime += Time.deltaTime;
                     BuildingProgress.fillAmount = (currentime / maxtime);
