@@ -271,7 +271,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             ChangeAnimationState(WALK);
-           Debug.Log(moveVelocity.ToString());
+         // Debug.Log(moveVelocity.ToString());
         }
     }
 
@@ -281,5 +281,10 @@ public class PlayerController : MonoBehaviour
         Movement();
         SetAnim();
     }
-    
+
+    public void Awake()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 }
