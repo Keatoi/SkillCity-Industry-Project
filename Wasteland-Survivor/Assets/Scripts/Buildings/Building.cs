@@ -112,7 +112,7 @@ public class Building : MonoBehaviour
             savedbuilinglocation = null;
             savedwalllocation = null;
             ghostarr.Clear();
-            isbuilding = false;
+      
         }
        else return;
        
