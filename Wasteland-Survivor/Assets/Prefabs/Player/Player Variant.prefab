@@ -236,8 +236,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5937559130521013596, guid: 0160f6cf961ff5c4192f9adbbb3ba54f, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -357,6 +356,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2207910347188883912, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
       propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660794614813309322, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: MaxDistance
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660794614813309322, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: MinDistance
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660794614813309322, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3316266158253128582, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
