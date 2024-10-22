@@ -61,6 +61,9 @@ public class PlayerController : MonoBehaviour
         DisableAll();
         currentWeapon.SetActive(true);
         maxSprintTime = sprintDuration;
+        //Cursor lock
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void OnLook(InputValue value)
@@ -70,7 +73,7 @@ public class PlayerController : MonoBehaviour
         float lookX = look.x * mouseSensitivity * Time.deltaTime;
         float lookY = look.y * mouseSensitivity * Time.deltaTime;
         xRotation -= lookY;
-        xRotation = Mathf.Clamp(xRotation,-90f,minViewRotation);
+        xRotation = Mathf.Clamp(xRotation,-90f,90f);
         //Rotate camera up
         mainCam.transform.localRotation = Quaternion.Euler(xRotation,0,0);
         //Rotate player entity
