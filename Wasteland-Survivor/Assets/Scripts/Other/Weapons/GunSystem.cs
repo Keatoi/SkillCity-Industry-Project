@@ -77,7 +77,7 @@ public class GunSystem : MonoBehaviour
         {
             //If we have ammo then play SFX and if the hit collider has the health component then subtract health
             Debug.DrawLine(origin, dir);//Only works in scene view, so the player won't see this
-            //PlayGunSFX();
+            PlayGunSFX();
             if (hit.collider != null)
             {
                 hitObject = hit.collider.gameObject;
@@ -117,16 +117,18 @@ public class GunSystem : MonoBehaviour
                 //subtract the reserve from itself to give 0
                 if (isSmallCalibre) { ammo.ChangeSmallCal(-currentreserve); } else { ammo.ChangeBigCal(-currentreserve); }
             }
+            PlayReloadSFX();
+            //Refill magazine (with one in chamber if magazine was not empty)
+            if (currentRounds > 0)
+            {
+                currentRounds = maxMagazineSize + 1;
+            }
+            else
+            {
+                currentRounds = maxMagazineSize;
+            }
         }
-        //Refill magazine (with one in chamber if magazine was not empty)
-        if (currentRounds > 0)
-        {
-            currentRounds = maxMagazineSize + 1;
-        }
-        else
-        {
-            currentRounds = maxMagazineSize;
-        }
+        
     }
     public void SetAim()
     {
