@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class InteractableObject : MonoBehaviour
 {
-    [SerializeField] private bool triggerActive = false;
+    [SerializeField] public bool triggerActive = false;
     private Collider playercollider;
+    public GameObject interacttext;
     // Update is called once per frame
     void Update()
     {
@@ -14,7 +16,10 @@ public class InteractableObject : MonoBehaviour
             InteractAction(playercollider);
         }
     }
-    
+    public  bool GetSetBool()
+    {
+        return triggerActive;
+    }
 
     public void OnTriggerEnter(Collider other)
     {
@@ -22,6 +27,11 @@ public class InteractableObject : MonoBehaviour
         {
             triggerActive = true;
             playercollider = other;
+            interacttext = GameObject.FindGameObjectWithTag("itemtext");
+            interacttext.SetActive(true);
+            if(this.gameObject.TryGetComponent<pickup>(out pickup pickupref )) {
+                pickupref.showtext();
+            }
         }
     }
 
@@ -31,10 +41,16 @@ public class InteractableObject : MonoBehaviour
         {
             triggerActive = false;
             playercollider= null;
+            interacttext.GetComponent<TextMeshProUGUI>().text = "";
+           // interacttext.SetActive(false);
         }
     }
     public virtual void InteractAction(Collider playercollider)
     {
         
+    }
+    public void Changetext(string text)
+    {
+        interacttext.GetComponent<TextMeshProUGUI>().text = text;
     }
 }

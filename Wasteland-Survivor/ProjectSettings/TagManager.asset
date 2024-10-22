@@ -8,6 +8,7 @@ TagManager:
   - NPCcanvas
   - NPC
   - CampCenter
+  - itemtext
   layers:
   - Default
   - TransparentFX

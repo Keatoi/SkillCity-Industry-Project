@@ -7,10 +7,10 @@ using UnityEngine;
 public class pickup : InteractableObject
 {
     public float resourceAmount;// Default amount of resource to pick up
-
     public ResourceSystem resourceSystem;
+
     /// <summary>
-    /// //rescource type and number is based on name of the prefab and number after doesnt matter about ()  
+    /// //rescource type and amount is based on name of the prefab and number after must be outside ()
     /// </summary>
     // Enum for different resource types
     public enum ResourceType
@@ -24,7 +24,7 @@ public class pickup : InteractableObject
     }
 
     // Start is called before the first frame update
-
+    
 
     public override void InteractAction(Collider Player)
     {
@@ -80,7 +80,8 @@ public class pickup : InteractableObject
 
         // If a match was found, parse the number; otherwise, default to 0
         float resourceAmount = match.Success ? float.Parse(match.Groups[1].Value) : 1f;
-
+        string text = cleanedName+ " " + resourceAmount;    
+        Changetext(text);
         return (cleanedName, resourceAmount);
     }   
     // Method to convert the object name to a ResourceType enum
@@ -105,5 +106,14 @@ public class pickup : InteractableObject
             default:
                 return ResourceType.Unknown;
         }
+    }
+    
+    public void showtext()
+    {
+
+        (string cleanedName, float resourceAmount) = ProcessResourceName(name);
+        string text = cleanedName + " " + resourceAmount;
+        Changetext(text);
+
     }
 }
