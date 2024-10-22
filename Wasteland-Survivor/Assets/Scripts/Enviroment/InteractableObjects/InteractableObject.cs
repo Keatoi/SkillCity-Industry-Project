@@ -5,18 +5,13 @@ using UnityEngine;
 public class InteractableObject : MonoBehaviour
 {
     [SerializeField] private bool triggerActive = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    private Collider playercollider;
     // Update is called once per frame
     void Update()
     {
         if (triggerActive && Input.GetKeyDown(KeyCode.E))
         {
-            InteractAction();
+            InteractAction(playercollider);
         }
     }
     
@@ -26,6 +21,7 @@ public class InteractableObject : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             triggerActive = true;
+            playercollider = other;
         }
     }
 
@@ -34,9 +30,10 @@ public class InteractableObject : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             triggerActive = false;
+            playercollider= null;
         }
     }
-    public virtual void InteractAction()
+    public virtual void InteractAction(Collider playercollider)
     {
         
     }

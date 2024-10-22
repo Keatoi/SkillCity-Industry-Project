@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ public class opencloseDoor : InteractableObject
 	}
 
 
-	public override void InteractAction()
+	public override void InteractAction(Collider Player)
 	{
 		open = !open;
 		if (open)

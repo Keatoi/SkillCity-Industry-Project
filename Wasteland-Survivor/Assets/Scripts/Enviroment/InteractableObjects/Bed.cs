@@ -11,7 +11,7 @@ public class Bed : InteractableObject
     {
         
     }
-    public override void InteractAction()
+    public override void InteractAction(Collider Player)
     {
         DayNightCycle.IncreaseHours(RestAmount);
     }
