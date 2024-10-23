@@ -372,6 +372,7 @@
 "Assets/Scripts/Enviroment/InteractableObjects/Bed.cs"
 "Assets/Scripts/Enviroment/InteractableObjects/InteractableObject.cs"
 "Assets/Scripts/Other/Objectives/Director.cs"
+"Assets/Scripts/Other/Objectives/GenericObjective.cs"
 "Assets/Scripts/Other/Objectives/KillObjective.cs"
 "Assets/Scripts/Other/Objectives/LocationObjective.cs"
 "Assets/Scripts/Other/Objectives/Objective.cs"
