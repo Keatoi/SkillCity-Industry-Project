@@ -9,6 +9,7 @@ public class ObjectiveManager : MonoBehaviour
     {
         //add new objective to List
         _objectives.Add(obj);
+        DebugShowObjectives();
     }
     public void CompleteObjective(string title)
     {
