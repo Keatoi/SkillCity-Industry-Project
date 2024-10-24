@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
         float lookX = look.x * mouseSensitivity * Time.deltaTime;
         float lookY = look.y * mouseSensitivity * Time.deltaTime;
         xRotation -= lookY;
-        xRotation = Mathf.Clamp(xRotation,minViewRotation,90f);
+        xRotation = Mathf.Clamp(xRotation,-90f,90f);
         //Rotate camera up
         mainCam.transform.localRotation = Quaternion.Euler(xRotation,0,0);
         //Rotate player entity
@@ -122,7 +122,7 @@ public class PlayerController : MonoBehaviour
     private void OnCrouch(InputValue value)
     {
         bIsCrouching = !bIsCrouching;
-        Debug.Log("Crouch Pressed");
+        //Debug.Log("Crouch Pressed");
     }
     
     private void OnJump(InputValue value)
@@ -252,7 +252,7 @@ public class PlayerController : MonoBehaviour
        // Debug.Log("Change anim state called: " + newState);
         // STOP THE SAME ANIMATION FROM INTERRUPTING WITH ITSELF //
         if (currentAnimationState == newState) return;
-        Debug.Log("Changing Animation State");
+        //Debug.Log("Changing Animation State");
         // PLAY THE ANIMATION //
         currentAnimationState = newState;
         animator.CrossFadeInFixedTime(currentAnimationState, 0.2f);

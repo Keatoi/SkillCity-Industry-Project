@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GenericObjective : Objective
 {
-   public GenericObjective(string title, string description)
+    public GenericObjective(string title, string description)
     {
         Title = title;
         Description = description;

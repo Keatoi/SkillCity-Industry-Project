@@ -4,7 +4,22 @@ using UnityEngine;
 
 public class ObjectiveManager : MonoBehaviour
 {
-   private List<Objective> _objectives = new List<Objective>();
+   public List<Objective> _objectives = new List<Objective>();
+    public static ObjectiveManager Instance; // Singleton instance
+
+    private void Awake()
+    {
+        // Check if instance already exists
+        if (Instance == null)
+        {
+            Instance = this; // Assign this instance
+            DontDestroyOnLoad(gameObject); // Optional: Keep it across scenes
+        }
+        else
+        {
+            Destroy(gameObject); // Destroy duplicate
+        }
+    }
     public void AddObjective(Objective obj)
     {
         //add new objective to List
@@ -20,7 +35,7 @@ public class ObjectiveManager : MonoBehaviour
             {
                 objective.CompleteObjective();
                 Debug.Log($"Objective Completed: {title}");
-                return;
+                break;
             }
         }
     }

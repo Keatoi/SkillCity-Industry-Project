@@ -389,6 +389,7 @@
 "Assets/Scripts/Player/UX/AudioDamageResponse.cs"
 "Assets/Scripts/Player/UX/HealthBar.cs"
 "Assets/Scripts/Player/UX/HungerBar.cs"
+"Assets/Scripts/Player/UX/ObjectiveUI.cs"
 "Assets/Scripts/Player/UX/ThirstBar.cs"
 -langversion:9.0
 /deterministic
