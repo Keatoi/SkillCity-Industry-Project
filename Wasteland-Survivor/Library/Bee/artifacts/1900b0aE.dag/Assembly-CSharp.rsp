@@ -377,6 +377,7 @@
 "Assets/Scripts/Other/Objectives/LocationObjective.cs"
 "Assets/Scripts/Other/Objectives/Objective.cs"
 "Assets/Scripts/Other/Objectives/ObjectiveManager.cs"
+"Assets/Scripts/Other/Weapons/Grenade.cs"
 "Assets/Scripts/Other/Weapons/GunSystem.cs"
 "Assets/Scripts/Other/Weapons/MeleeSystem.cs"
 "Assets/Scripts/Other/Weapons/ThrowScript.cs"
