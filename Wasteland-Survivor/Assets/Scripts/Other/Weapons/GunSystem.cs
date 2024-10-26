@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GunSystem : MonoBehaviour
 {
+    public delegate void OnAmmoChangeAction(float MagAmmo,float ReserveAmmo);  
+    public static event OnAmmoChangeAction OnAmmoChange;
     [SerializeField] float maxMagazineSize = 30;
     public float currentRounds;//amount of rounds in magazine
     [SerializeField] private GameObject barrelPoint;
@@ -22,6 +24,7 @@ public class GunSystem : MonoBehaviour
     public AudioClip reloadSFX;
     public float GunShotVolume = 1.0f;
     public float ReloadVolume = 1.0f;
+    private float reserve;
     private AudioSource m_Audio;
 
     // Start is called before the first frame update
@@ -41,6 +44,10 @@ public class GunSystem : MonoBehaviour
             m_Audio.volume = GunShotVolume;
         }
         currentRounds = maxMagazineSize;
+        ResourceSystem ammo = transform.root.gameObject.GetComponent<ResourceSystem>();
+        float currentreserve = isSmallCalibre ? ammo.smallcalibre : ammo.largecalibre;
+        reserve = currentreserve;
+        OnAmmoChange?.Invoke(currentRounds, reserve);
     }
    
     // Update is called once per frame
@@ -84,6 +91,7 @@ public class GunSystem : MonoBehaviour
             PlayGunSFX();
             //Decrement ammo from magazine
             currentRounds--;
+            OnAmmoChange?.Invoke(currentRounds, reserve);
             Debug.Log(currentRounds);
             if (Physics.Raycast(origin, dir, out hit, range))
             {
@@ -114,17 +122,31 @@ public class GunSystem : MonoBehaviour
         UnityEngine.Debug.Log("Reload Gun");
         ResourceSystem ammo = transform.root.gameObject.GetComponent<ResourceSystem>();
         float currentreserve = isSmallCalibre ? ammo.smallcalibre : ammo.largecalibre;
-        if (currentreserve > 0)
+        reserve = currentreserve;
+        //Can only reload if we have ammo to reload with and there is less than the max mag size in the gun
+        if (currentreserve > 0 && currentRounds < maxMagazineSize)
         {
             //check current amount of reserve ammo left and assign refill amount
             float refill;
             if (currentreserve >= maxMagazineSize)
             {
                 //if the reserve is greater than the max magazine size of this weapon then we use the max amount
-                refill = maxMagazineSize;
-                //subtract standard mag amount from reserve
+                if(currentRounds > 0)
+                {
+                    //take away the difference between max magazine count and the number of rounds still in the gun to get the number of shots fired + 1 for the round in the chamber
+                    refill = (maxMagazineSize - currentRounds) + 1;
+                    if (isSmallCalibre) { ammo.ChangeSmallCal(-refill); } else { ammo.ChangeBigCal(-refill); }
+                    currentRounds = maxMagazineSize + 1;
+                }
+                else
+                {
+                    refill = maxMagazineSize;
+                    //subtract standard mag amount from reserve
 
-                if (isSmallCalibre) { ammo.ChangeSmallCal(-maxMagazineSize); } else { ammo.ChangeBigCal(-maxMagazineSize); }
+                    if (isSmallCalibre) { ammo.ChangeSmallCal(-refill); } else { ammo.ChangeBigCal(-refill); }
+                    currentRounds = maxMagazineSize;
+                }
+               
             }
             else
             {
@@ -132,19 +154,16 @@ public class GunSystem : MonoBehaviour
                 refill = currentreserve;
                 //subtract the reserve from itself to give 0
                 if (isSmallCalibre) { ammo.ChangeSmallCal(-currentreserve); } else { ammo.ChangeBigCal(-currentreserve); }
+                currentRounds = refill;
             }
             PlayReloadSFX();
-            //Refill magazine (with one in chamber if magazine was not empty)
-            if (currentRounds > 0)
-            {
-                currentRounds = maxMagazineSize + 1;
-            }
-            else
-            {
-                currentRounds = maxMagazineSize;
-            }
+            
         }
-        
+        reserve = isSmallCalibre ? ammo.smallcalibre : ammo.largecalibre;
+        Debug.Log("Current Reserve: " + reserve);
+        OnAmmoChange?.Invoke(currentRounds, reserve);
+
+
     }
     public void SetAim()
     {

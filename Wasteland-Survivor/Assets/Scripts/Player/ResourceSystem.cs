@@ -35,6 +35,7 @@ public class ResourceSystem : MonoBehaviour
     public void ChangeSmallCal(float newSmallCal)
     {
         smallcalibre += newSmallCal;
+        Debug.Log ("small call changed." +  smallcalibre);
     }
     public void ChangeBigCal(float newBigCal)
     {
