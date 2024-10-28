@@ -9,6 +9,7 @@ public class Grenade : MonoBehaviour
     AudioSource source;
     float damage = 50f;
     float radius = 25f;
+    float force = 30f;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,11 +24,12 @@ public class Grenade : MonoBehaviour
         if (timer <= 0)
         {
             DealDamage();
-            Killself();
+            timer = fuse;
         }
     }
     void DealDamage()
     {
+        PlaySFX();
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);
         foreach (var collider in hitColliders)
         {
@@ -36,7 +38,14 @@ public class Grenade : MonoBehaviour
                 Debug.Log(collider.name + "Has been hurt!");
                 collider.GetComponent<HealthSystem>().ChangeHealth(-damage);
             }
+            if(collider.gameObject.GetComponentInChildren<Rigidbody>())
+            {
+                Debug.Log(collider.name + "Has rb!");
+                Rigidbody rigidbody = collider.gameObject.GetComponentInChildren<Rigidbody>();
+                rigidbody.AddExplosionForce(force, transform.position, radius);
+            }
         }
+        Killself();
     }
     void PlaySFX()
     {
