@@ -1002,6 +1002,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4084000139907910688, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: ShellPool
+      value: 
+      objectReference: {fileID: 4892726914544266317}
     - target: {fileID: 4514127615177098375, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.56
@@ -1115,6 +1119,10 @@ PrefabInstance:
       value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 9084716714650261064, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: ShellPool
+      value: 
+      objectReference: {fileID: 4892726914544266317}
+    - target: {fileID: 9084716714650261064, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
       propertyPath: reloadSFX
       value: 
       objectReference: {fileID: 8300000, guid: e7632c6401c09437e83de45d33c5858e, type: 3}
@@ -1162,6 +1170,9 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7443095820101425238, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 4892726914544266317}
+    - targetCorrespondingSourceObject: {fileID: 7443095820101425238, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 5626889162188530634}
     - targetCorrespondingSourceObject: {fileID: 7443095820101425238, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
       insertIndex: -1
@@ -1205,6 +1216,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7443095820101425238, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
   m_PrefabInstance: {fileID: 2992047916479407174}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4892726914544266317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5678708781343898640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cae4bc63a331a94692bd95ab29d8154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  casingPrefab: {fileID: 0}
+  poolSize: 15
 --- !u!114 &5626889162188530634
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ public class GunSystem : MonoBehaviour
     [SerializeField] float damage = 30f;
     [SerializeField] float accuracy = 0.9f;
 
-    public float defaultFOV = 90f;
+    public float defaultFOV = 60f;
     [SerializeField] float zoomDuration = 2f;
     [SerializeField] float magnification = 2;
     bool bIsAimed = false;
@@ -91,6 +91,7 @@ public class GunSystem : MonoBehaviour
         {
             //Debug.Log("Firing handgun");
             PlayGunSFX();
+            EjectCase();
             //Decrement ammo from magazine
             currentRounds--;
             OnAmmoChange?.Invoke(currentRounds, reserve);
@@ -207,7 +208,7 @@ public class GunSystem : MonoBehaviour
         {
             casing.transform.position = ejectPos.position;
             casing.transform.rotation = ejectPos.rotation;
-            Rigidbody rb = casing.GetComponent<Rigidbody>();
+            Rigidbody rb = casing.GetComponentInChildren<Rigidbody>();
             rb.AddForce(ejectPos.right * Random.Range(1f, 3f));
             rb.AddTorque(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f), ForceMode.Impulse);
             StartCoroutine(ReturnCaseToPool(casing, 3f));
@@ -218,4 +219,10 @@ public class GunSystem : MonoBehaviour
         yield return new WaitForSeconds(delay);
         ShellPool.ReturnToPool(go);
     }
+    private void OnEnable()
+    {
+        barrelCamera.fieldOfView = defaultFOV;
+        OnAmmoChange?.Invoke(currentRounds, reserve);
+    }
+   
 }
