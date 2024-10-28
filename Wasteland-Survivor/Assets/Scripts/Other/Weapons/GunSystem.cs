@@ -6,10 +6,12 @@ public class GunSystem : MonoBehaviour
 {
     public delegate void OnAmmoChangeAction(float MagAmmo,float ReserveAmmo);  
     public static event OnAmmoChangeAction OnAmmoChange;
+    public ShellPool ShellPool;
     [SerializeField] float maxMagazineSize = 30;
     public float currentRounds;//amount of rounds in magazine
     [SerializeField] private GameObject barrelPoint;
     [SerializeField] private Camera barrelCamera;
+    [SerializeField] private Transform ejectPos;
     [SerializeField] float range = 100f;
     [SerializeField] float damage = 30f;
     [SerializeField] float accuracy = 0.9f;
@@ -197,5 +199,23 @@ public class GunSystem : MonoBehaviour
     {
         m_Audio.clip = reloadSFX;
         m_Audio.PlayOneShot(m_Audio.clip);
+    }
+    void EjectCase()
+    {
+        GameObject casing = ShellPool.GetPoolObject();
+        if( casing != null )
+        {
+            casing.transform.position = ejectPos.position;
+            casing.transform.rotation = ejectPos.rotation;
+            Rigidbody rb = casing.GetComponent<Rigidbody>();
+            rb.AddForce(ejectPos.right * Random.Range(1f, 3f));
+            rb.AddTorque(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f), ForceMode.Impulse);
+            StartCoroutine(ReturnCaseToPool(casing, 3f));
+        }
+    }
+    private IEnumerator<YieldInstruction>ReturnCaseToPool(GameObject go, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ShellPool.ReturnToPool(go);
     }
 }

@@ -380,6 +380,7 @@
 "Assets/Scripts/Other/Weapons/Grenade.cs"
 "Assets/Scripts/Other/Weapons/GunSystem.cs"
 "Assets/Scripts/Other/Weapons/MeleeSystem.cs"
+"Assets/Scripts/Other/Weapons/ShellPool.cs"
 "Assets/Scripts/Other/Weapons/ThrowScript.cs"
 "Assets/Scripts/Player/HealthSystem.cs"
 "Assets/Scripts/Player/HungerSystem.cs"
