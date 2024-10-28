@@ -188,6 +188,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d368e0a477a8b86468490a4c6414a452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slide: {fileID: 4744854618519397250}
+  slideSpeed: 5
+  slideDistance: 0.1
   ShellPool: {fileID: 0}
   maxMagazineSize: 8
   currentRounds: 0

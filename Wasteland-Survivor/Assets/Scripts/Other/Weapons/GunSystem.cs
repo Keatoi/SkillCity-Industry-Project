@@ -6,6 +6,10 @@ public class GunSystem : MonoBehaviour
 {
     public delegate void OnAmmoChangeAction(float MagAmmo,float ReserveAmmo);  
     public static event OnAmmoChangeAction OnAmmoChange;
+    public Transform slide;
+    Vector3 slideStartPos;
+    public float slideSpeed = 5f;
+    public float slideDistance = 0.1f;
     public ShellPool ShellPool;
     [SerializeField] float maxMagazineSize = 30;
     public float currentRounds;//amount of rounds in magazine
@@ -50,6 +54,7 @@ public class GunSystem : MonoBehaviour
         float currentreserve = isSmallCalibre ? ammo.smallcalibre : ammo.largecalibre;
         reserve = currentreserve;
         OnAmmoChange?.Invoke(currentRounds, reserve);
+        slideStartPos = slide.localPosition;
     }
    
     // Update is called once per frame
@@ -63,7 +68,10 @@ public class GunSystem : MonoBehaviour
         {
             Aim(defaultFOV);
         }
-
+        if (slide.localPosition != slideStartPos)
+        {
+            slide.localPosition = Vector3.Lerp(slide.localPosition, slideStartPos, slideSpeed * Time.deltaTime);
+        }
     }
     public void Fire()
     {
@@ -92,6 +100,7 @@ public class GunSystem : MonoBehaviour
             //Debug.Log("Firing handgun");
             PlayGunSFX();
             EjectCase();
+            MoveSlide();
             //Decrement ammo from magazine
             currentRounds--;
             OnAmmoChange?.Invoke(currentRounds, reserve);
@@ -223,6 +232,12 @@ public class GunSystem : MonoBehaviour
     {
         barrelCamera.fieldOfView = defaultFOV;
         OnAmmoChange?.Invoke(currentRounds, reserve);
+    }
+    private void MoveSlide()
+    {
+        if(slide == null) { return; }
+        Vector3 slideBackPos = slideStartPos + new Vector3(slideDistance, 0, 0);
+        slide.localPosition = slideBackPos;
     }
    
 }
