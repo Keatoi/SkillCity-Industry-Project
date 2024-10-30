@@ -9,17 +9,8 @@ public class ResourceSystem : MonoBehaviour
     public float wood = 0f;
     public float smallcalibre = 0f;
     public float largecalibre = 0f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int Waterchip = 0;
+  
     public void ChangeStone(float newStone)
     {
         stone += newStone;

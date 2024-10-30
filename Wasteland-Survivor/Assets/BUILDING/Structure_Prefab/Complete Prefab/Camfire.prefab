@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2065566140504669822
 Transform:
   m_ObjectHideFlags: 0
@@ -224,6 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerActive: 0
+  interacttext: {fileID: 0}
   ison: 0
   effects: {fileID: 2065566140504669822}
 --- !u!1001 &8841789514559174969

@@ -84,7 +84,7 @@ public class GunSystem : MonoBehaviour
             PlayGunSFX();
             //Decrement ammo from magazine
             currentRounds--;
-            Debug.Log(currentRounds);
+           // Debug.Log("current "+currentRounds);
             if (Physics.Raycast(origin, dir, out hit, range))
             {
                 //If we have ammo then play SFX and if the hit collider has the health component then subtract health
@@ -93,7 +93,7 @@ public class GunSystem : MonoBehaviour
                 if (hit.collider != null)
                 {
                     hitObject = hit.collider.gameObject;
-                    Debug.Log(hitObject.name);
+             //       Debug.Log(hitObject.name);
                     if (hitObject.GetComponent<HealthSystem>() != null && hitObject.CompareTag("Enemy"))
                     {
                         Debug.Log(hitObject.name + "Has been hurt!");
@@ -157,19 +157,19 @@ public class GunSystem : MonoBehaviour
     }
     private void PlayGunSFX()
     {
-        Debug.Log("Playing Sound");
+     //   Debug.Log("Playing Sound");
         if(currentRounds > 0)
         {
             //shoot gun sound
             
             m_Audio.clip = GunSFXArr[0];
-            Debug.Log(m_Audio.clip.name);
+          //  Debug.Log(m_Audio.clip.name);
         }
         else 
         {
             //empty gun sound
             m_Audio.clip = GunSFXArr[1];
-            Debug.Log(m_Audio.clip.name);
+         //   Debug.Log(m_Audio.clip.name);
         }
         //play the sound
         m_Audio.PlayOneShot(m_Audio.clip);
