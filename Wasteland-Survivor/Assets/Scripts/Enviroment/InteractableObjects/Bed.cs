@@ -7,11 +7,8 @@ public class Bed : InteractableObject
     public DayNightCycle DayNightCycle;
     [SerializeField] int RestAmount = 4;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-    public override void InteractAction()
+
+    public override void InteractAction(Collider Player)
     {
         DayNightCycle.IncreaseHours(RestAmount);
     }

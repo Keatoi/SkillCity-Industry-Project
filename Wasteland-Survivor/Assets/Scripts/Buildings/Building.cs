@@ -7,6 +7,8 @@ using UnityEngine;
 public class Building : MonoBehaviour
 {
     public GameObject[] strucprefab;// array of all buildables 
+    public MaterialRequirement[] materialRequirements;
+
     public GameObject campcenterstruc,campcenterinworld;
     public Material ghostMat;
     public float rotationspeed = 5f; //speed of rotation for the ghost-obj
@@ -14,8 +16,6 @@ public class Building : MonoBehaviour
 
     [HideInInspector]
     public bool currentlyBuilding;   //structure is actively being built    
-    [HideInInspector] 
-    public bool finishedbuilding;    //structure has been built
     [HideInInspector] 
     public Transform savedbuilinglocation;// transform location of the ghost building
     [HideInInspector] 
@@ -28,12 +28,58 @@ public class Building : MonoBehaviour
 
     public BuildingBarManager BuildingBar;
     public Raycastcheck Raycast;
+    public ResourceSystem ResourceSystem;
 
     public GameObject currentghost=null; // outline of obj
     public List<GameObject> ghostarr = new() { }; 
     public int strucIndex = 0;      // index of build array
+    public int numoflogscurrentlybuilidng;
 
     public bool Campfound;
+
+    public void Start()
+    {
+        ResourceSystem.GetComponentInParent<ResourceSystem>();
+        materialRequirements = new MaterialRequirement[]
+        {new(6,8,0),//Campfire materials
+         new(3,0,0),//wall material perlog
+         new(4,0,1),//Bed material 
+         new(30,10,10)//Bighouse material
+        };
+    }
+    bool CheckMaterials(int structureindex,bool wall)
+    {if(ResourceSystem != null)
+        {
+            if (ResourceSystem.wood >= materialRequirements[structureindex].wood && ResourceSystem.stone >= materialRequirements[structureindex].stone && ResourceSystem.steel >= materialRequirements[structureindex].steel)
+            {
+              // if(!wall) RemoveMatsFromInventory(structureindex,false);if(wall) { numoflogscurrentlybuilidng += ((int)materialRequirements[structureindex].wood); }
+                Debug.Log(ResourceSystem.wood+ ResourceSystem.stone+ResourceSystem.wood);
+                Debug.Log($"Materials[{structureindex}] - Wood: {materialRequirements[structureindex].wood}, Stone: {materialRequirements[structureindex].stone}, steel: {materialRequirements[structureindex].steel} true");
+                return true;
+            }
+            else
+                Debug.Log(ResourceSystem.wood + ResourceSystem.stone + ResourceSystem.wood); Debug.Log($"Materials[{structureindex}] - Wood: {materialRequirements[structureindex].wood}, Stone: {materialRequirements[structureindex].stone}, steel: {materialRequirements[structureindex].steel}"); return false;
+        }
+        Debug.Log(ResourceSystem.wood + ResourceSystem.stone + ResourceSystem.wood);
+        return default;
+    }
+
+    void RemoveMatsFromInventory(int structureindex, bool wall)
+    {
+        if (!wall)
+        {
+            ResourceSystem.wood -= materialRequirements[structureindex].wood;
+            ResourceSystem.stone -= materialRequirements[structureindex].stone;
+            ResourceSystem.steel -= materialRequirements[structureindex].steel;
+        }
+        else
+        {
+            ResourceSystem.wood -= numoflogscurrentlybuilidng;
+            numoflogscurrentlybuilidng = 0;
+        }
+    }
+
+
 
     void Createghost()//handles ghost creation
     {   campcenterinworld = GameObject.FindGameObjectWithTag("CampCenter");
@@ -106,13 +152,12 @@ public class Building : MonoBehaviour
             } 
             Destroy(currentghost);
             currentghost = null;
-            finishedbuilding = false; 
             Destroy(savedbuilding);
             Destroy(savedwall);
             savedbuilinglocation = null;
             savedwalllocation = null;
             ghostarr.Clear();
-            isbuilding = false;
+      
         }
        else return;
        
@@ -173,16 +218,27 @@ public class Building : MonoBehaviour
         // Define the size of the logs
         float logSpacing = prefabsize.x; // Distance between logs
         int numberOfLogs = ((int)(distance / logSpacing));
-        Debug.Log("distance" + distance.ToString()+"number of logs" + numberOfLogs); 
-
-        // Place the logs
+        
+        Debug.Log("distance" + distance.ToString()+"number of logs" + numberOfLogs);
         for (int i = 0; i <= numberOfLogs; i++)
-        {
-            Vector3 logPosition = startPoint.position + i * logSpacing * direction;
-            Instantiate(strucprefab[1], logPosition, Quaternion.identity);
-        }
-    }
+        { 
+        CheckMaterials(strucIndex,true);
 
+        }
+        if(numoflogscurrentlybuilidng <= ResourceSystem.wood) { 
+            // Place the logs
+            for (int i = 0; i <= numberOfLogs; i++)
+            {
+            Vector3 logPosition = startPoint.position + i * logSpacing * direction;
+            
+            Instantiate(strucprefab[1], logPosition, Quaternion.identity);
+             }
+            Debug.Log("number of logs " + numoflogscurrentlybuilidng);
+            RemoveMatsFromInventory(strucIndex, true);Debug.Log("remove");
+
+    
+        }else Debug.Log("not wnought mats?");
+    }
     public void BuildStructure()
     {
         if (!Campfound) { Checkdistance(currentghost.transform, null); }
@@ -194,7 +250,7 @@ public class Building : MonoBehaviour
         }
         else if (savedbuilinglocation != null)
         {
-            if (Campfound) { Instantiate(strucprefab[strucIndex], savedbuilinglocation.position, savedbuilinglocation.rotation); }
+            if (Campfound) { Instantiate(strucprefab[strucIndex], savedbuilinglocation.position, savedbuilinglocation.rotation);isbuilding = false; }
             else { Instantiate(campcenterstruc, savedbuilinglocation.position, savedbuilinglocation.rotation); Campfound = true;}
         }
        Destroyghost(false); //destroys ghost as its replaced with the real obj
@@ -222,7 +278,7 @@ public class Building : MonoBehaviour
                     if (currentghost == null) { Createghost(); }
                     Vector3 prefabsize= currentghost.transform.localScale;//SIZE USING RENDERER SCALE
 
-                    if ( currentghost.TryGetComponent<Renderer>(out Renderer renderer))
+                    if ( currentghost.TryGetComponent(out Renderer renderer))
                     {
                     if (renderer != null)
                     {
@@ -266,7 +322,7 @@ public class Building : MonoBehaviour
                         {
                             ghostarr[0].transform.position = savedbuilinglocation.position;
                             currentghost.transform.position = buildpos;  
-                        }else { return; }
+                        }
            
                 
                     if (Input.mouseScrollDelta.y != 0)   // makes obj rotate with scroll wheel depending on rotation speed
@@ -290,10 +346,9 @@ public class Building : MonoBehaviour
 
                 
                    
-        ////////////////////////////////////////////////////WALL BUILDING
+            //////////////////WALL BUILDING
             if (Input.GetMouseButtonDown(0) && strucIndex == 1)
             {
-               
                 if (savedbuilinglocation == null)
                 {
                     savedbuilding = new GameObject("savedbuilding");
@@ -308,35 +363,40 @@ public class Building : MonoBehaviour
                     savedwalllocation.SetPositionAndRotation(currentghost.transform.position, currentghost.transform.rotation);
                     Checkdistance(savedbuilinglocation.transform, campcenterinworld.transform);
                     CheckWall(savedwalllocation,savedbuilinglocation);
-                    
+                    CheckMaterials(strucIndex, false);
                 }
                 
             }
-        ////////////////////////////////////////////////////OTHER STRUC BUILDING
-                if (Input.GetMouseButtonDown(0)&& strucIndex!=1)//places obj using ghost's transform
-                 {
-                if (savedbuilinglocation == null) 
-                {  
+            ////////////////////////////////////////////////////OTHER STRUC BUILDING
+            if (Input.GetMouseButtonDown(0) && strucIndex != 1)//places obj using ghost's transform
+            {
+                if (savedbuilinglocation == null)
+                {
                     savedbuilding = new GameObject("savedBuildingLocation");
-                     
-                    savedbuilinglocation =savedbuilding.transform;
+
+                    savedbuilinglocation = savedbuilding.transform;
                     savedbuilinglocation.SetPositionAndRotation(currentghost.transform.position, currentghost.transform.rotation);
-                } else { return; }
+                }
+                else { return; }
 
                 if (campcenterinworld == null) Checkdistance(currentghost.transform, null);
                 else { Checkdistance(currentghost.transform, campcenterinworld.transform); };
 
-
-                BuildingBar.StartBuildBar(false);
-                 }
-
-           
-
+                if (campcenterinworld != null)
+                {
+                    if (CheckMaterials(strucIndex,false)) { BuildingBar.StartBuildBar(false); }
+                    else
+                        StartCoroutine(BuildingBar.Cancelltext("Not enough Materials"));
+                }
+                else BuildingBar.StartBuildBar(false);
+            }
         }
         else { Destroyghost(true); }// if not in building mode cancell / destroy ghost
       
      
     }
+
+
 }
 
 

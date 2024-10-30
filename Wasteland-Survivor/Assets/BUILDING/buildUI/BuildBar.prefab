@@ -327,13 +327,14 @@ MonoBehaviour:
   player: {fileID: 0}
   buildingdistance: 5
   maxtime: 3.5
+  TextObj: {fileID: 0}
   MoveText: {fileID: 3077505293273162181}
-  MoveText1: {fileID: 8659945997634942516}
   audioSource: {fileID: 3747605900162956067}
   audioClips:
   - {fileID: 8300000, guid: 2f9ed9f4860d8f446a55b57fdfdac6bc, type: 3}
   - {fileID: 8300000, guid: ed98ee8061febfd49b30a55f1f5a5044, type: 3}
   isbuilding: 0
+  Ischeck: 0
 --- !u!82 &3747605900162956067
 AudioSource:
   m_ObjectHideFlags: 0

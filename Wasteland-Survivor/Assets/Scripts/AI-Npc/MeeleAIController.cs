@@ -18,9 +18,8 @@ public class MeeleAIController : MonoBehaviour
     private AudioSource attackSource;
 
     //attack varibales
-    private Vector3 enemydirection;
-    private Vector3 boxSize = new(1, 1, 1);
-    private Color boxColor = Color.red;
+    public Vector3 enemydirection;
+
 
 
     // Patrol variables
@@ -34,6 +33,14 @@ public class MeeleAIController : MonoBehaviour
     Vector3 lastplayerpos;
 
     public float stucktimer = 10f;
+
+    [Header ("box collider")]
+    public Vector3 boxCenter = Vector3.zero;     // Relative to the GameObject's position
+    public Vector3 boxHalfExtents = Vector3.one; // Half the size of the box in each dimension
+    public Vector3 direction = Vector3.forward;  // Direction of the BoxCast
+    public float maxDistance = 5.0f;             // Max distance of the BoxCast
+    public Quaternion orientation = Quaternion.identity; // Orientation of the box
+
 
     // Start is called before the first frame update
     public void Awake()
@@ -61,7 +68,7 @@ public class MeeleAIController : MonoBehaviour
 
         if (victimtrans == null) { Victim = GameObject.FindGameObjectWithTag("Player"); victimtrans = Victim.transform; }
         bool inrange = Vector3.Distance(transform.position, victimtrans.position) <= 3f;
-        Debug.Log("INRAGE" + inrange + Vector3.Distance(transform.position, victimtrans.position).ToString());
+        //  Debug.Log("INRAGE" + inrange + Vector3.Distance(transform.position, victimtrans.position).ToString());
         if (enemyref.playerspotted == true)
         {
             enemyref.playerwasspotted = true;
@@ -71,13 +78,13 @@ public class MeeleAIController : MonoBehaviour
             if (!inrange)
             {
                 UpdatePath();
-              //  Debug.Log("Chasing");
+                Debug.Log("Chasing");
             }
             else
             {
-                lookattarget();
-                attack();
-             //   Debug.Log("attacking");
+                Lookattarget();
+                Attack();
+
             }
         }
         else { Patrol(); }
@@ -97,13 +104,15 @@ public class MeeleAIController : MonoBehaviour
         if (enemyref.agent.velocity.magnitude <= 0.5f && !waitingAtPoint && !enemyref.playerspotted)
         {
             animator.SetBool("Moving", false);
-          //  Debug.Log("checking if stuck");
+            Debug.Log("checking if stuck");
             stucktimer -= Time.deltaTime;
             if (stucktimer <= 0.1f)
             {
                 if (enemyref.agent.velocity.magnitude <= 0.7f)
-                { patrolDestination = GetRandomPatrolPoint();
-                    Debug.Log("Stuck, Changing point"); }
+                {
+                    patrolDestination = GetRandomPatrolPoint();
+                    Debug.Log("Stuck, Changing point");
+                }
                 stucktimer = 10f;
 
             }
@@ -131,7 +140,8 @@ public class MeeleAIController : MonoBehaviour
         if (!isPatrolling) return; // Skip if we're not in patrolling mode
         enemyref.agent.speed = 2;
         animator.SetBool("Moving", true);
-        if (Distance.magnitude >= 3.0f && !waitingAtPoint) {
+        if (Distance.magnitude >= 3.0f && !waitingAtPoint)
+        {
             // Debug.Log("patrolling to location "+Distance.magnitude.ToString());
             enemyref.agent.SetDestination(patrolDestination);
 
@@ -149,12 +159,12 @@ public class MeeleAIController : MonoBehaviour
         if (waitingAtPoint)
         {
 
-        //    Debug.Log("WAITING");
-            waitatpoint();
+            Debug.Log("WAITING");
+            Waitatpoint();
         }
 
     }
-    void waitatpoint()
+    void Waitatpoint()
     {
         animator.SetBool("Moving", false);
         waitTimer -= Time.deltaTime;
@@ -168,7 +178,8 @@ public class MeeleAIController : MonoBehaviour
 
     }
 
-    void lookattarget() {
+    void Lookattarget()
+    {
 
         Vector3 playerdirection = victimtrans.position - transform.position;
         playerdirection.y = 0;
@@ -183,7 +194,7 @@ public class MeeleAIController : MonoBehaviour
     void UpdatePath()
     {
         animator.SetBool("Moving", true);
-        lookattarget();
+        Lookattarget();
         if (Time.time >= PathUpdateDelay)
         {
             Debug.Log("Updating enenmy Path");
@@ -195,7 +206,7 @@ public class MeeleAIController : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
-       
+
         if (other.CompareTag("NPC"))
         {
             Victim = other.gameObject;
@@ -203,14 +214,13 @@ public class MeeleAIController : MonoBehaviour
             if (Victim.TryGetComponent<AiRef>(out AiRef component)) { aiRef = component; };
             if (aiRef.Rescued) { enemyref.playerspotted = true; }
 
-          //  Debug.Log("airef" + Victim.name + aiRef.name);
+            //  Debug.Log("airef" + Victim.name + aiRef.name);
 
         }
         else if (other.CompareTag("Player"))
         {
             Vector3 directionToPlayer = other.transform.position - transform.position;
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, directionToPlayer.normalized, out hit, Mathf.Infinity))
+            if (Physics.Raycast(transform.position, directionToPlayer.normalized, out RaycastHit hit, Mathf.Infinity))
             {
                 // Check if the raycast hit the player
                 if (hit.collider.CompareTag("Player"))
@@ -236,69 +246,68 @@ public class MeeleAIController : MonoBehaviour
 
     }
 
-    void attack() {
-
-        Vector3 halfExtents = new(5f / 2, 5f / 2, 5f / 2);
-        Vector3 startpos = transform.position;startpos.y += 1;
-  
-        if (Time.time >= attackdelay)
+    void Attack()
+    {
+      //  Debug.Log("attacking time "+Time.time+" delay "+ attackdelay );
+        
+         if (Time.time > attackdelay)
         {
-            Debug.Log("attacking");
+            Debug.Log(" meele");
             attackdelay = Time.time + enemyref.attackdelay;
-  
-
-
-            if (Physics.BoxCast(startpos, halfExtents, enemydirection.normalized, out RaycastHit hit, transform.rotation, 1f))
-            {
-                if (hit.collider.gameObject.name == "Player")
-                {
-                    Debug.Log("Hit an object with BoxCast: " + hit.collider.name + hit.transform.gameObject.name);
-
-                    animator.SetTrigger("attack"); attackSource.Play();
-
-                    playerhealth.ChangeHealth(-15);
-                }
-
-                if (hit.collider.gameObject.CompareTag("NPC"))
-                {
-                    Debug.Log("Hit an object with BoxCast: " + hit.collider.name + hit.transform.gameObject.name);
-                    aiRef.changehealthAi(10); if (aiRef.health <= 0) { enemyref.playerspotted = false; enemyref.playerwasspotted = false; }
-                    animator.SetTrigger("attack"); attackSource.Play();
-                    
-                    
-                    
-
-
-                }
-                Rigidbody rb = GetComponent<Rigidbody>(); 
-                Vector3 knockbackDirection = (transform.position - victimtrans.position).normalized;
-                rb.AddForce(knockbackDirection * 10, ForceMode.Impulse);
-            }
-
-
+            
+            Attackhitbox();
 
         }
-      
-    }  private void OnDrawGizmos()
+
+
+    }
+
+    void Attackhitbox()
+    {
+        Vector3 rotatedCenter = transform.position + transform.rotation * boxCenter;
+        Quaternion rotatedOrientation = transform.rotation * orientation;
+
+        // Perform the BoxCast
+        if (Physics.BoxCast(rotatedCenter, boxHalfExtents, enemydirection.normalized * maxDistance, out RaycastHit hitInfo, rotatedOrientation, maxDistance))
         {
-            // Start position of the box cast
-            Vector3 startPos = transform.position;
-        startPos += enemydirection;
-        startPos.y += 1;
-            // End position of the box cast
-            Vector3 endPos = startPos + enemydirection.normalized * 2f;
-
-            // Draw the starting box
-            Gizmos.color = boxColor;
-            Gizmos.matrix = Matrix4x4.TRS(startPos, transform.rotation,  new(5f / 2, 5f / 2, 5f / 2));
-            Gizmos.DrawWireCube(Vector3.zero, boxSize);
-
-            // Draw the ending box (after the box cast)
-          //  Gizmos.matrix = Matrix4x4.TRS(endPos, transform.rotation, Vector3.one);
-        //    Gizmos.DrawWireCube(Vector3.zero, boxSize);
-
-            // Draw a line connecting the start and end positions
-         //   Gizmos.matrix = Matrix4x4.identity;
-          //  Gizmos.DrawLine(startPos, endPos);
+            if (hitInfo.collider.CompareTag("Player"))
+            {
+                Debug.Log("hitplayer");
+                playerhealth.ChangeHealth(-10);
+                animator.SetTrigger("attack");
+                attackSource.Play();
+            }
+            if (hitInfo.collider.CompareTag("NPC"))
+            { animator.SetTrigger("attack");
+                attackSource.Play();
+                aiRef.changehealthAi(10); if (aiRef.health <= 0) { enemyref.playerspotted = false; }
+            }
         }
+    }
+    private void OnDrawGizmos()
+    {
+        // Rotate boxCenter by the GameObject's rotation to align it correctly
+        Vector3 rotatedCenter = transform.position + transform.rotation * boxCenter;
+        Quaternion rotatedOrientation = transform.rotation * orientation;
+
+        // Perform the BoxCast
+        if (Physics.BoxCast(rotatedCenter, boxHalfExtents, enemydirection.normalized*maxDistance, out RaycastHit hitInfo, rotatedOrientation, maxDistance))
+        {
+        
+          
+            Gizmos.color = Color.red;
+            Gizmos.matrix = Matrix4x4.TRS(rotatedCenter + enemydirection , orientation, Vector3.one);
+            Gizmos.DrawWireCube(Vector3.zero, boxHalfExtents * 2);
+
+        }
+         else
+        {
+            // Draw the box at the max distance (indicates no collision)
+            Gizmos.color = Color.green;
+            Gizmos.matrix = Matrix4x4.TRS(rotatedCenter + enemydirection.normalized * maxDistance, rotatedOrientation, boxHalfExtents);
+            Gizmos.DrawWireCube(Vector3.zero, boxHalfExtents * 2);
+        }
+
+
+    }
 }

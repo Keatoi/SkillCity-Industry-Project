@@ -26,6 +26,7 @@ public class NpcController : MonoBehaviour
     public float patrolradius = 300f;
     private bool inrange;
     Vector3 Enemydirection;
+    public Quaternion orientation = Quaternion.identity;
 
     public void Awake()
     {
@@ -42,6 +43,7 @@ public class NpcController : MonoBehaviour
     {
         AiRef.Rescued = rescued;
         if (!AiRef.Rescued) { return; }
+        bool moving = AiRef.agent.velocity.magnitude > 0.5f;
         if (following)
         {
             Following();
@@ -103,6 +105,10 @@ public class NpcController : MonoBehaviour
         }
         else { stucktimer = 10f; }
 
+        if (moving)
+        {
+            animator.SetBool("moving",true);
+        }else animator.SetBool("moving", false);
     }
 
 
@@ -230,21 +236,23 @@ public class NpcController : MonoBehaviour
 
     void attack()
     {
+        Vector3 rotatedCenter = transform.position + transform.rotation * Vector3.zero;
+        Quaternion rotatedOrientation = transform.rotation * orientation;
         if (Time.time >= attackdelay)
         {
-            Vector3 startPos = transform.position;
-            Vector3 halfExtents = new(4f / 2, 4f / 2, 4f / 2);
+          
+
             attackdelay = Time.time + AiRef.attackdelay;
+             Vector3 boxHalfExtents = Vector3.one;
+             animator.SetTrigger("attacking");
 
-
-
-            if (Physics.BoxCast(startPos, halfExtents, Enemydirection.normalized, out RaycastHit hit, transform.rotation, 2f))
+            if (Physics.BoxCast(rotatedCenter, boxHalfExtents, Enemydirection.normalized, out RaycastHit hit, rotatedOrientation, 2f))
             {
                 Debug.Log("ATT box cast");
                 if (hit.collider.gameObject.name == "Enemy") { Debug.Log("Hit an object with BoxCast: " + hit.collider.name + hit.transform.gameObject.name); }
 
                 Debug.Log("attacking");
-                // animator.SetTrigger("attack"); 
+                 
                 EnemyRef.changehealthNPC(10, this); if (EnemyRef.health <= 0) { enemmyspotted = false; }
             }
 
@@ -263,7 +271,7 @@ public class NpcController : MonoBehaviour
             enemmyspotted = true;
             findcamp = false; patrol = false; waitingAtPoint = false; following = false;
             EnemyRef = Enemy.GetComponent<AiRef>();
-            Debug.Log("enemy in sight" + Enemy.name + other.name);
+            //Debug.Log("enemy in sight" + Enemy.name + other.name);
 
         }
     }
