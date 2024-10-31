@@ -115,7 +115,7 @@ public class GunSystem : MonoBehaviour
                 if (hit.collider != null)
                 {
                     hitObject = hit.collider.gameObject;
-             //       Debug.Log(hitObject.name);
+             
                     if (hitObject.GetComponent<HealthSystem>() != null && hitObject.CompareTag("Enemy"))
                     {
                         Debug.Log(hitObject.name + "Has been hurt!");

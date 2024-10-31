@@ -358,7 +358,12 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.46f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.46f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
+"Assets/BrokenVector/LowPolyDungeon/Demo Scenes/MouseCamLook.cs"
+"Assets/BrokenVector/LowPolyDungeon/Demo Scenes/PlayerMovement.cs"
+"Assets/BrokenVector/LowPolyDungeon/Demo Scenes/ScreenshotMaker.cs"
 "Assets/BuildingSystem.cs"
+"Assets/IgniteCoders/Simple Water Shader/Info/Scripts/Readme.cs"
+"Assets/IgniteCoders/Simple Water Shader/Resources/WaterReflection.cs"
 "Assets/Scripts/AI-Npc/Enemyref.cs"
 "Assets/Scripts/AI-Npc/MeeleAIController.cs"
 "Assets/Scripts/AI-Npc/Npc Ui controller.cs"
@@ -398,6 +403,8 @@
 "Assets/Scripts/Player/UX/ObjectiveUI.cs"
 "Assets/Scripts/Player/UX/ThirstBar.cs"
 "Assets/waterpurifierscript.cs"
+"Assets/Winter Zone Mini 1.0/Scripts/EmitterPositionController.cs"
+"Assets/Winter Zone Mini 1.0/Scripts/FXDemoController.cs"
 -langversion:9.0
 /deterministic
 /optimize+
