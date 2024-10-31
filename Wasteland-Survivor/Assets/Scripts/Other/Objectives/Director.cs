@@ -7,6 +7,9 @@ public class Director : MonoBehaviour
     private ObjectiveManager objectiveManager;
 
     public Transform playerLoc;
+    public Transform chipLoc;
+    private bool Obj1Done = false;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +19,7 @@ public class Director : MonoBehaviour
             objectiveManager = gameObject.AddComponent<ObjectiveManager>();
         }
         //Non Specified Objective (Completion check must be done in the objective object. Ex. Build a building then call the func for completing the corresponding objective once that building is built
-        objectiveManager.AddObjective(new GenericObjective("Test Objective", "Do a testing thing"));
+        objectiveManager.AddObjective(new GenericObjective("Build Hydro-Purifier", "Build a Hydro-Purifier to provide clean water"));
         Debug.Log(objectiveManager._objectives.Count);
         FindObjectOfType<ObjectiveUI>().UpdateObjectives();
     }
@@ -24,9 +27,11 @@ public class Director : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
+        if(objectiveManager.GetCompletionStatus("Build Hydro-Purifier") && Obj1Done == false)
         {
-            objectiveManager.CompleteObjective("Test Objective");
+            Obj1Done = true;
+            objectiveManager.AddObjective(new LocationObjective("Find the old fort", "the Chip is damaged, a replacement may be found at the old fort",chipLoc.position));
         }
+        objectiveManager.CompleteLocationObjective(playerLoc.position);
     }
 }

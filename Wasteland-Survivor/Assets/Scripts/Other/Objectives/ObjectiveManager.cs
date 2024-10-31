@@ -60,4 +60,13 @@ public class ObjectiveManager : MonoBehaviour
             objective.ShowStatus();
         }
     }
+    public bool GetCompletionStatus(string title)
+    {
+        foreach(var objective in _objectives)
+        {
+            if (objective.Title == title && objective.IsCompleted) return true;
+               
+        }
+        return false;
+    }
 }
