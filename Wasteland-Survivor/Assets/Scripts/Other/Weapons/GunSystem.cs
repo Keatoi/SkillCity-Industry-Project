@@ -93,11 +93,13 @@ public class GunSystem : MonoBehaviour
                 if (hit.collider != null)
                 {
                     hitObject = hit.collider.gameObject;
-             //       Debug.Log(hitObject.name);
-                    if (hitObject.GetComponent<HealthSystem>() != null && hitObject.CompareTag("Enemy"))
+                    Debug.Log("guns "+hitObject.name);
+                    if (hitObject.GetComponent<AiRef>() != null && hitObject.CompareTag("Enemy"))
                     {
                         Debug.Log(hitObject.name + "Has been hurt!");
-                        hitObject.GetComponent<HealthSystem>().ChangeHealth(-damage);
+                      //  hitObject.GetComponent<HealthSystem>().ChangeHealth(-damage);
+                        hitObject.GetComponent<AiRef>().changehealthAi(damage);
+
                     }
                 }
 

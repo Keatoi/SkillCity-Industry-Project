@@ -365,11 +365,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2470ff8dbecb54c42907f70ecd3e2a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemydirection: {x: 0, y: 0, z: 0}
   patrolWaitTime: 3
   isPatrolling: 1
   waitingAtPoint: 0
   Patrolcenter: {x: 0, y: 0, z: 0}
   stucktimer: 100
+  boxCenter: {x: 0, y: 0, z: 0}
+  boxHalfExtents: {x: 1, y: 1, z: 1}
+  direction: {x: 0, y: 0, z: 1}
+  maxDistance: 5
+  orientation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!114 &797011688161427826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,7 +417,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 942964203219585055, guid: 981c62c5bd9803a45911450abae6e50c, type: 3}
+  m_Mesh: {fileID: 942964203219585055, guid: d3da0db8fe3d9d94ba1508c971a17ef9, type: 3}
 --- !u!82 &6413177875320023740
 AudioSource:
   m_ObjectHideFlags: 0
