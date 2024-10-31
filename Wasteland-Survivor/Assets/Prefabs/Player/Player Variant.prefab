@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
-<<<<<<< HEAD
+
 --- !u!1 &81026365371344555
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,8 +851,7 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 9118462621960845944, guid: 0160f6cf961ff5c4192f9adbbb3ba54f, type: 3}
   m_PrefabInstance: {fileID: 168639627007594541}
   m_PrefabAsset: {fileID: 0}
-=======
->>>>>>> dev
+
 --- !u!1001 &2992047916479407174
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -901,7 +900,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-<<<<<<< HEAD
+
     - target: {fileID: 2207910347188883912, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
@@ -978,13 +977,11 @@ PrefabInstance:
       propertyPath: m_BackGroundColor.r
       value: 0
       objectReference: {fileID: 0}
-=======
->>>>>>> dev
     - target: {fileID: 7443095820101425238, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
       propertyPath: m_Name
       value: Player Variant
       objectReference: {fileID: 0}
-<<<<<<< HEAD
+
     - target: {fileID: 7443095820101425238, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
       propertyPath: m_TagString
       value: Player
@@ -1327,8 +1324,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -68.383
       objectReference: {fileID: 0}
-=======
->>>>>>> dev
+
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
