@@ -17,7 +17,7 @@ public class DayNightCycle : MonoBehaviour
     [SerializeField] private Vector3 rotationperMinute = new Vector3(0.25f, 0, 0);
     public bool bIsWinter { get; private set; }
     public WeatherState currentWeather;
-   
+    public ParticleSystem snowEffect;
 
     void Start()
     {
@@ -103,6 +103,7 @@ public class DayNightCycle : MonoBehaviour
         {
             //If its winter set to permanent snow
             currentWeather = WeatherState.Snow;
+            snowEffect.Play();
         }
         else
         {

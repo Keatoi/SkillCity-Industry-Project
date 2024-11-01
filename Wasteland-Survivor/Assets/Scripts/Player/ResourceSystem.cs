@@ -9,7 +9,7 @@ public class ResourceSystem : MonoBehaviour
     public float wood = 0f;
     public float smallcalibre = 0f;
     public float largecalibre = 0f;
-    public int Waterchip = 0;
+    public bool Waterchip = false;
   
     public void ChangeStone(float newStone)
     {
@@ -26,7 +26,6 @@ public class ResourceSystem : MonoBehaviour
     public void ChangeSmallCal(float newSmallCal)
     {
         smallcalibre += newSmallCal;
-        Debug.Log ("small call changed." +  smallcalibre);
     }
     public void ChangeBigCal(float newBigCal)
     {

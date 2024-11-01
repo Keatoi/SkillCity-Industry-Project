@@ -7,6 +7,7 @@ public class Waterpurifierscript : InteractableObject
     [SerializeField] bool ison = false;
     [SerializeField] Transform effects;
     [SerializeField] ResourceSystem playerinv;
+    
 
     public void Start()
     {
@@ -15,11 +16,11 @@ public class Waterpurifierscript : InteractableObject
     }
     public override void InteractAction(Collider Player)
     {
-        if (playerinv.Waterchip >0)
+        if (playerinv.Waterchip == true)
         {
               ison = !ison;
             effects.gameObject.SetActive(ison);
-            playerinv.Waterchip = 0;
+           
         }
       
     }
