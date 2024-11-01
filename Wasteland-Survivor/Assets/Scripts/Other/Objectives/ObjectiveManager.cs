@@ -69,6 +69,19 @@ public class ObjectiveManager : MonoBehaviour
         }
         return false;
     }
+    public void KillCheck(string title)
+    {
+        foreach (var objective in _objectives)
+        {
+            if (objective is KillObjective killObjective)
+            {
+                if (killObjective.Title == title)
+                {
+                    killObjective.IncrementKills();
+                }
+            }
+        }
+    }
     public bool IsObjective(string title)
     {
         foreach (var objective in _objectives)
