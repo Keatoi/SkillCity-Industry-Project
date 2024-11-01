@@ -107,7 +107,7 @@ public class pickup : InteractableObject
                 return ResourceType.SmallAmmo;
             case "largeammo":
                 return ResourceType.LargeAmmo;
-            case "Waterchip":
+            case "waterchip":
                 return ResourceType.WaterChip;
             default:
                 return ResourceType.Unknown;

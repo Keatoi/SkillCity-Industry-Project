@@ -10,6 +10,7 @@ public class ResourceSystem : MonoBehaviour
     public float smallcalibre = 0f;
     public float largecalibre = 0f;
     public bool Waterchip = false;
+    public ObjectiveManager OM;
   
     public void ChangeStone(float newStone)
     {
@@ -31,5 +32,9 @@ public class ResourceSystem : MonoBehaviour
     {
         largecalibre += newBigCal;
     }
-    public void SetWaterchip() { Waterchip = true; }
+    public void SetWaterchip() 
+    { 
+        Waterchip = true;
+        OM.CompleteObjective("Collect WaterChip");
+    }
 }

@@ -9,8 +9,8 @@ public class Director : MonoBehaviour
     public Transform playerLoc;
     public Transform chipLoc;
     public Transform campLoc;
-    private bool[] objBool;
-    
+    bool[] objBool = new bool[4];
+
     // Start is called before the first frame update
     void Start()
     {
