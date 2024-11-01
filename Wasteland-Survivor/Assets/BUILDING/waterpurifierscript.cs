@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class waterpurifierscript : InteractableObject
+public class Waterpurifierscript : InteractableObject
 {
     [SerializeField] bool ison = false;
     [SerializeField] Transform effects;
@@ -11,7 +11,7 @@ public class waterpurifierscript : InteractableObject
     public void Start()
     {
        playerinv = GameObject.FindGameObjectWithTag("Player").GetComponent<ResourceSystem>();
-
+        Debug.Log("WATER");
     }
     public override void InteractAction(Collider Player)
     {

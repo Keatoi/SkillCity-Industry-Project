@@ -100,7 +100,12 @@ public class BuildingSystem : MonoBehaviour
             childRenderer.sharedMaterial = ghostMat[0];
         }
         GhostMateril(0);
+
+      
+
+            
     }
+    
     void GhostMateril(int matindex)
     {   //change all materials
         MeshRenderer[] childMeshRenderers = currentghost.GetComponentsInChildren<MeshRenderer>();
@@ -242,14 +247,19 @@ public class BuildingSystem : MonoBehaviour
             return;
         }
         if (savedbuilding != null)
-        {
-            if (Campfound)
+        {   if(strucIndex ==4 )
+            {
+                
+              GameObject  Waterpurifier = Instantiate(strucprefab[strucIndex], savedbuilding.transform.position, savedbuilding.transform.rotation);
+                Waterpurifier.AddComponent<Waterpurifierscript>();
+            }
+            if (Campfound && strucIndex !=4)
             {//build struc at index
                 Instantiate(strucprefab[strucIndex], savedbuilding.transform.position, savedbuilding.transform.rotation);
                 isbuilding = false;
                 RemoveMatsFromInventory(strucIndex, false);
             }
-            else
+            else if(!Campfound)
             {
                 campcenterinworld = Instantiate(campcenterstruc, savedbuilding.transform.position, savedbuilding.transform.rotation);//build campcenter
                 Campfound = true;
