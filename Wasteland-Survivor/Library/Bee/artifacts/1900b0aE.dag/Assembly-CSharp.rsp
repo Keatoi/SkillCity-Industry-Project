@@ -364,7 +364,7 @@
 "Assets/BUILDING/New Folder/BuildingSystem.cs"
 "Assets/BUILDING/New Folder/waterpurifierscript.cs"
 "Assets/IgniteCoders/Simple Water Shader/Resources/WaterReflection.cs"
-"Assets/Scripts/AI-Npc/Enemyref.cs"
+"Assets/Scripts/AI-Npc/AiRef.cs"
 "Assets/Scripts/AI-Npc/MeeleAIController.cs"
 "Assets/Scripts/AI-Npc/Npc Ui controller.cs"
 "Assets/Scripts/AI-Npc/NpcController.cs"

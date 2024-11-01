@@ -15,7 +15,7 @@ public class AiRef : MonoBehaviour
     public bool following = false;
     public bool Rescued = false;
     public float health = 100f;
-
+    public ObjectiveManager OM;
     public void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -50,10 +50,10 @@ public class AiRef : MonoBehaviour
         if (health <= 0 && this != null)
         {
 
-           // attacker.playerspotted = false;
-           // attacker.playerwasspotted = false;
-    
+            // attacker.playerspotted = false;
+            // attacker.playerwasspotted = false;
 
+            OM.KillCheck("Defend the camp");
             Destroy(gameObject);
         }
         else { return; }
