@@ -332,6 +332,7 @@ GameObject:
   - component: {fileID: 220703957744308241}
   - component: {fileID: 1965122627309790765}
   - component: {fileID: 9002160992222631980}
+  - component: {fileID: 5437215059965090922}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -660,6 +661,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   casingPrefab: {fileID: 8576238885827897079, guid: 9f246bbe13236e24f9e27c6167198620, type: 3}
   poolSize: 20
+--- !u!114 &5437215059965090922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7443095820101425238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eedbafb60cd1f654eb6a0cf175959fcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strucprefab: []
+  strucIndex: 0
+  campcenterstruc: {fileID: 0}
+  ghostMat: []
+  campcenterinworld: {fileID: 0}
+  isbuilding: 0
+  Campfound: 0
+  currentghost: {fileID: 0}
+  ghostarr: []
+  rotationspeed: 5
+  maxdistancefromcamp: 10
+  savedbuilding: {fileID: 0}
+  savedwall: {fileID: 0}
+  currentlyBuilding: 0
+  numberoflogs: 0
+  woodforwall: 0
+  Barobject: {fileID: 0}
+  BuildingBar: {fileID: 0}
+  Raycast: {fileID: 0}
+  ResourceSystem: {fileID: 0}
+  materialRequirements: []
 --- !u!1 &7972822046053012202
 GameObject:
   m_ObjectHideFlags: 0
