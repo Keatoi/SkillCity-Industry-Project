@@ -20,6 +20,7 @@ public class pickup : InteractableObject
         Wood,
         SmallAmmo,
         LargeAmmo,
+        WaterChip,
         Unknown // Default if name doesn't match anything
     }
 
@@ -54,6 +55,9 @@ public class pickup : InteractableObject
                     break;
                 case ResourceType.LargeAmmo:
                     resourceSystem.ChangeBigCal(resourceAmount);
+                    break;
+                case ResourceType.WaterChip:
+                    resourceSystem.SetWaterchip();
                     break;
                 case ResourceType.Unknown:
                     Debug.LogWarning("Unknown resource: " + this.gameObject.name);

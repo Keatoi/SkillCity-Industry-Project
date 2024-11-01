@@ -31,4 +31,5 @@ public class ResourceSystem : MonoBehaviour
     {
         largecalibre += newBigCal;
     }
+    public void SetWaterchip() { Waterchip = true; }
 }
