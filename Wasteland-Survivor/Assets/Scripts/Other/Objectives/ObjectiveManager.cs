@@ -69,4 +69,13 @@ public class ObjectiveManager : MonoBehaviour
         }
         return false;
     }
+    public bool IsObjective(string title)
+    {
+        foreach (var objective in _objectives)
+        {
+            if (objective.Title == title ) return true;
+
+        }
+        return false;
+    }
 }

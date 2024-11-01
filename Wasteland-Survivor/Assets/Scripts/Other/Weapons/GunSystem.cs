@@ -121,6 +121,13 @@ public class GunSystem : MonoBehaviour
                         Debug.Log(hitObject.name + "Has been hurt!");
                         hitObject.GetComponent<HealthSystem>().ChangeHealth(-damage);
                     }
+                    if (hitObject.GetComponent<AiRef>() != null && hitObject.CompareTag("Enemy"))
+                    {
+                        Debug.Log(hitObject.name + "Has been hurt!");
+                        
+                        hitObject.GetComponent<AiRef>().changehealthAi(damage);
+
+                    }
                 }
 
             }

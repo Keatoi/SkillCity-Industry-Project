@@ -8,7 +8,8 @@ public class Director : MonoBehaviour
     public ObjectiveUI ObjectiveUI;
     public Transform playerLoc;
     public Transform chipLoc;
-    private bool Obj1Done = false;
+    public Transform campLoc;
+    private bool[] objBool;
     
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class Director : MonoBehaviour
         objectiveManager.AddObjective(new GenericObjective("Build Hydro-Purifier", "Build a Hydro-Purifier to provide clean water"));
         Debug.Log(objectiveManager._objectives.Count);
         FindObjectOfType<ObjectiveUI>().UpdateObjectives();
+       
     }
 
     // Update is called once per frame
@@ -31,16 +33,36 @@ public class Director : MonoBehaviour
         {
             objectiveManager.CompleteObjective("Build Hydro-Purifier");
         }
-        if(objectiveManager.GetCompletionStatus("Build Hydro-Purifier") && Obj1Done == false)
+        if(objectiveManager.GetCompletionStatus("Build Hydro-Purifier") && objBool[0] == false)
         {
-            Obj1Done = true;
+            objBool[0] = true;
             objectiveManager.AddObjective(new LocationObjective("Find the old fort", "the Chip is damaged, a replacement may be found at the old fort",chipLoc.position));
             ObjectiveUI.UpdateObjectives();
         }
-        if(objectiveManager.GetCompletionStatus("Find the old fort") == false)
+       
+        if(objectiveManager.GetCompletionStatus("Find the old fort") == true && objBool[1] == false)
         {
-            objectiveManager.CompleteLocationObjective(playerLoc.position);
+            objBool[1] = true;
+            objectiveManager.AddObjective(new GenericObjective("Collect WaterChip", "Collect the water chip"));
+            ObjectiveUI.UpdateObjectives();
         }
-        
+        if (objectiveManager.GetCompletionStatus("Collect WaterChip") == true && objBool[2] == false)
+        {
+            objBool[2] = true;
+            objectiveManager.AddObjective(new LocationObjective("Return to camp", "The camp has come under attack. Return at once.", chipLoc.position));
+            ObjectiveUI.UpdateObjectives();
+        }
+        //check location based objectives for their proximity to the player
+        if (objectiveManager.GetCompletionStatus("Find the old fort") == false || objectiveManager.GetCompletionStatus("Return to camp") == false)
+        {
+
+            objectiveManager.CompleteLocationObjective(playerLoc.position);
+
+        }
+        if(objectiveManager.GetCompletionStatus("Return to camp") && objBool[3] == false)
+        {
+            objectiveManager.AddObjective(new KillObjective("Defend the camp", "Defend the camp from the attacking tribesmen", 8));
+        }
+
     }
 }
