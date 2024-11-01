@@ -21,6 +21,6 @@ public class LocationObjective : Objective
     }
     public bool CheckDistance(Vector3 playerLoc)
     {
-        return Vector3.Distance(playerLoc, TargetLoc) < 1f;
+        return Vector3.Distance(playerLoc, TargetLoc) < 10f;
     }
 }

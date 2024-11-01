@@ -5,7 +5,7 @@ using UnityEngine;
 public class Director : MonoBehaviour
 {
     private ObjectiveManager objectiveManager;
-
+    public ObjectiveUI ObjectiveUI;
     public Transform playerLoc;
     public Transform chipLoc;
     private bool Obj1Done = false;
@@ -27,11 +27,20 @@ public class Director : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyUp(KeyCode.K))
+        {
+            objectiveManager.CompleteObjective("Build Hydro-Purifier");
+        }
         if(objectiveManager.GetCompletionStatus("Build Hydro-Purifier") && Obj1Done == false)
         {
             Obj1Done = true;
             objectiveManager.AddObjective(new LocationObjective("Find the old fort", "the Chip is damaged, a replacement may be found at the old fort",chipLoc.position));
+            ObjectiveUI.UpdateObjectives();
         }
-        objectiveManager.CompleteLocationObjective(playerLoc.position);
+        if(objectiveManager.GetCompletionStatus("Find the old fort") == false)
+        {
+            objectiveManager.CompleteLocationObjective(playerLoc.position);
+        }
+        
     }
 }
