@@ -10,6 +10,7 @@ public class Director : MonoBehaviour
     public Transform chipLoc;
     public Transform campLoc;
     bool[] objBool = new bool[4];
+    public GameObject enemySpawner;
 
     // Start is called before the first frame update
     void Start()
@@ -61,7 +62,10 @@ public class Director : MonoBehaviour
         }
         if(objectiveManager.GetCompletionStatus("Return to camp") && objBool[3] == false)
         {
+            objBool[3] = true;
             objectiveManager.AddObjective(new KillObjective("Defend the camp", "Defend the camp from the attacking tribesmen", 8));
+            //set all enemies to active
+            enemySpawner.SetActive(true);
         }
 
     }
