@@ -30,10 +30,7 @@ public class Director : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyUp(KeyCode.K))
-        {
-            objectiveManager.CompleteObjective("Build Hydro-Purifier");
-        }
+        DebugShortcuts();
         if(objectiveManager.GetCompletionStatus("Build Hydro-Purifier") && objBool[0] == false)
         {
             objBool[0] = true;
@@ -68,5 +65,29 @@ public class Director : MonoBehaviour
             enemySpawner.SetActive(true);
         }
 
+    }
+    void DebugShortcuts()
+    {
+        //Debugging shortcuts to skip quests
+        if (Input.GetKeyUp(KeyCode.Keypad0))
+        {
+            objectiveManager.CompleteObjective("Build Hydro-Purifier");
+        }
+        if (Input.GetKeyUp(KeyCode.Keypad1))
+        {
+            objectiveManager.CompleteObjective("Find the old fort");
+        }
+        if (Input.GetKeyUp(KeyCode.Keypad3))
+        {
+            objectiveManager.CompleteObjective("Collect WaterChip");
+        }
+        if (Input.GetKeyUp(KeyCode.Keypad4))
+        {
+            objectiveManager.CompleteObjective("Return to camp");
+        }
+        if (Input.GetKeyUp(KeyCode.Keypad5))
+        {
+            objectiveManager.CompleteObjective("Defend the camp");
+        }
     }
 }
