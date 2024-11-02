@@ -14,31 +14,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fae0cda9381b41f408adc76286af835a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 46.482826
+      value: -49.39
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fae0cda9381b41f408adc76286af835a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0034980774
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fae0cda9381b41f408adc76286af835a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 26.85521
+      value: 47.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fae0cda9381b41f408adc76286af835a, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -0.32910222
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fae0cda9381b41f408adc76286af835a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fae0cda9381b41f408adc76286af835a, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.94429433
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fae0cda9381b41f408adc76286af835a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fae0cda9381b41f408adc76286af835a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -46,7 +46,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fae0cda9381b41f408adc76286af835a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -218.429
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fae0cda9381b41f408adc76286af835a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -170,7 +170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fae0cda9381b41f408adc76286af835a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fae0cda9381b41f408adc76286af835a, type: 3}
       propertyPath: m_TagString
@@ -318,7 +318,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -327,10 +327,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3.37
-  m_Height: 22.1
+  m_Radius: 4.5
+  m_Height: 45.24
   m_Direction: 2
-  m_Center: {x: -0.20705271, y: 0.6, z: 8.13}
+  m_Center: {x: 0, y: 2, z: 17.58}
 --- !u!195 &6537742104456579328
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -365,17 +365,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2470ff8dbecb54c42907f70ecd3e2a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  victimtrans: {fileID: 0}
+  Victim: {fileID: 0}
+  playerhealth: {fileID: 0}
   enemydirection: {x: 0, y: 0, z: 0}
   patrolWaitTime: 3
   isPatrolling: 1
   waitingAtPoint: 0
   Patrolcenter: {x: 0, y: 0, z: 0}
-  stucktimer: 100
+  stucktimer: 10
   boxCenter: {x: 0, y: 0, z: 0}
   boxHalfExtents: {x: 1, y: 1, z: 1}
   direction: {x: 0, y: 0, z: 1}
   maxDistance: 5
   orientation: {x: 0, y: 0, z: 0, w: 1}
+  Other: {fileID: 0}
 --- !u!114 &797011688161427826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,6 +400,7 @@ MonoBehaviour:
   following: 0
   Rescued: 0
   health: 100
+  OM: {fileID: 0}
 --- !u!64 &3501766424583496449
 MeshCollider:
   m_ObjectHideFlags: 0

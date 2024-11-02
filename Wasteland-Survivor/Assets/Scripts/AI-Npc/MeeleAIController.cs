@@ -8,9 +8,9 @@ using UnityEngine.UIElements;
 public class MeeleAIController : MonoBehaviour
 {
     private Animator animator;
-    private Transform victimtrans;
-    private GameObject Victim;
-    private HealthSystem playerhealth;
+    public Transform victimtrans;
+    public GameObject Victim;
+    public HealthSystem playerhealth;
     private AiRef enemyref;
     private AiRef aiRef;
     private float PathUpdateDelay;
@@ -40,6 +40,7 @@ public class MeeleAIController : MonoBehaviour
     public Vector3 direction = Vector3.forward;  // Direction of the BoxCast
     public float maxDistance = 5.0f;             // Max distance of the BoxCast
     public Quaternion orientation = Quaternion.identity; // Orientation of the box
+    public GameObject Other;
 
 
     // Start is called before the first frame update
@@ -48,7 +49,7 @@ public class MeeleAIController : MonoBehaviour
         enemyref = GetComponent<AiRef>();
         Victim = GameObject.FindGameObjectWithTag("Player");
         victimtrans = Victim.GetComponent<Transform>();
-        playerhealth = Victim.GetComponent<HealthSystem>();
+      //  playerhealth = Victim.GetComponent<HealthSystem>();
         attackSource = enemyref.GetComponent<AudioSource>();
         animator = enemyref.GetComponent<Animator>();
         Debug.Log("AWAKED");
@@ -64,12 +65,12 @@ public class MeeleAIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isPatrolling = !enemyref.playerspotted;
+        isPatrolling = !enemyref.playerspotted&& !enemyref.playerwasspotted;
 
         if (victimtrans == null) { Victim = GameObject.FindGameObjectWithTag("Player"); victimtrans = Victim.transform; }
         bool inrange = Vector3.Distance(transform.position, victimtrans.position) <= 3f;
         //  Debug.Log("INRAGE" + inrange + Vector3.Distance(transform.position, victimtrans.position).ToString());
-        if (enemyref.playerspotted == true)
+        if (enemyref.playerspotted == true|| enemyref.playerwasspotted)
         {
             enemyref.playerwasspotted = true;
             enemyref.agent.speed = 5;
@@ -89,36 +90,38 @@ public class MeeleAIController : MonoBehaviour
         }
         else { Patrol(); }
 
-        if (enemyref.playerwasspotted)
+        if (enemyref.playerwasspotted && ! enemyref.playerspotted)
         {
-            if (enemyref.playerspotted == false)
-            {
+
+            stucktimer -= Time.deltaTime;
+            if (stucktimer <= 0.1f)
+            { 
+            
                 Debug.Log("playerlost");
                 lastplayerpos = victimtrans.position;
                 Patrolcenter = lastplayerpos;
                 enemyref.playerwasspotted = false;
-                //Instantiate<GameObject>(square,lastplayerpos,Quaternion.identity);  
             }
+
         }
 
-        if (enemyref.agent.velocity.magnitude <= 0.5f && !waitingAtPoint && !enemyref.playerspotted)
+        if (enemyref.agent.velocity.magnitude <= 0.5f && !waitingAtPoint && !enemyref.playerspotted&& !enemyref.playerwasspotted)
         {
             animator.SetBool("Moving", false);
             Debug.Log("checking if stuck");
             stucktimer -= Time.deltaTime;
             if (stucktimer <= 0.1f)
             {
-                if (enemyref.agent.velocity.magnitude <= 0.7f)
-                {
+                
                     patrolDestination = GetRandomPatrolPoint();
                     Debug.Log("Stuck, Changing point");
-                }
+                
                 stucktimer = 10f;
 
             }
 
         }
-        else { stucktimer = 10f; }
+        //else { stucktimer = 10f; }
     }
     // Generates a random patrol point within the patrol radius
     Vector3 GetRandomPatrolPoint()
@@ -127,7 +130,7 @@ public class MeeleAIController : MonoBehaviour
         Vector3 randomDirection = Random.insideUnitSphere * patrolRadius;
         randomDirection += Patrolcenter; // Center around the patrol center
         NavMesh.SamplePosition(randomDirection, out NavMeshHit navHit, patrolRadius, NavMesh.AllAreas);
-        enemyref.playerwasspotted = false;
+      //  enemyref.playerwasspotted = false;
         return navHit.position;
     }
     void Patrol()
@@ -211,6 +214,7 @@ public class MeeleAIController : MonoBehaviour
         {
             Victim = other.gameObject;
             victimtrans = other.transform;
+       
             if (Victim.TryGetComponent<AiRef>(out AiRef component)) { aiRef = component; };
             if (aiRef.Rescued) { enemyref.playerspotted = true; }
 
@@ -219,12 +223,17 @@ public class MeeleAIController : MonoBehaviour
         }
         else if (other.CompareTag("Player"))
         {
+            Vector3 eyespos = new (transform.position.x,transform.position.y+1.5f,transform.position.z);
             Vector3 directionToPlayer = other.transform.position - transform.position;
-            if (Physics.Raycast(transform.position, directionToPlayer.normalized, out RaycastHit hit, Mathf.Infinity))
+
+            Other = other.gameObject;
+            if (Physics.Raycast(eyespos, directionToPlayer.normalized, out RaycastHit hit, Mathf.Infinity))
             {
+                Debug.Log(hit.collider.name);
                 // Check if the raycast hit the player
                 if (hit.collider.CompareTag("Player"))
                 {
+                    Debug.Log("seeplayer");
                     // If we hit the player directly, the enemy can see the player
                     enemyref.playerspotted = true;
                     Victim = other.gameObject;
@@ -266,6 +275,7 @@ public class MeeleAIController : MonoBehaviour
     {
         Vector3 rotatedCenter = transform.position + transform.rotation * boxCenter;
         Quaternion rotatedOrientation = transform.rotation * orientation;
+       
 
         // Perform the BoxCast
         if (Physics.BoxCast(rotatedCenter, boxHalfExtents, enemydirection.normalized * maxDistance, out RaycastHit hitInfo, rotatedOrientation, maxDistance))
@@ -289,7 +299,18 @@ public class MeeleAIController : MonoBehaviour
         // Rotate boxCenter by the GameObject's rotation to align it correctly
         Vector3 rotatedCenter = transform.position + transform.rotation * boxCenter;
         Quaternion rotatedOrientation = transform.rotation * orientation;
+        if (Other != null)
+        {
+            // Calculate direction from the current object to the player
+            Vector3 eyespos = new (transform.position.x,transform.position.y+1.5f,transform.position.z);
+            Vector3 directionToPlayer = Other.transform.position - transform.position;
 
+            // Set the gizmo color to distinguish it in the editor
+            Gizmos.color = Color.red;
+
+            // Draw a line to represent the ray
+            Gizmos.DrawLine(eyespos, transform.position + directionToPlayer.normalized * 100f);
+        }
         // Perform the BoxCast
         if (Physics.BoxCast(rotatedCenter, boxHalfExtents, enemydirection.normalized*maxDistance, out RaycastHit hitInfo, rotatedOrientation, maxDistance))
         {

@@ -2199,6 +2199,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arms
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7972ebbdd5283b24c8fe2d8c05851221, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 7972ebbdd5283b24c8fe2d8c05851221, type: 3}
       propertyPath: m_Controller
       value: 
