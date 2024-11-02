@@ -28,9 +28,10 @@ public class InteractableObject : MonoBehaviour
             triggerActive = true;
             playercollider = other;
             interacttext = GameObject.FindGameObjectWithTag("itemtext");
+            interacttext.GetComponent<TextMeshProUGUI>().text = ("Press E to Interact"); 
             interacttext.SetActive(true);
             if(this.gameObject.TryGetComponent<pickup>(out pickup pickupref )) {
-                pickupref.showtext();
+                pickupref.Showtext();
             }
         }
     }
@@ -53,4 +54,5 @@ public class InteractableObject : MonoBehaviour
     {
         interacttext.GetComponent<TextMeshProUGUI>().text = text;
     }
+  
 }

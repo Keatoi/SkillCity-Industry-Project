@@ -6,7 +6,7 @@ using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class BuildingSystem : MonoBehaviour
 {
-    [Header("PREFAB STRUCTURE")]
+    [Header("PREFAB STRUCTURE(look at start method for Object Order)")]
     public GameObject[] strucprefab;// array of all buildables 
     public int strucIndex;      // index of build array
     public GameObject campcenterstruc; //Camp Struc
@@ -37,7 +37,7 @@ public class BuildingSystem : MonoBehaviour
 
     [Header("SCRIPT REFERENCE")]
 
-    public GameObject Barobject;
+    public GameObject BarObject;
     public BuildingBarManager BuildingBar;
     public Raycastcheck Raycast;
     public ResourceSystem ResourceSystem;
@@ -325,7 +325,7 @@ public class BuildingSystem : MonoBehaviour
 
     void Start()
     {
-        BuildingBar = Barobject.GetComponent<BuildingBarManager>();
+        BuildingBar = BarObject.GetComponent<BuildingBarManager>();
         ResourceSystem = GetComponent<ResourceSystem>();
         Raycast = GetComponent<Raycastcheck>();
         materialRequirements = new MaterialRequirement[]

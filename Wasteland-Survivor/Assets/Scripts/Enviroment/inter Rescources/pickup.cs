@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+using TMPro;
 using UnityEngine;
 
 public class pickup : InteractableObject
@@ -65,6 +66,7 @@ public class pickup : InteractableObject
             }
 
             // Optionally destroy or disable the object after pickup
+            interacttext.GetComponent<TextMeshProUGUI>().text = " ";
             Destroy(gameObject);
         }
     }
@@ -114,11 +116,11 @@ public class pickup : InteractableObject
         }
     }
     
-    public void showtext()
+    public void Showtext()
     {
 
         (string cleanedName, float resourceAmount) = ProcessResourceName(name);
-        string text = cleanedName + " " + resourceAmount;
+        string text = resourceAmount+ " "+cleanedName   ;
         Changetext(text);
 
     }
