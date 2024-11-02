@@ -45,7 +45,7 @@ public class ObjectiveManager : MonoBehaviour
         {
             if(objective is LocationObjective locationObjective)
             {
-                if(locationObjective.CheckDistance(playerPos) && objective.IsCompleted == false)
+                if(locationObjective.CheckDistance(playerPos))
                 {
                     locationObjective.CompleteObjective();
                 }

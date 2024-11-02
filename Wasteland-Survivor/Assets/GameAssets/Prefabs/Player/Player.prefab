@@ -852,7 +852,15 @@ PrefabInstance:
       value: ThirstBar
       objectReference: {fileID: 0}
     - target: {fileID: 4311248713417253285, guid: 49a038b6a9f5b224180764cc3f8e63f9, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311248713417253285, guid: 49a038b6a9f5b224180764cc3f8e63f9, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311248713417253285, guid: 49a038b6a9f5b224180764cc3f8e63f9, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6619391951551732862, guid: 49a038b6a9f5b224180764cc3f8e63f9, type: 3}
@@ -933,6 +941,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6619391951551732862, guid: 49a038b6a9f5b224180764cc3f8e63f9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879829404672845407, guid: 49a038b6a9f5b224180764cc3f8e63f9, type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8879829404672845407, guid: 49a038b6a9f5b224180764cc3f8e63f9, type: 3}
@@ -1579,6 +1591,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1108751964597960720, guid: 2cddeb387224d0a4fa699e328d62c741, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5518950633093893995, guid: 2cddeb387224d0a4fa699e328d62c741, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1905,7 +1921,15 @@ PrefabInstance:
     m_TransformParent: {fileID: 4074974587517764702}
     m_Modifications:
     - target: {fileID: 403861609029562971, guid: 8f9fec2541cebb3438b8f3990ed9b866, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 403861609029562971, guid: 8f9fec2541cebb3438b8f3990ed9b866, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 403861609029562971, guid: 8f9fec2541cebb3438b8f3990ed9b866, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3600105071743937960, guid: 8f9fec2541cebb3438b8f3990ed9b866, type: 3}
@@ -1991,6 +2015,10 @@ PrefabInstance:
     - target: {fileID: 6254391718298579132, guid: 8f9fec2541cebb3438b8f3990ed9b866, type: 3}
       propertyPath: m_Name
       value: HungerBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8434237537012603237, guid: 8f9fec2541cebb3438b8f3990ed9b866, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8434237537012603237, guid: 8f9fec2541cebb3438b8f3990ed9b866, type: 3}
       propertyPath: m_AnchorMax.y
