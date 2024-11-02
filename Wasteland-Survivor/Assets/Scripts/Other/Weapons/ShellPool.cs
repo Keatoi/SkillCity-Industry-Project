@@ -11,12 +11,12 @@ public class ShellPool : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CasingPool = new GameObject("Casings pool");
+        //CasingPool = new GameObject("Casings pool");
       //Init pool
       for (int i = 0; i < poolSize; i++)
         {
             GameObject go = Instantiate(casingPrefab);
-            go.transform.parent = CasingPool.transform;
+          //  go.transform.parent = CasingPool.transform;
             go.SetActive(false);
             objPool.Enqueue(go);
         }
