@@ -63,6 +63,7 @@ public class Director : MonoBehaviour
             objectiveManager.AddObjective(new KillObjective("Defend the camp", "Defend the camp from the attacking tribesmen", 8));
             //set all enemies to active
             enemySpawner.SetActive(true);
+            ObjectiveUI.UpdateObjectives();
         }
 
     }
