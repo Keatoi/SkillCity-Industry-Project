@@ -16,6 +16,7 @@ public class GunSystem : MonoBehaviour
     [SerializeField] private GameObject barrelPoint;
     [SerializeField] private Camera barrelCamera;
     [SerializeField] private Transform ejectPos;
+    [SerializeField] private ParticleSystem FireVFX;
     [SerializeField] float range = 100f;
     [SerializeField] float damage = 30f;
     [SerializeField] float accuracy = 0.9f;
@@ -97,15 +98,16 @@ public class GunSystem : MonoBehaviour
         }
         if(currentRounds > 0)
         {
-            //Debug.Log("Firing handgun");
+            //Play Firing effects
             PlayGunSFX();
+            PlayGunVFX();
             EjectCase();
             MoveSlide();
             //Decrement ammo from magazine
             currentRounds--;
-
+            //Update UI
             OnAmmoChange?.Invoke(currentRounds, reserve);
-           // Debug.Log(currentRounds);
+           
 
             if (Physics.Raycast(origin, dir, out hit, range))
             {
@@ -115,7 +117,7 @@ public class GunSystem : MonoBehaviour
                 if (hit.collider != null)
                 {
                     hitObject = hit.collider.gameObject;
-             
+                    //Check for both normal and AI targets
                     if (hitObject.GetComponent<HealthSystem>() != null && hitObject.CompareTag("Enemy"))
                     {
                         Debug.Log(hitObject.name + "Has been hurt!");
@@ -247,6 +249,13 @@ public class GunSystem : MonoBehaviour
         if(slide == null) { return; }
         Vector3 slideBackPos = slideStartPos + new Vector3(slideDistance, 0, 0);
         slide.localPosition = slideBackPos;
+    }
+    private void PlayGunVFX() 
+    {
+        if(FireVFX != null)
+        {
+            FireVFX.Play();
+        }
     }
    
 }
