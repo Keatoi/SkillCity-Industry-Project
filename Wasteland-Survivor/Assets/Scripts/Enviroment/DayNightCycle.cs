@@ -18,7 +18,7 @@ public class DayNightCycle : MonoBehaviour
     public bool bIsWinter { get; private set; }
     public WeatherState currentWeather;
     public ParticleSystem snowEffect;
-
+    public AudioSource weatherAS;
     void Start()
     {
         minuteResetValue = inGameMinute;
@@ -104,6 +104,7 @@ public class DayNightCycle : MonoBehaviour
             //If its winter set to permanent snow
             currentWeather = WeatherState.Snow;
             snowEffect.Play();
+            weatherAS.Play();
         }
         else
         {

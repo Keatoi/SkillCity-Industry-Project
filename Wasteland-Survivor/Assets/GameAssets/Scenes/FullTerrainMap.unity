@@ -13579,6 +13579,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1024636589}
   m_SourcePrefab: {fileID: 100100000, guid: a86848aa4b7bf93429931cf0f141f3e5, type: 3}
+--- !u!82 &675525970 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8573638511141602971, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
+  m_PrefabInstance: {fileID: 2000648673}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &675987980
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46238,8 +46243,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 413710596327563164, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
       propertyPath: timeOfDay
-      value: 23
+      value: 18
       objectReference: {fileID: 0}
+    - target: {fileID: 413710596327563164, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
+      propertyPath: weatherAS
+      value: 
+      objectReference: {fileID: 675525970}
     - target: {fileID: 413710596327563164, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
       propertyPath: currentDay
       value: 30
@@ -46250,7 +46259,7 @@ PrefabInstance:
       objectReference: {fileID: 749009470}
     - target: {fileID: 413710596327563164, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
       propertyPath: timeOfHour
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 413710596327563164, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
       propertyPath: currentMonth
@@ -46303,6 +46312,10 @@ PrefabInstance:
     - target: {fileID: 4325930749169136265, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573638511141602971, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
+      propertyPath: m_Volume
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
