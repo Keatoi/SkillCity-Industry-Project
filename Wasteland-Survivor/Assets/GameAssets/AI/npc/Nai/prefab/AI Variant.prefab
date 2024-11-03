@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1618675835710720261, guid: fc13864f8dba52a489fcfc75089dca59, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -131.51
       objectReference: {fileID: 0}
     - target: {fileID: 1618675835710720261, guid: fc13864f8dba52a489fcfc75089dca59, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.56
       objectReference: {fileID: 0}
     - target: {fileID: 1618675835710720261, guid: fc13864f8dba52a489fcfc75089dca59, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -73.2
       objectReference: {fileID: 0}
     - target: {fileID: 1618675835710720261, guid: fc13864f8dba52a489fcfc75089dca59, type: 3}
       propertyPath: m_LocalRotation.w
@@ -48,18 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1871818914999388024, guid: fc13864f8dba52a489fcfc75089dca59, type: 3}
-      propertyPath: m_Avatar
-      value: 
-      objectReference: {fileID: 9000000, guid: f6f4a0b5dd3a9164184482ba57de8796, type: 3}
     - target: {fileID: 2106947627084649407, guid: fc13864f8dba52a489fcfc75089dca59, type: 3}
       propertyPath: m_Name
       value: AI Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 3140813021085454179, guid: fc13864f8dba52a489fcfc75089dca59, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 249cf90c3c606c64bb341556a8bee21f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

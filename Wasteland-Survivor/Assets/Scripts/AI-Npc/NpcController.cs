@@ -6,8 +6,8 @@ using UnityEngine.InputSystem;
 
 public class NpcController : MonoBehaviour
 {
-    private AiRef AiRef;
-    private GameObject Player;
+    public AiRef AiRef;
+    public GameObject Player;
     private Transform player;
     private GameObject campcenter;
     private float PathUpdateDelay;
@@ -30,7 +30,7 @@ public class NpcController : MonoBehaviour
 
     public void Awake()
     {
-        AiRef = GetComponent<AiRef>();
+        AiRef = GetComponent<AiRef>();if(AiRef == null) { AiRef.GetComponent<AiRef>(); }
         Player = GameObject.FindGameObjectWithTag("Player");
         player = Player.GetComponent<Transform>();
         audioSource = AiRef.GetComponent<AudioSource>();
@@ -70,7 +70,7 @@ public class NpcController : MonoBehaviour
 
             if (Enemy != null)
             {
-                inrange = Vector3.Distance(transform.position, Enemy.transform.position) <= 1.5f;
+                inrange = Vector3.Distance(transform.position, Enemy.transform.position) <= 2f;
             }
 
             if (!inrange)
@@ -80,6 +80,7 @@ public class NpcController : MonoBehaviour
             }
             else
             {
+                Debug.Log("inrage");
                 lookattarget();
                 attack();
                 // Debug.Log("attacking");
@@ -215,12 +216,16 @@ public class NpcController : MonoBehaviour
     //////////////Chasing enemy state////////////////////////////////////////////////////////////////////////////////////////////////////
     void lookattarget()//lets Ai face the enemy whilst its moving
     {
-
-        Enemydirection = Enemy.transform.position - transform.position;
-        Enemydirection.y = 2;
-        Quaternion rotation = Quaternion.LookRotation(Enemydirection);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.2f);
-        Enemydirection.Normalize();
+        if (Enemy != null)
+        {
+            Enemydirection = Enemy.transform.position - transform.position;
+            Enemydirection.y = 2;
+            Quaternion rotation = Quaternion.LookRotation(Enemydirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.2f);
+            Enemydirection.Normalize();
+        }
+        else enemmyspotted = false;
+        
     }
     void UpdatePath()
     {
@@ -252,8 +257,14 @@ public class NpcController : MonoBehaviour
                 if (hit.collider.gameObject.name == "Enemy") { Debug.Log("Hit an object with BoxCast: " + hit.collider.name + hit.transform.gameObject.name); }
 
                 Debug.Log("attacking");
-                 
-                EnemyRef.changehealthNPC(10, this); if (EnemyRef.health <= 0) { enemmyspotted = false; }
+
+                if (hit.collider.GetComponent<AiRef>()&& hit.collider.gameObject.activeSelf)
+                {
+                    EnemyRef.changehealthNPC(10, this); if (EnemyRef.health <= 0)
+                    {
+                        enemmyspotted = false;
+                    }
+                }
             }
 
         }
@@ -264,7 +275,7 @@ public class NpcController : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy")&& other.gameObject.activeSelf)
         {
 
             Enemy = other.gameObject;

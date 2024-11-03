@@ -22,13 +22,15 @@ public class AiRef : MonoBehaviour
     }
 
     ///////////Npc changehealth funtion for NPC attack -> Ai ///////////////////////////////////////////////////////////////////////////////////////////
-    public void changehealthNPC(float damage,NpcController attacker) { 
-    health -=damage;
+    public void changehealthNPC(float damage,NpcController attacker) 
+    { 
+        health -=damage;
         onhealthchange(attacker);
     }
     
     void onhealthchange(NpcController attacker) { 
-     if(health  <= 0&& this!=null) {
+        Debug.Log("Dealt damage"+attacker.name);
+        if(health  <= 0&& this!=null) {
 
       attacker.enemmyspotted = false;
       attacker.findcamp = true;
