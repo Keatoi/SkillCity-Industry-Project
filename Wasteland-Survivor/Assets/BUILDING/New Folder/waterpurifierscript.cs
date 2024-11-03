@@ -12,7 +12,8 @@ public class Waterpurifierscript : InteractableObject
 
     public void Start()
     {
-       playerinv = GameObject.FindGameObjectWithTag("Player").GetComponent<ResourceSystem>();
+        
+        playerinv = GameObject.FindGameObjectWithTag("Player").GetComponent<ResourceSystem>();
         manager = GameObject.Find("Director").GetComponent<ObjectiveManager>();
         Debug.Log("WATER");
         manager.CompleteObjective("Build Hydro-Purifier");
@@ -28,6 +29,7 @@ public class Waterpurifierscript : InteractableObject
     }
     public override void InteractAction(Collider Player)
     {
+        playerinv = playercollider.GetComponent<ResourceSystem>();
         if (playerinv.Waterchip == true)
         {
               ison = !ison;

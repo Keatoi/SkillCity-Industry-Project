@@ -6,7 +6,7 @@ using UnityEngine;
 public class InteractableObject : MonoBehaviour
 {
     [SerializeField] public bool triggerActive = false;
-    private Collider playercollider;
+    public Collider playercollider;
     public GameObject interacttext;
     // Update is called once per frame
     void Update()
@@ -33,6 +33,7 @@ public class InteractableObject : MonoBehaviour
             if(this.gameObject.TryGetComponent<pickup>(out pickup pickupref )) {
                 pickupref.Showtext();
             }
+
         }
     }
 

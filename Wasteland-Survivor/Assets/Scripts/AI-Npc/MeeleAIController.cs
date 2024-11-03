@@ -229,7 +229,7 @@ public class MeeleAIController : MonoBehaviour
             Other = other.gameObject;
             if (Physics.Raycast(eyespos, directionToPlayer.normalized, out RaycastHit hit, Mathf.Infinity))
             {
-                Debug.Log(hit.collider.name);
+               // Debug.Log(hit.collider.name);
                 // Check if the raycast hit the player
                 if (hit.collider.CompareTag("Player"))
                 {
