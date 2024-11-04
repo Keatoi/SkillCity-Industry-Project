@@ -9,10 +9,18 @@ using UnityEngine.UI;
 public class NpcUicontroller : MonoBehaviour
 {
     public GameObject NPCcanvas;
+    public GameObject Chatbox;
+    public GameObject Dialogueincanvas;
+    public GameObject Dialoguebutton;
     private bool talkingtoNpc = false;
+    public bool conversation;
     public GameObject talkinstruction, camptext;
     public PlayerInput playerInput;
     public NpcController npcController ;
+    public string[] Dialoguecontainer;
+    public int dialogueIndex = 0;
+    public string[] PlayerDialoguecontainer;
+    public int PlayerdialogueIndex = 0;
 
     void Awake()//Finds and sets references and ui
     {
@@ -137,6 +145,31 @@ public class NpcUicontroller : MonoBehaviour
         npcController.findcamp = !npcController.findcamp;
         npcController.following = false;
     }
+    public void Convoswicth()
+    {
+        conversation = !conversation;
+    }
+
+    public void ProgressConvo(bool progress)
+    {
+        if (progress) { 
+         dialogueIndex++;
+         dialogueIndex %= Dialoguecontainer.Length;
+         PlayerdialogueIndex++;
+         PlayerdialogueIndex %= PlayerDialoguecontainer.Length;
+        
+        }
+       
+       // Dialogueincanvas.SetActive(conversation);
+        Dialogueincanvas.GetComponent<TextMeshProUGUI>().text = Dialoguecontainer[dialogueIndex];
+        
+
+       
+        Dialoguebutton.GetComponentInChildren<TextMeshProUGUI>().text = PlayerDialoguecontainer[PlayerdialogueIndex];
+
+        
+    }
+
     public void NocampText()
     {
         StartCoroutine(ErrorText());
