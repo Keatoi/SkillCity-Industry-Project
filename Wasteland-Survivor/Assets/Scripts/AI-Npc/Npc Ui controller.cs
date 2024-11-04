@@ -11,13 +11,13 @@ public class NpcUicontroller : MonoBehaviour
     public GameObject NPCcanvas;
     private bool talkingtoNpc = false;
     public GameObject talkinstruction, camptext;
-    private PlayerInput playerInput;
-    public NpcController npcController = null;
+    public PlayerInput playerInput;
+    public NpcController npcController ;
 
     void Awake()//Finds and sets references and ui
     {
         NPCcanvas = GameObject.FindGameObjectWithTag("NPCcanvas");
-        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+       // playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
         talkinstruction.SetActive(false);
         camptext.SetActive(false);
         NPCcanvas.SetActive(false);
@@ -28,9 +28,11 @@ public class NpcUicontroller : MonoBehaviour
 
         if (Raycastcheck.hitpos.collider != null && Raycastcheck.hitpos.collider.gameObject.CompareTag("NPC")) //if lookiong at NPc
         {
+          
             talkinstruction.SetActive(!talkingtoNpc);//show talk text
             if (Input.GetKeyDown(KeyCode.E))
             {
+                
 
                 if (npcController == null)
                 {
@@ -38,15 +40,35 @@ public class NpcUicontroller : MonoBehaviour
                     Debug.Log("cont " + npcController.name);
                     if (!npcController.rescued)
                     {
-
                         npcController.rescued = true;
+
+                        Debug.Log("Rescued" + npcController.rescued);
+                    }
+                    if (npcController.rescued)
+                    {
+                        if (!talkingtoNpc)
+                        {
+                            NPCTALK();
+                        }
+                    }
+
+                }else { 
+                    if (!npcController.rescued)
+                    {
+                        npcController.rescued = true;
+
+                        Debug.Log("Rescued" + npcController.rescued);
                     }
                     if (npcController.rescued)
                     {
 
-                        NPCTALK();
+                       
+                     if (!talkingtoNpc)
+                     {
+                                NPCTALK();
+                     }
+                        
                     }
-
                 }
             }
 
