@@ -278,6 +278,10 @@ public class PlayerController : MonoBehaviour
     {
         Movement();
         SetAnim();
+        if(Input.GetKeyUp(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     public void Awake()
