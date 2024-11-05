@@ -14930,6 +14930,50 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4245644142072145120, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: _DitheringScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245644142072145120, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: _InterlacingSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245644142072145120, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: _PixelationFactor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245644142072145120, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: _ColorEmulationMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245644142072145120, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: _DitheringMatrixSize
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245644142072145120, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: _FullscreenColorDepth.x
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245644142072145120, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: _FullscreenColorDepth.y
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245644142072145120, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: _FullscreenColorDepth.z
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245644142072145120, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: _FullscreenDitherDepth.x
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245644142072145120, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: _FullscreenDitherDepth.y
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245644142072145120, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: _FullscreenDitherDepth.z
+      value: 32
+      objectReference: {fileID: 0}
     - target: {fileID: 5059645982104116894, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
       propertyPath: objectiveManager
       value: 
@@ -48297,6 +48341,38 @@ PrefabInstance:
     - target: {fileID: 967758886151696614, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
       propertyPath: m_Name
       value: Sun
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025281582992840738, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
+      propertyPath: _DepthDebugView
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025281582992840738, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
+      propertyPath: _FlatShadingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025281582992840738, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
+      propertyPath: _TriangleSortMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025281582992840738, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
+      propertyPath: _VertexWobbleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025281582992840738, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
+      propertyPath: _TextureWarpingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025281582992840738, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
+      propertyPath: _RetroLightFalloffStart
+      value: 0.00029996998
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025281582992840738, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
+      propertyPath: _UseRetroVertexLighting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025281582992840738, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
+      propertyPath: _RetroLightingNormalFactor
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4325930749169136265, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
       propertyPath: m_LocalPosition.x

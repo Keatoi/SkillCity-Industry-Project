@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4325930749169136265}
   - component: {fileID: 5144479614887235449}
+  - component: {fileID: 4025281582992840738}
   - component: {fileID: 413710596327563164}
   - component: {fileID: 6110938625717749056}
   - component: {fileID: 8573638511141602971}
@@ -97,6 +98,28 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &4025281582992840738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967758886151696614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1a4c69f7a9d3ea43907b5765229dc85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TextureWarpingFactor: 1
+  _TextureWarpingMode: 1
+  _VertexGridResolution: 50
+  _VertexWobbleMode: 0
+  _UseRetroVertexLighting: 1
+  _RetroLightingNormalFactor: 0.004
+  _RetroLightFalloffStart: 0
+  _FlatShadingMode: 0
+  _TriangleSortMode: 2
+  _DepthDebugView: 0
 --- !u!114 &413710596327563164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,6 +141,7 @@ MonoBehaviour:
   rotationperMinute: {x: 0.12, y: 0, z: 0}
   currentWeather: 0
   snowEffect: {fileID: 0}
+  weatherAS: {fileID: 0}
 --- !u!114 &6110938625717749056
 MonoBehaviour:
   m_ObjectHideFlags: 0
