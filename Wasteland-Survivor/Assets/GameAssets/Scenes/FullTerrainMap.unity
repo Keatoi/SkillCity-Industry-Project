@@ -14930,6 +14930,18 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4083212253438936066, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4095448051384107124, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4183967126733770682, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4245644142072145120, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
       propertyPath: _DitheringScale
       value: 1
@@ -16090,11 +16102,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1250592793311360206, guid: 08d8739a1760f844ab67a96caae0a4c5, type: 3}
   m_PrefabInstance: {fileID: 81732493}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &749009470 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 2375961431389110767, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
-  m_PrefabInstance: {fileID: 701179135}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &750392449
 PrefabInstance:
@@ -26280,6 +26287,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed0623c5a40537949a7ff1df760351be, type: 3}
+--- !u!198 &1215681379 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4095448051384107124, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+  m_PrefabInstance: {fileID: 701179135}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1216183729 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4762954023449249358, guid: e3eea6d2e77863c4a8b19a0d3b0d99b9, type: 3}
@@ -37751,6 +37763,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2112381865}
   m_SourcePrefab: {fileID: 100100000, guid: a86848aa4b7bf93429931cf0f141f3e5, type: 3}
+--- !u!198 &1649883994 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4083212253438936066, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+  m_PrefabInstance: {fileID: 701179135}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1651639576
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48325,11 +48342,15 @@ PrefabInstance:
     - target: {fileID: 413710596327563164, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
       propertyPath: snowEffect
       value: 
-      objectReference: {fileID: 749009470}
+      objectReference: {fileID: 0}
     - target: {fileID: 413710596327563164, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
       propertyPath: timeOfHour
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 413710596327563164, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
+      propertyPath: windEffect
+      value: 
+      objectReference: {fileID: 1649883994}
     - target: {fileID: 413710596327563164, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
       propertyPath: currentMonth
       value: 1
@@ -48338,6 +48359,10 @@ PrefabInstance:
       propertyPath: inGameMinute
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 413710596327563164, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
+      propertyPath: precipitationEffect
+      value: 
+      objectReference: {fileID: 1215681379}
     - target: {fileID: 967758886151696614, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
       propertyPath: m_Name
       value: Sun
@@ -48418,6 +48443,10 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 8573638511141602971, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 64b8d4fd416c27a4e9b150960886ec14, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject Torch;
 
     private CharacterController controller;
+    private FootstepController footstep;
     Animator animator;
     [SerializeField] float camOffset = 0.5f;
     [SerializeField] float crouchCamOffset = 0.25f;
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        footstep = GetComponent<FootstepController>();
         speed = walkSpeed;
         controller.height = standingHeight;
         crouchingHeight = standingHeight / 2;
@@ -217,7 +219,7 @@ public class PlayerController : MonoBehaviour
             maxJumps++;
             
         }
-        if(bIsSprinting)
+        if(bIsSprinting && sprintDuration > 0)
         {
             speed = sprintSpeed;
             sprintDuration -= Time.deltaTime;
@@ -278,6 +280,15 @@ public class PlayerController : MonoBehaviour
     {
         Movement();
         SetAnim();
+        if(controller.isGrounded && moveVelocity.magnitude > 0.5)
+        {
+            footstep.StartWalking();
+        }
+        else 
+        {
+            Debug.Log("StopWalking");
+           footstep.StopWalking();
+        }
         if(Input.GetKeyUp(KeyCode.Escape))
         {
             Application.Quit();

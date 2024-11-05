@@ -7,14 +7,14 @@ public class FootstepController : MonoBehaviour
     public AudioClip[] footStepSFX;
     public float minTimeBetweenSteps = 0.3f;
     public float maxTimeBetweenSteps = 0.6f;
-    private AudioSource footstepSource;
+    public AudioSource footstepSource;
     private bool isWalking = false;
     private float timeSinceLastStep;
     // Start is called before the first frame update
 
     private void Awake()
     {
-        footstepSource = GetComponent<AudioSource>(); // Get the Audio Source component
+        
     }
     void Start()
     {
@@ -29,7 +29,8 @@ public class FootstepController : MonoBehaviour
             if (Time.time - timeSinceLastStep >= Random.Range(minTimeBetweenSteps, maxTimeBetweenSteps))
             {
                 AudioClip footstepClip = footStepSFX[Random.Range(0,footStepSFX.Length)];
-                footstepSource.PlayOneShot(footstepClip);
+                footstepSource.clip = footstepClip;
+                footstepSource.Play();
                 timeSinceLastStep = Time.time;
             }
         }
