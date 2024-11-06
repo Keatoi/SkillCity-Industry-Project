@@ -34,6 +34,9 @@ public class GunSystem : MonoBehaviour
     private float reserve;
     private AudioSource m_Audio;
 
+    public bool isbuilding;
+    public BuildingSystem buildingSystem;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +64,9 @@ public class GunSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        buildingSystem = GetComponentInParent<BuildingSystem>();
+        isbuilding = buildingSystem.isbuilding;
+
         if (bIsAimed)
         {
             Aim(defaultFOV / magnification);
@@ -78,66 +84,67 @@ public class GunSystem : MonoBehaviour
     {
         //TODO ADD FLASH AND BULLET MARKERS
         //Raycast from gun barrel/camera to destination
-        
-        RaycastHit hit;
-
-        Vector3 origin = barrelCamera.transform.position;
-        Vector3 dir = barrelCamera.transform.forward;
-        if (!bIsAimed)
+        if (!isbuilding)
         {
-            //If we aren't aimed down the sights,nthen add a small amount of random variance to direction vector to simulate weapon sway
-            //Subtract accuracy var from 1 to get a range between -(1-accuracy) to (1-accuracy)eg. if the gun has accuracy stat of 90% (0.9) then the range is -0.1 to 0.1
-            //add this to all three axes to produce a random direction.
-            float RandDirX = Random.Range(-(1 - accuracy), 1 - accuracy);
-            float RandDirY = Random.Range(-(1 - accuracy), 1 - accuracy);
-            float RandDirZ = Random.Range(-(1 - accuracy), 1 - accuracy);
-            dir.x += RandDirX;
-            dir.y += RandDirY;
-            dir.z += RandDirZ;
+            RaycastHit hit;
 
-        }
-        if(currentRounds > 0)
-        {
-            //Play Firing effects
-            PlayGunSFX();
-            PlayGunVFX();
-            EjectCase();
-            MoveSlide();
-            //Decrement ammo from magazine
-            currentRounds--;
-            //Update UI
-            OnAmmoChange?.Invoke(currentRounds, reserve);
-           
-
-            if (Physics.Raycast(origin, dir, out hit, range))
+            Vector3 origin = barrelCamera.transform.position;
+            Vector3 dir = barrelCamera.transform.forward;
+            if (!bIsAimed)
             {
-                //If we have ammo then play SFX and if the hit collider has the health component then subtract health
-                Debug.DrawLine(origin, dir);//Only works in scene view, so the player won't see this
-
-                if (hit.collider != null)
-                {
-                    hitObject = hit.collider.gameObject;
-                    //Check for both normal and AI targets
-                    if (hitObject.GetComponent<HealthSystem>() != null && hitObject.CompareTag("Enemy"))
-                    {
-                        Debug.Log(hitObject.name + "Has been hurt!");
-                        hitObject.GetComponent<HealthSystem>().ChangeHealth(-damage);
-                    }
-                    if (hitObject.GetComponent<AiRef>() != null && hitObject.CompareTag("Enemy"))
-                    {
-                        Debug.Log(hitObject.name + "Has been hurt!");
-                        
-                        hitObject.GetComponent<AiRef>().changehealthAi(damage);
-
-                    }
-                }
+                //If we aren't aimed down the sights,nthen add a small amount of random variance to direction vector to simulate weapon sway
+                //Subtract accuracy var from 1 to get a range between -(1-accuracy) to (1-accuracy)eg. if the gun has accuracy stat of 90% (0.9) then the range is -0.1 to 0.1
+                //add this to all three axes to produce a random direction.
+                float RandDirX = Random.Range(-(1 - accuracy), 1 - accuracy);
+                float RandDirY = Random.Range(-(1 - accuracy), 1 - accuracy);
+                float RandDirZ = Random.Range(-(1 - accuracy), 1 - accuracy);
+                dir.x += RandDirX;
+                dir.y += RandDirY;
+                dir.z += RandDirZ;
 
             }
+            if (currentRounds > 0)
+            {
+                //Play Firing effects
+                PlayGunSFX();
+                PlayGunVFX();
+                EjectCase();
+                MoveSlide();
+                //Decrement ammo from magazine
+                currentRounds--;
+                //Update UI
+                OnAmmoChange?.Invoke(currentRounds, reserve);
+
+
+                if (Physics.Raycast(origin, dir, out hit, range))
+                {
+                    //If we have ammo then play SFX and if the hit collider has the health component then subtract health
+                    Debug.DrawLine(origin, dir);//Only works in scene view, so the player won't see this
+
+                    if (hit.collider != null)
+                    {
+                        hitObject = hit.collider.gameObject;
+                        //Check for both normal and AI targets
+                        if (hitObject.GetComponent<HealthSystem>() != null && hitObject.CompareTag("Enemy"))
+                        {
+                            Debug.Log(hitObject.name + "Has been hurt!");
+                            hitObject.GetComponent<HealthSystem>().ChangeHealth(-damage);
+                        }
+                        if (hitObject.GetComponent<AiRef>() != null && hitObject.CompareTag("Enemy"))
+                        {
+                            Debug.Log(hitObject.name + "Has been hurt!");
+
+                            hitObject.GetComponent<AiRef>().changehealthAi(damage);
+
+                        }
+                    }
+
+                }
+            }
+
+
+
         }
-        
-
-
-
 
     }
     public void Reload()

@@ -10,6 +10,7 @@ public class BuildingSystem : MonoBehaviour
     public Material[] ghostMat;
     public GameObject campcenterinworld;
 
+
     [Header("SWICTHES")]
     public bool isbuilding;            //flag to enter building mode   
     public bool Campfound;             //if player has built camp
@@ -39,6 +40,8 @@ public class BuildingSystem : MonoBehaviour
     public Raycastcheck Raycast;
     public ResourceSystem ResourceSystem;
     [HideInInspector] public MaterialRequirement[] materialRequirements;
+    public GameObject ARMS;
+    public GameObject crosshairs;
 
     void Createghost()//handles ghost creation
     {
@@ -348,6 +351,7 @@ public class BuildingSystem : MonoBehaviour
         }
         if (isbuilding)
         {
+           
 
             if (Raycastcheck.raycasthit && !currentlyBuilding) // if mouse hits an obj and not actively building
             {

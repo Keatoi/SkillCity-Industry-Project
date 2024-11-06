@@ -24,6 +24,7 @@ public class MeleeSystem : MonoBehaviour
     bool m_hasHit;
     int attackTotal;
     PlayerController m_PlayerController;
+    public BuildingSystem buildingsystem;
     void Start()
     {
         m_Audio = GetComponent<AudioSource>();
@@ -38,29 +39,32 @@ public class MeleeSystem : MonoBehaviour
     }
     public void Attack()
     {
-        //if part way through an attack or cannot attack immediatly return
-        if (!bCanAttack || bIsAttacking) { return; }
-        Invoke(nameof(ResetAttack), speed);
-        Invoke(nameof(AttackRaycast),delay);
-
-       
-        m_Audio.clip = swingSFX;
-        m_Audio.pitch = Random.Range(0.9f, 1.1f);
-        m_Audio.PlayOneShot(m_Audio.clip);
-        if (attackTotal == 0)
+        if (!buildingsystem.isbuilding)
         {
-            //Change Animation here
-            Debug.Log("Play attack 1");
-            m_PlayerController.ChangeAnimationState("Attack 1");
-            attackTotal++;
-        }
-        else
-        {
-            //same as above
-            m_PlayerController.ChangeAnimationState("Attack 2");
-            Debug.Log("Play attack 2");
-            attackTotal = 0;
+            //if part way through an attack or cannot attack immediatly return
+            if (!bCanAttack || bIsAttacking) { return; }
+            Invoke(nameof(ResetAttack), speed);
+            Invoke(nameof(AttackRaycast), delay);
 
+
+            m_Audio.clip = swingSFX;
+            m_Audio.pitch = Random.Range(0.9f, 1.1f);
+            m_Audio.PlayOneShot(m_Audio.clip);
+            if (attackTotal == 0)
+            {
+                //Change Animation here
+                Debug.Log("Play attack 1");
+                m_PlayerController.ChangeAnimationState("Attack 1");
+                attackTotal++;
+            }
+            else
+            {
+                //same as above
+                m_PlayerController.ChangeAnimationState("Attack 2");
+                Debug.Log("Play attack 2");
+                attackTotal = 0;
+
+            }
         }
     }
     void ResetAttack()

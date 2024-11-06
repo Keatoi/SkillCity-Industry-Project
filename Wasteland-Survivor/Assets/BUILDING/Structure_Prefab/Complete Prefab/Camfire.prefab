@@ -224,6 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerActive: 0
+  playercollider: {fileID: 0}
   interacttext: {fileID: 0}
   ison: 0
   effects: {fileID: 2065566140504669822}

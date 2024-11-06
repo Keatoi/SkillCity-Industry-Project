@@ -43,7 +43,8 @@ public class NpcController : MonoBehaviour
     {
         AiRef.Rescued = rescued;
         if (!AiRef.Rescued) { return; }
-        bool moving = AiRef.agent.velocity.magnitude > 0.5f;
+        bool moving = AiRef.agent.velocity.magnitude >= 1f;
+        Debug.Log(" velo" + AiRef.agent.velocity.magnitude + moving);
         if (following)
         {
             Following();
