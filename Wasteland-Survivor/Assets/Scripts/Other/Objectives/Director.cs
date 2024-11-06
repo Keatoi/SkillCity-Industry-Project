@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Director : MonoBehaviour
 {
@@ -65,6 +66,10 @@ public class Director : MonoBehaviour
             enemySpawner.SetActive(true);
             ObjectiveUI.UpdateObjectives();
         }
+        if(objectiveManager.GetCompletionStatus("Defend the camp"))
+        {
+            StartCoroutine(QuitToMenu(3f));
+        }
 
     }
     void DebugShortcuts()
@@ -89,6 +94,12 @@ public class Director : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Keypad5))
         {
             objectiveManager.CompleteObjective("Defend the camp");
+            StartCoroutine(QuitToMenu(3f));
         }
+    }
+    IEnumerator QuitToMenu(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        SceneManager.LoadScene(0);
     }
 }

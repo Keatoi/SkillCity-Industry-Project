@@ -286,7 +286,7 @@ public class PlayerController : MonoBehaviour
         }
         else 
         {
-            Debug.Log("StopWalking");
+           // Debug.Log("StopWalking");
            footstep.StopWalking();
         }
         if(Input.GetKeyUp(KeyCode.Escape))

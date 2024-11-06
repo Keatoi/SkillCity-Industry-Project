@@ -48329,7 +48329,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 413710596327563164, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
       propertyPath: timeOfDay
-      value: 18
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 413710596327563164, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
       propertyPath: weatherAS
@@ -48345,7 +48345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 413710596327563164, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
       propertyPath: timeOfHour
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 413710596327563164, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
       propertyPath: windEffect
