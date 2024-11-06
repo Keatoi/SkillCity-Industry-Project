@@ -331,7 +331,7 @@ Transform:
   m_GameObject: {fileID: 7047833617256607292}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.355}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -733,6 +733,8 @@ MonoBehaviour:
   Raycast: {fileID: 3103502215363587304}
   ResourceSystem: {fileID: 1644877285830476877}
   materialRequirements: []
+  ARMS: {fileID: 0}
+  crosshairs: {fileID: 0}
 --- !u!114 &3103502215363587304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1206,11 +1208,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1033620640446185444, guid: 17a6301a1529bcc4eb040cfa7ce13eab, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 747
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 1033620640446185444, guid: 17a6301a1529bcc4eb040cfa7ce13eab, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -491
+      value: -423
       objectReference: {fileID: 0}
     - target: {fileID: 1033620640446185444, guid: 17a6301a1529bcc4eb040cfa7ce13eab, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1224,6 +1226,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2875503664778368081, guid: 17a6301a1529bcc4eb040cfa7ce13eab, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2875503664778368081, guid: 17a6301a1529bcc4eb040cfa7ce13eab, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f4209ba123b3bd24fa6c25e5a860b657, type: 3}
     - target: {fileID: 2875503664778368081, guid: 17a6301a1529bcc4eb040cfa7ce13eab, type: 3}
       propertyPath: m_Color.a
       value: 0.45490196
@@ -1798,6 +1808,14 @@ PrefabInstance:
       propertyPath: PlayerOrCamera
       value: 
       objectReference: {fileID: 9214377120670627532}
+    - target: {fileID: 198187670477844222, guid: 17504871f215feb46b405f6f12366160, type: 3}
+      propertyPath: SizeModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198187670477844222, guid: 17504871f215feb46b405f6f12366160, type: 3}
+      propertyPath: LightsModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 199702627740420700, guid: 17504871f215feb46b405f6f12366160, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -2660,12 +2678,20 @@ PrefabInstance:
       value: ObjectivePanel
       objectReference: {fileID: 0}
     - target: {fileID: 3340861635290100140, guid: c14a697aaaec833489569c2f4af835c0, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340861635290100140, guid: c14a697aaaec833489569c2f4af835c0, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f4209ba123b3bd24fa6c25e5a860b657, type: 3}
+    - target: {fileID: 3340861635290100140, guid: c14a697aaaec833489569c2f4af835c0, type: 3}
       propertyPath: m_Color.a
       value: 0.23921569
       objectReference: {fileID: 0}
     - target: {fileID: 4701156905025284193, guid: c14a697aaaec833489569c2f4af835c0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 281
+      value: 188
       objectReference: {fileID: 0}
     - target: {fileID: 6356992502335060417, guid: c14a697aaaec833489569c2f4af835c0, type: 3}
       propertyPath: m_fontStyle
@@ -2685,7 +2711,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7046802902656164821, guid: c14a697aaaec833489569c2f4af835c0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -175
+      value: -262
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -14862,6 +14862,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 601142785585309035, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: force
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 601142785585309035, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: upwardsForce
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 601142785585309035, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: grenadePrefab
+      value: 
+      objectReference: {fileID: 7627778872193170293, guid: bc05508ab4db03a4bb2c1fb0a4279a5c, type: 3}
+    - target: {fileID: 601142785585309035, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
+      propertyPath: throwDistance
+      value: 600
+      objectReference: {fileID: 0}
     - target: {fileID: 864902650471260282, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -14888,7 +14904,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2207910347188883912, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.39
+      value: 2.87
       objectReference: {fileID: 0}
     - target: {fileID: 2207910347188883912, guid: 80dd21cc7153a8b42a877ecd5fa74731, type: 3}
       propertyPath: m_LocalPosition.z
@@ -48540,7 +48556,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 413710596327563164, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
       propertyPath: timeOfDay
-      value: 23
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 413710596327563164, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
       propertyPath: weatherAS
@@ -48556,7 +48572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 413710596327563164, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
       propertyPath: timeOfHour
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 413710596327563164, guid: 595949a6e58cb8249b2a3f7b2ec8a4b0, type: 3}
       propertyPath: windEffect

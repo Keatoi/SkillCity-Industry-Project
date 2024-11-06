@@ -7,9 +7,10 @@ public class Grenade : MonoBehaviour
     public float fuse = 3f;
     private float timer;
     AudioSource source;
-    float damage = 50f;
-    float radius = 25f;
+    float damage = 20f;
+    public float radius = 10f;
     float force = 30f;
+    public ParticleSystem explosionFX;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +51,7 @@ public class Grenade : MonoBehaviour
     void PlaySFX()
     {
         source.Play();
+        explosionFX.Play();
     }
     void Killself()
     {
