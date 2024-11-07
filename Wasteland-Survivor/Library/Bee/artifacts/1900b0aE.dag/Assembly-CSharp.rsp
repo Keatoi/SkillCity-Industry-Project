@@ -378,6 +378,7 @@
 "Assets/Scripts/Buildings/BuildingBarManager.cs"
 "Assets/Scripts/Buildings/MatRequirement.cs"
 "Assets/Scripts/Buildings/Raycast.cs"
+"Assets/Scripts/Entities/AnimalBehaviour.cs"
 "Assets/Scripts/Entities/BulletController.cs"
 "Assets/Scripts/Enviroment/DayNightCycle.cs"
 "Assets/Scripts/Enviroment/inter Rescources/InteractableObject.cs"
