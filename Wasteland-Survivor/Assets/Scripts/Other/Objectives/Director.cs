@@ -56,11 +56,12 @@ public class Director : MonoBehaviour
         {
 
             objectiveManager.CompleteLocationObjective(playerLoc.position);
+            objBool[3] = true;
 
         }
         if(objectiveManager.GetCompletionStatus("Return to camp") && objBool[3] == false)
         {
-            objBool[3] = true;
+            
             objectiveManager.AddObjective(new KillObjective("Defend the camp", "Defend the camp from the attacking tribesmen", 8));
             //set all enemies to active
             enemySpawner.SetActive(true);
@@ -90,6 +91,7 @@ public class Director : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Keypad4))
         {
             objectiveManager.CompleteObjective("Return to camp");
+            objBool[3] = false;
         }
         if (Input.GetKeyUp(KeyCode.Keypad5))
         {
